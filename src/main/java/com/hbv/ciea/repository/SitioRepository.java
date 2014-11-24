@@ -15,17 +15,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.hbv.ciea.repository;
 
-import com.hbv.ciea.model.Usuario;
+import com.hbv.ciea.model.Sitio;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- *
+ * 
  * @author Herman Barrantes
- * @since 21-oct-2014
+ * @since 24-nov-2014
  */
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+public interface SitioRepository extends JpaRepository<Sitio, Long> {
 
-    Usuario findByUsuario(String usuario);
 }

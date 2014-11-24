@@ -18,26 +18,57 @@
 
 package com.hbv.ciea;
 
+import com.hbv.ciea.model.Sitio;
+import com.hbv.ciea.repository.SitioRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 
-@EnableMongoRepositories
-@Import(RepositoryRestMvcConfiguration.class)
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
 public class Application {
 
     public static void main(String[] args) {
-//        SpringApplication app = new SpringApplication(Application.class);
-//        app.setShowBanner(true);
-//        app.run(args);
         SpringApplication.run(Application.class, args);
+//        prueba();
+    }
+    
+    public static void prueba() {
+
+        ConfigurableApplicationContext context = SpringApplication.run(Application.class);
+        SitioRepository repository = context.getBean(SitioRepository.class);
+
+        // save a couple of customers
+        repository.save(new Sitio("Dirección"));
+        repository.save(new Sitio("Aula 1"));
+        repository.save(new Sitio("Aula 2"));
+        repository.save(new Sitio("Aula 3"));
+        repository.save(new Sitio("Aula 4"));
+        repository.save(new Sitio("Aula 5"));
+        repository.save(new Sitio("Aula 6"));
+        repository.save(new Sitio("Aula 7"));
+        repository.save(new Sitio("Aula 8"));
+
+        // fetch all customers
+        Iterable<Sitio> sitios = repository.findAll();
+        System.out.println("Sitios found with findAll():");
+        System.out.println("----------------------------");
+        for (Sitio sitio : sitios) {
+            System.out.println(sitio);
+        }
+        System.out.println();
+
+        // fetch an individual customer by ID
+        Sitio sitio = repository.findOne(1L);
+        System.out.println("Sitio found with findOne(1L):");
+        System.out.println("-----------------------------");
+        System.out.println(sitio);
+        System.out.println();
+
+        context.close();
     }
 
 }
