@@ -24,6 +24,9 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -57,13 +60,13 @@ public class OrdenCompra implements Serializable {
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-    @Size(max = 9)
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado")
-    private String estado;
+    private OrdenCompraEstado estado;
     @JoinColumn(name = "id_proveedor", referencedColumnName = "id")
     @ManyToOne
     private Proveedor idProveedor;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrdenCompra")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenCompra", fetch = FetchType.LAZY)
     private List<OrdenCompraDetalle> ordenCompraDetalleList;
 
     public OrdenCompra() {
@@ -93,11 +96,11 @@ public class OrdenCompra implements Serializable {
         this.fecha = fecha;
     }
 
-    public String getEstado() {
+    public OrdenCompraEstado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(OrdenCompraEstado estado) {
         this.estado = estado;
     }
 

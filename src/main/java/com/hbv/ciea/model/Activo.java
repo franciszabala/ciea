@@ -15,12 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.hbv.ciea.model;
 
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,13 +30,14 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * 
+ *
  * @author Herman Barrantes
  * @since 24-nov-2014
  */
 @Entity
 @Table(name = "activo")
 public class Activo implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @NotNull
@@ -48,15 +50,15 @@ public class Activo implements Serializable {
     @Column(name = "serie")
     private String serie;
     @NotNull
-    @Size(min = 1, max = 7)
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado")
-    private String estado;
+    private ActivoEstado estado;
     @JoinColumn(name = "id_sitio", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Sitio idSitio;
+    private Sitio sitio;
     @JoinColumn(name = "id_articulo", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Articulo idArticulo;
+    private Articulo articulo;
 
     public Activo() {
     }
@@ -85,28 +87,28 @@ public class Activo implements Serializable {
         this.serie = serie;
     }
 
-    public String getEstado() {
+    public ActivoEstado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(ActivoEstado estado) {
         this.estado = estado;
     }
 
-    public Sitio getIdSitio() {
-        return idSitio;
+    public Sitio getSitio() {
+        return sitio;
     }
 
-    public void setIdSitio(Sitio idSitio) {
-        this.idSitio = idSitio;
+    public void setIdSitio(Sitio sitio) {
+        this.sitio = sitio;
     }
 
-    public Articulo getIdArticulo() {
-        return idArticulo;
+    public Articulo getArticulo() {
+        return articulo;
     }
 
-    public void setIdArticulo(Articulo idArticulo) {
-        this.idArticulo = idArticulo;
+    public void setIdArticulo(Articulo articulo) {
+        this.articulo = articulo;
     }
 
     @Override

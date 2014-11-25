@@ -20,9 +20,9 @@ package com.hbv.ciea.model;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +30,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -67,7 +66,6 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 15)
     @Column(name = "usuario")
     private String usuario;
-    @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 15)
     @Column(name = "clave")
@@ -81,17 +79,20 @@ public class Usuario implements Serializable {
     @JoinTable(name = "usuario_telefono", joinColumns = {
         @JoinColumn(name = "id_usuario", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_telefono", referencedColumnName = "id")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Telefono> telefonoList;
     @JoinTable(name = "usuario_correo", joinColumns = {
         @JoinColumn(name = "id_usuario", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_correo", referencedColumnName = "id")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Correo> correoList;
     @JoinColumn(name = "id_sitio", referencedColumnName = "id")
     @ManyToOne
-    private Sitio idSitio;
-    @OneToMany(mappedBy = "idUsuario")
+    private Sitio sitio;
+    @JoinTable(name = "usuario_perfil", joinColumns = {
+        @JoinColumn(name = "id_usuario", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "id_perfil", referencedColumnName = "id")})
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Perfil> perfilList;
 
     public Usuario() {
@@ -185,12 +186,12 @@ public class Usuario implements Serializable {
         this.correoList = correoList;
     }
 
-    public Sitio getIdSitio() {
-        return idSitio;
+    public Sitio getSitio() {
+        return sitio;
     }
 
-    public void setIdSitio(Sitio idSitio) {
-        this.idSitio = idSitio;
+    public void setSitio(Sitio sitio) {
+        this.sitio = sitio;
     }
 
     public List<Perfil> getPerfilList() {

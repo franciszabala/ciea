@@ -21,13 +21,13 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -59,15 +59,13 @@ public class Proveedor implements Serializable {
     @JoinTable(name = "proveedor_telefono", joinColumns = {
         @JoinColumn(name = "id_proveedor", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_telefono", referencedColumnName = "id")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Telefono> telefonoList;
     @JoinTable(name = "proveedor_correo", joinColumns = {
         @JoinColumn(name = "id_proveedor", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_correo", referencedColumnName = "id")})
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Correo> correoList;
-    @OneToMany(mappedBy = "idProveedor")
-    private List<OrdenCompra> orderCompraList;
 
     public Proveedor() {
     }
@@ -118,14 +116,6 @@ public class Proveedor implements Serializable {
 
     public void setCorreoList(List<Correo> correoList) {
         this.correoList = correoList;
-    }
-
-    public List<OrdenCompra> getOrderCompraList() {
-        return orderCompraList;
-    }
-
-    public void setOrderCompraList(List<OrdenCompra> orderCompraList) {
-        this.orderCompraList = orderCompraList;
     }
 
     @Override

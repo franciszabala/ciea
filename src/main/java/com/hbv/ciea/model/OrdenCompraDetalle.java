@@ -15,12 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.hbv.ciea.model;
 
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,34 +32,35 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
- * 
+ *
  * @author Herman Barrantes
  * @since 24-nov-2014
  */
 @Entity
 @Table(name = "oder_compra_detalle")
 public class OrdenCompraDetalle implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @Min(value=0)
-    @Max(value=9999)
+    @Min(value = 0)
+    @Max(value = 9999)
     @NotNull
     @Column(name = "cantidad")
     private int cantidad;
-    @Min(value=0)
-    @Max(value=9999)
+    @Min(value = 0)
+    @Max(value = 9999999)
     @NotNull
-    @Column(name = "precio")
+    @Column(name = "precio", precision = 9, scale = 2)
     private double precio;
     @JoinColumn(name = "id_articulo", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Articulo idArticulo;
+    private Articulo articulo;
     @JoinColumn(name = "id_orden_compra", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private OrdenCompra idOrdenCompra;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private OrdenCompra ordenCompra;
 
     public OrdenCompraDetalle() {
     }
@@ -88,20 +89,20 @@ public class OrdenCompraDetalle implements Serializable {
         this.precio = precio;
     }
 
-    public Articulo getIdArticulo() {
-        return idArticulo;
+    public Articulo getArticulo() {
+        return articulo;
     }
 
-    public void setIdArticulo(Articulo idArticulo) {
-        this.idArticulo = idArticulo;
+    public void setArticulo(Articulo articulo) {
+        this.articulo = articulo;
     }
 
-    public OrdenCompra getIdOrdenCompra() {
-        return idOrdenCompra;
+    public OrdenCompra getOrdenCompra() {
+        return ordenCompra;
     }
 
-    public void setIdOrdenCompra(OrdenCompra idOrdenCompra) {
-        this.idOrdenCompra = idOrdenCompra;
+    public void setOrdenCompra(OrdenCompra ordenCompra) {
+        this.ordenCompra = ordenCompra;
     }
 
     @Override

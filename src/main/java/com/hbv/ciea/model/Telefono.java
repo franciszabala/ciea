@@ -15,27 +15,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.hbv.ciea.model;
 
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
- * 
+ *
  * @author Herman Barrantes
  * @since 24-nov-2014
  */
 @Entity
 @Table(name = "telefono")
 public class Telefono implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,15 +47,20 @@ public class Telefono implements Serializable {
     private int telefono;
     @Column(name = "extension")
     private Integer extension;
-    @Size(max = 8)
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipo")
-    private String tipo;
+    private TelefonoTipo tipo;
 
     public Telefono() {
     }
 
     public Telefono(int telefono) {
         this.telefono = telefono;
+    }
+
+    public Telefono(int telefono, TelefonoTipo tipo) {
+        this.telefono = telefono;
+        this.tipo = tipo;
     }
 
     public long getId() {
@@ -81,11 +87,11 @@ public class Telefono implements Serializable {
         this.extension = extension;
     }
 
-    public String getTipo() {
+    public TelefonoTipo getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TelefonoTipo tipo) {
         this.tipo = tipo;
     }
 

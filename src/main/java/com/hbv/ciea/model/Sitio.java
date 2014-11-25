@@ -93,7 +93,7 @@ public class Sitio implements Serializable {
 
     @Override
     public String toString() {
-        return "com.hbv.ciea.model.Sitio[ id=" + id + " ]";
+        return "Sitio[ id=" + id + " ]";
     }
 
 }
