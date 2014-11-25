@@ -36,17 +36,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/welcome").permitAll()
+                .antMatchers("/", "/welcome", "/webjars/**", "/resources/**").permitAll()
                 .anyRequest().authenticated();
         http
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/welcome")
-                .permitAll()
+                .formLogin().loginPage("/login").defaultSuccessUrl("/welcome").permitAll()
                 .and()
-                .logout()
-                .logoutSuccessUrl("/welcome")
-                .permitAll();
+                .logout().logoutSuccessUrl("/welcome").permitAll();
     }
 
     @Override
@@ -55,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .inMemoryAuthentication()
                 .withUser("user").password("123").roles("USER")
                 .and()
-                .withUser("Herman").password("asd").roles("USER","ADMIN");
+                .withUser("Herman").password("asd").roles("USER", "ADMIN");
     }
 
 }
