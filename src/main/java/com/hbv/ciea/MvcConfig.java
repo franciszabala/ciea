@@ -15,22 +15,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.hbv.ciea;
 
-package com.hbv.ciea.controller;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * 
+ *
  * @author Herman Barrantes
  * @since 25-nov-2014
  */
-@Controller
-public class HelloController {
+@Configuration
+public class MvcConfig extends WebMvcConfigurerAdapter {
 
-    @RequestMapping(value = {"/hello"})
-    public String hello() {
-        return "hello";
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/hello").setViewName("hello");
+        registry.addViewController("/login").setViewName("login");
     }
 }
