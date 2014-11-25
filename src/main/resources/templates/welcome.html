@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Prueba</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <h1 th:text="#{home.welcome}">Bienvenido</h1>
+        <p th:text="'Hello, ' + ${nombre} + '!'" >Hello, Herman</p>
+        <br/>
+        <label th:text="'Fecha: ' + ${#dates.format(fecha, 'dd/MMM/yyyy HH:mm')}" >Fecha: 25/nov/2014 10:25</label>
+    </body>
+</html>
