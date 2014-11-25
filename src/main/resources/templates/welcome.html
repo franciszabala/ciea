@@ -10,5 +10,6 @@
         <p th:text="'Hello, ' + ${nombre} + '!'" >Hello, Herman</p>
         <br/>
         <label th:text="'Fecha: ' + ${#dates.format(fecha, 'dd/MMM/yyyy HH:mm')}" >Fecha: 25/nov/2014 10:25</label>
+        <p><a href="#" th:href="@{/hello}">Hello</a></p>
     </body>
 </html>
