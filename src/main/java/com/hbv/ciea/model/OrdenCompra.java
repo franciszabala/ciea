@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.hbv.ciea.model;
 
 import java.io.Serializable;
@@ -40,13 +39,14 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * 
+ *
  * @author Herman Barrantes
  * @since 24-nov-2014
  */
 @Entity
 @Table(name = "orden_compra")
 public class OrdenCompra implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,7 +67,7 @@ public class OrdenCompra implements Serializable {
     @ManyToOne
     private Proveedor proveedor;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenCompra", fetch = FetchType.LAZY)
-    private List<OrdenCompraDetalle> ordenCompraDetalleList;
+    private List<OrdenCompraDetalle> detalles;
 
     public OrdenCompra() {
     }
@@ -112,12 +112,12 @@ public class OrdenCompra implements Serializable {
         this.proveedor = proveedor;
     }
 
-    public List<OrdenCompraDetalle> getOrdenCompraDetalleList() {
-        return ordenCompraDetalleList;
+    public List<OrdenCompraDetalle> getDetalles() {
+        return detalles;
     }
 
-    public void setOrdenCompraDetalleList(List<OrdenCompraDetalle> ordenCompraDetalleList) {
-        this.ordenCompraDetalleList = ordenCompraDetalleList;
+    public void setDetalles(List<OrdenCompraDetalle> detalles) {
+        this.detalles = detalles;
     }
 
     @Override

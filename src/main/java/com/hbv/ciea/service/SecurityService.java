@@ -55,7 +55,7 @@ public class SecurityService implements UserDetailsService {
             return null;
         }
         ArrayList<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        for(Perfil perfil : usuario.getPerfilList()) {
+        for(Perfil perfil : usuario.getPerfiles()) {
             SimpleGrantedAuthority authority = new SimpleGrantedAuthority(perfil.getNombre());
             authorities.add(authority);
         }

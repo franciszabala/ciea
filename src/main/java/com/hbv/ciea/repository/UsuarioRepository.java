@@ -29,6 +29,6 @@ import org.springframework.data.repository.query.Param;
  */
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    @Query("SELECT u FROM Usuario u JOIN FETCH u.perfilList WHERE u.usuario = (:usuario)")
+    @Query("SELECT u FROM Usuario u JOIN FETCH u.perfiles WHERE u.usuario = (:usuario)")
     Usuario findByUsuario(@Param("usuario") String usuario);
 }

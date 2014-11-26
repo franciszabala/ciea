@@ -60,12 +60,12 @@ public class Proveedor implements Serializable {
         @JoinColumn(name = "id_proveedor", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_telefono", referencedColumnName = "id")})
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Telefono> telefonoList;
+    private List<Telefono> telefonos;
     @JoinTable(name = "proveedor_correo", joinColumns = {
         @JoinColumn(name = "id_proveedor", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_correo", referencedColumnName = "id")})
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Correo> correoList;
+    private List<Correo> correos;
 
     public Proveedor() {
     }
@@ -102,20 +102,20 @@ public class Proveedor implements Serializable {
         this.sitioWeb = sitioWeb;
     }
 
-    public List<Telefono> getTelefonoList() {
-        return telefonoList;
+    public List<Telefono> getTelefonos() {
+        return telefonos;
     }
 
-    public void setTelefonoList(List<Telefono> telefonoList) {
-        this.telefonoList = telefonoList;
+    public void setTelefonos(List<Telefono> telefonos) {
+        this.telefonos = telefonos;
     }
 
-    public List<Correo> getCorreoList() {
-        return correoList;
+    public List<Correo> getCorreos() {
+        return correos;
     }
 
-    public void setCorreoList(List<Correo> correoList) {
-        this.correoList = correoList;
+    public void setCorreos(List<Correo> correos) {
+        this.correos = correos;
     }
 
     @Override

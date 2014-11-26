@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.hbv.ciea.model;
 
 import java.io.Serializable;
@@ -35,13 +34,14 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * 
+ *
  * @author Herman Barrantes
  * @since 24-nov-2014
  */
 @Entity
 @Table(name = "usuario")
 public class Usuario implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,12 +80,12 @@ public class Usuario implements Serializable {
         @JoinColumn(name = "id_usuario", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_telefono", referencedColumnName = "id")})
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Telefono> telefonoList;
+    private List<Telefono> telefonos;
     @JoinTable(name = "usuario_correo", joinColumns = {
         @JoinColumn(name = "id_usuario", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_correo", referencedColumnName = "id")})
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Correo> correoList;
+    private List<Correo> correos;
     @JoinColumn(name = "id_sitio", referencedColumnName = "id")
     @ManyToOne
     private Sitio sitio;
@@ -93,7 +93,7 @@ public class Usuario implements Serializable {
         @JoinColumn(name = "id_usuario", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_perfil", referencedColumnName = "id")})
     @ManyToMany(fetch = FetchType.LAZY)
-    private List<Perfil> perfilList;
+    private List<Perfil> perfiles;
 
     public Usuario() {
     }
@@ -170,22 +170,6 @@ public class Usuario implements Serializable {
         this.activo = activo;
     }
 
-    public List<Telefono> getTelefonoList() {
-        return telefonoList;
-    }
-
-    public void setTelefonoList(List<Telefono> telefonoList) {
-        this.telefonoList = telefonoList;
-    }
-
-    public List<Correo> getCorreoList() {
-        return correoList;
-    }
-
-    public void setCorreoList(List<Correo> correoList) {
-        this.correoList = correoList;
-    }
-
     public Sitio getSitio() {
         return sitio;
     }
@@ -194,12 +178,28 @@ public class Usuario implements Serializable {
         this.sitio = sitio;
     }
 
-    public List<Perfil> getPerfilList() {
-        return perfilList;
+    public List<Telefono> getTelefonos() {
+        return telefonos;
     }
 
-    public void setPerfilList(List<Perfil> perfilList) {
-        this.perfilList = perfilList;
+    public void setTelefonos(List<Telefono> telefonos) {
+        this.telefonos = telefonos;
+    }
+
+    public List<Correo> getCorreos() {
+        return correos;
+    }
+
+    public void setCorreos(List<Correo> correos) {
+        this.correos = correos;
+    }
+
+    public List<Perfil> getPerfiles() {
+        return perfiles;
+    }
+
+    public void setPerfiles(List<Perfil> perfiles) {
+        this.perfiles = perfiles;
     }
 
     @Override
