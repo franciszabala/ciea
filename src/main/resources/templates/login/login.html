@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Login</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.2.0/css/bootstrap.min.css"
+              th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}"
+              rel="stylesheet"
+              media="screen" />
+        <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.2.0/css/bootstrap-theme.min.css"
+              th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap-theme.min.css}"
+              rel="stylesheet"
+              media="screen" />
+        <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.1/jquery.min.js"
+        th:src="@{/webjars/jquery/2.1.1/jquery.min.js}"></script>
+    </head>
+    <body onload="document.f.username.focus();">
+        <div class="container">
+
+            <span class="label label-default">Default</span>
+            <span class="label label-primary">Primary</span>
+            <span class="label label-success">Success</span>
+            <span class="label label-info">Info</span>
+            <span class="label label-warning">Warning</span>
+            <span class="label label-danger">Danger</span>
+
+            <div th:if="${param.logout}" class="alert alert-info" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <strong>Info!</strong> You have been logged out.
+            </div>
+            <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <strong>Error!</strong> There was an error, please try again.
+            </div>
+            <h2>Login with Username and Password</h2>
+            <form name="form"
+                  role="form"
+                  th:action="@{/login}"
+                  action="/login"
+                  method="POST">
+                <div class="form-group">
+                    <label for="username">User Name</label>
+                    <input id="username"
+                           type="text"
+                           class="form-control"
+                           name="username"
+                           value=""
+                           placeholder="Username" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input id="password"
+                           type="password"
+                           class="form-control"
+                           name="password"
+                           placeholder="Password" />
+                </div>
+                <input type="submit"
+                       id="login"
+                       value="Login"
+                       class="btn btn-primary" />
+            </form>
+        </div>
+        <script src="http://cdn.jsdelivr.net/webjars/bootstrap/3.2.0/bootstrap.min.js"
+        th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
+    </body>
+</html>
