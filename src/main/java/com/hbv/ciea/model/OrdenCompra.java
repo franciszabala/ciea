@@ -65,7 +65,7 @@ public class OrdenCompra implements Serializable {
     private OrdenCompraEstado estado;
     @JoinColumn(name = "id_proveedor", referencedColumnName = "id")
     @ManyToOne
-    private Proveedor idProveedor;
+    private Proveedor proveedor;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenCompra", fetch = FetchType.LAZY)
     private List<OrdenCompraDetalle> ordenCompraDetalleList;
 
@@ -104,12 +104,12 @@ public class OrdenCompra implements Serializable {
         this.estado = estado;
     }
 
-    public Proveedor getIdProveedor() {
-        return idProveedor;
+    public Proveedor getProveedor() {
+        return proveedor;
     }
 
-    public void setIdProveedor(Proveedor idProveedor) {
-        this.idProveedor = idProveedor;
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 
     public List<OrdenCompraDetalle> getOrdenCompraDetalleList() {

@@ -17,6 +17,8 @@
  */
 package com.hbv.ciea;
 
+import com.hbv.ciea.service.SecurityService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -32,11 +34,14 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 @EnableWebMvcSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private SecurityService securityService;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/welcome", "/webjars/**", "/resources/**").permitAll()
+                .antMatchers("/", "/welcome", "/error", "/webjars/**", "/resources/**").permitAll()
                 .anyRequest().authenticated();
         http
                 .formLogin().loginPage("/login").defaultSuccessUrl("/welcome").permitAll()
@@ -46,11 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("user").password("123").roles("USER")
-                .and()
-                .withUser("Herman").password("asd").roles("USER", "ADMIN");
+        auth.userDetailsService(securityService);
     }
 
 }

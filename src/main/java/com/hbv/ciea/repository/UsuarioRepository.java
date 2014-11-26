@@ -19,6 +19,8 @@ package com.hbv.ciea.repository;
 
 import com.hbv.ciea.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
@@ -27,5 +29,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    Usuario findByUsuario(String usuario);
+    @Query("SELECT u FROM Usuario u JOIN FETCH u.perfilList WHERE u.usuario = (:usuario)")
+    Usuario findByUsuario(@Param("usuario") String usuario);
 }
