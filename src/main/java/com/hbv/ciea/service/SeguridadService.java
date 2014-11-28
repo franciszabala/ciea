@@ -17,14 +17,10 @@
  */
 package com.hbv.ciea.service;
 
-import com.hbv.ciea.model.Perfil;
 import com.hbv.ciea.model.Usuario;
+import com.hbv.ciea.model.UsuarioSeguridad;
 import com.hbv.ciea.repository.UsuarioRepository;
-import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -34,16 +30,13 @@ import org.springframework.stereotype.Service;
  *
  * @author Herman Barrantes
  * @since 26-nov-2014
+ * @see http://www.javacodegeeks.com/2014/03/springmvc4-spring-data-jpa-springsecurity-configuration-using-javaconfig.html
  */
 @Service
-public class SecurityService implements UserDetailsService {
-
-    private UsuarioRepository usuarioRepository;
+public class SeguridadService implements UserDetailsService {
 
     @Autowired
-    public SecurityService(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
-    }
+    private UsuarioRepository usuarioRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -54,12 +47,7 @@ public class SecurityService implements UserDetailsService {
         if (usuario == null) {
             return null;
         }
-        ArrayList<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        for(Perfil perfil : usuario.getPerfiles()) {
-            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(perfil.getNombre());
-            authorities.add(authority);
-        }
-        return new User(usuario.getUsuario(), usuario.getClave(), usuario.getActivo(), true, true, true, authorities);
+        return new UsuarioSeguridad(usuario);
     }
 
 }

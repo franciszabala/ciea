@@ -15,20 +15,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.hbv.ciea.repository;
 
-import com.hbv.ciea.model.Usuario;
+import com.hbv.ciea.model.Activo;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 /**
- *
+ * 
  * @author Herman Barrantes
- * @since 21-oct-2014
+ * @since 26-nov-2014
  */
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+public interface ActivoRepository extends JpaRepository<Activo, Long> {
 
-    @Query("SELECT u FROM Usuario u JOIN FETCH u.perfiles WHERE u.usuario = :usuario")
-    Usuario findByUsuario(@Param("usuario") String usuario);
 }
