@@ -18,49 +18,71 @@
     <body onload="document.f.username.focus();">
         <div class="container">
 
-            <span class="label label-default">Default</span>
-            <span class="label label-primary">Primary</span>
-            <span class="label label-success">Success</span>
-            <span class="label label-info">Info</span>
-            <span class="label label-warning">Warning</span>
-            <span class="label label-danger">Danger</span>
+            <div class="row">
+                <div class="col-lg-8">
 
-            <div th:if="${param.logout}" class="alert alert-info" role="alert">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <strong>Info!</strong> You have been logged out.
-            </div>
-            <div th:if="${param.error}" class="alert alert-danger" role="alert">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <strong>Error!</strong> There was an error, please try again.
-            </div>
-            <h2>Login with Username and Password</h2>
-            <form name="form"
-                  role="form"
-                  th:action="@{/login}"
-                  action="/login"
-                  method="POST">
-                <div class="form-group">
-                    <label for="username">User Name</label>
-                    <input id="username"
-                           type="text"
-                           class="form-control"
-                           name="username"
-                           value=""
-                           placeholder="Username" />
+                    <form action="/login" method="post" class="form-horizontal" role="form">
+
+                        <div class="form-group">
+                            <label for="username" class="col-lg-4 control-label">${i18n("login.username")}</label>
+                            <div class="col-lg-8">
+                                <input type="text" id="username" class="form-control" value="${(flash.username)!""}" name="username" id="username">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="col-lg-4 control-label">${i18n("login.password")}</label>
+                            <div class="col-lg-8">
+                                <input type="password" class="form-control" name="password" id="password" value="${(flash.password)!""}">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success pull-right">${i18n("login.loginNowButton")}</button>
+                    </form>
+
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input id="password"
-                           type="password"
-                           class="form-control"
-                           name="password"
-                           placeholder="Password" />
+            </div>
+
+            <div class="row">
+
+                <div th:if="${param.logout}" class="alert alert-info" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <strong>Info!</strong> You have been logged out.
                 </div>
-                <input type="submit"
-                       id="login"
-                       value="Login"
-                       class="btn btn-primary" />
-            </form>
+                <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <strong>Error!</strong> There was an error, please try again.
+                </div>
+                <h2>Login with Username and Password</h2>
+                <form name="form"
+                      role="form"
+                      class="form-horizontal"
+                      th:action="@{/login}"
+                      action="/login"
+                      method="POST">
+                    <div class="form-group">
+                        <label for="username" class="control-label">User Name</label>
+                        <input id="username"
+                               type="text"
+                               class="form-control"
+                               name="username"
+                               value=""
+                               placeholder="Username" />
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="control-label">Password</label>
+                        <input id="password"
+                               type="password"
+                               class="form-control"
+                               name="password"
+                               placeholder="Password" />
+                    </div>
+                    <button type="submit"
+                            id="login"
+                            class="btn btn-primary pull-right" >Login</button>
+                </form>
+
+            </div>
         </div>
         <script src="http://cdn.jsdelivr.net/webjars/bootstrap/3.2.0/bootstrap.min.js"
         th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
