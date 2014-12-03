@@ -17,7 +17,7 @@
  */
 package com.hbv.ciea;
 
-import com.hbv.ciea.service.SecurityService;
+import com.hbv.ciea.service.SeguridadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -36,7 +36,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private SecurityService securityService;
+    private SeguridadService seguridadService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -55,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(securityService)
+                .userDetailsService(seguridadService)
                 .passwordEncoder(new BCryptPasswordEncoder(10));
     }
 
