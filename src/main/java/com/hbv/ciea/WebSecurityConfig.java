@@ -24,6 +24,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  *
@@ -39,19 +40,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+//        http.authorizeRequests().antMatchers("/api/**").hasRole("ADMIN").and().httpBasic(); //http://stackoverflow.com/questions/18729752/basic-and-form-based-authentication-with-spring-security-javaconfig
         http
                 .authorizeRequests()
                 .antMatchers("/", "/welcome", "/error", "/webjars/**", "/resources/**").permitAll()
+//                .antMatchers("/usuario","/usuario/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
         http
                 .formLogin().loginPage("/login").defaultSuccessUrl("/welcome").permitAll()
                 .and()
-                .logout().logoutSuccessUrl("/login?logout").permitAll();
+                .logout().deleteCookies("JSESSIONID").logoutSuccessUrl("/login?logout").permitAll();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(securityService);
+        auth
+                .userDetailsService(securityService)
+                .passwordEncoder(new BCryptPasswordEncoder(10));
     }
 
 }
