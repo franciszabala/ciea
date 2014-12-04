@@ -16,6 +16,7 @@
 package com.hbv.ciea.controller;
 
 //import org.springframework.security.access.annotation.Secured;
+import com.hbv.ciea.model.UsuarioSeguridad;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,8 @@ public class UsuarioController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
             nombre = ((UserDetails) principal).getUsername();
+            UsuarioSeguridad us = (UsuarioSeguridad) principal;
+            us.getActivo();
         }
         model.addAttribute("nombre", nombre);
         return "usuario";
