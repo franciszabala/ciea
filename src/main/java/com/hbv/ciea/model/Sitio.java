@@ -49,6 +49,10 @@ public class Sitio implements Serializable {
     public Sitio() {
     }
 
+    public Sitio(long id) {
+        this.id = id;
+    }
+
     public Sitio(String nombre) {
         this.nombre = nombre;
     }

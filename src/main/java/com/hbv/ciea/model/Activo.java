@@ -45,7 +45,7 @@ public class Activo implements Serializable {
     private long id;
     @NotNull
     @Column(name = "placa")
-    private int placa;
+    private String placa;
     @Size(max = 50)
     @Column(name = "serie")
     private String serie;
@@ -71,11 +71,11 @@ public class Activo implements Serializable {
         this.id = id;
     }
 
-    public int getPlaca() {
+    public String getPlaca() {
         return placa;
     }
 
-    public void setPlaca(int placa) {
+    public void setPlaca(String placa) {
         this.placa = placa;
     }
 
