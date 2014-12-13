@@ -9,8 +9,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Herman Barrantes">
-</head>
-<body>
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+  </head>
+  <body>
 
     <!-- Fixed navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -60,6 +64,7 @@
     </nav>
 
     <div class="container" ng-app="baseApp" ng-controller="baseController">
+
         <h1>Mantenimiento Base</h1>
         <div ng-hide="formulario">
             <h2>Tabla Base</h2>
@@ -81,11 +86,11 @@
                             <td>{{ usuario.apellido }}</td>
                             <td>
                                 <div class="btn-group btn-group-ms pull-right" role="group">
-                                    <button class="btn btn-primary" ng-click="editar(usuario.id)">
-                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    <button class="btn btn-primary" ng-click="editar(usuario)">
+                                        <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Editar
                                     </button>
-                                    <button class="btn btn-danger" ng-click="borrar(usuario.id)">
-                                        <span class="glyphicon glyphicon-remove"></span>
+                                    <button class="btn btn-danger" ng-click="borrar($index)">
+                                        <span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Borrar
                                     </button>
                                 </div>
                             </td>
@@ -94,18 +99,41 @@
                 </table>
             </div>
         </div>
+
         <div ng-show="formulario">
+            <p>{{ formulario }} </p>
             <h2>Formulario Base</h2>
-            <div class="btn-group btn-group-ms pull-right" role="group">
-                <button class="btn btn-primary" ng-click="aceptar()">
-                    <span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;Aceptar
-                </button>
-                <button class="btn btn-default" ng-click="cancelar()">
-                    <span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp;Cancelar
-                </button>
-            </div>
+            <form role="form">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="Nombre" ng-model="usuario.nombre"></input>
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" class="form-control" id="apellido" placeholder="Apellido" ng-model="usuario.apellido"></input>
+                </div>
+                <div class="btn-group btn-group-ms pull-right" role="group">
+                    <button class="btn btn-primary" ng-click="aceptar(usuario)">
+                        <span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;Aceptar
+                    </button>
+                    <button class="btn btn-default" ng-click="cancelar()">
+                        <span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp;Cancelar
+                    </button>
+                </div>
+                <br></br>
+                <pre>usuario = {{usuario | json}}</pre>
+                <pre>seleccionado = {{seleccionado | json}}</pre>
+            </form>
         </div>
+
     </div>
+
+
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">Place sticky footer content here.</p>
+        </div>
+    </footer>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

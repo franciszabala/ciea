@@ -18,6 +18,8 @@
 
  app.controller("baseController", function ($scope) {
     $scope.formulario = false;
+    $scope.usuario = {};
+    $scope.selecionado = {};
     $scope.usuarios = [
     {id:1, nombre:'Hege',  apellido:"Pege" },
     {id:2, nombre:'Kim',   apellido:"Pim" },
@@ -29,17 +31,34 @@
 
     $scope.nuevo = function () {
         alert("Nuevo");
-        $scope.formulario = true;
-        $scope.usuario = {id:0, nombre:"", apellido:""};
-    };
-    $scope.editar = function (id) {
+        $scope.usuario = {id:0};
         $scope.formulario = true;
     };
-    $scope.borrar = function (id) {
+    $scope.editar = function (usuario) {
+        alert("Editar " + usuario.nombre);
+        $scope.selecionado = usuario;
+        $scope.usuario = angular.copy(usuario);
+        $scope.formulario = true;
+    };
+    $scope.borrar = function (index) {
+        alert("Borrar " + index);
+        $scope.usuarios.splice(index, 1);
         $scope.formulario = false;
     };
-    $scope.aceptar = function () {
+    $scope.aceptar = function (usuario) {
         alert("Aceptar");
+        if(usuario.id == 0) {
+            //Al enviar a la BD obtengo el ID y asi lo meto a la lista
+            $scope.usuarios.push(usuario);
+        } else {
+            $scope.selecionado = usuario;
+            //for(var i = 0; i < $scope.usuarios.length; i++){
+            //    if($scope.usuarios[i].id == usuario.id){
+            //        $scope.usuarios.splice(i,1);
+            //    }
+            //}
+            //$scope.usuarios.push(usuario);
+        }
         $scope.formulario = false;
     };
     $scope.cancelar = function () {

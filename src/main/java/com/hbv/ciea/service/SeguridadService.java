@@ -41,11 +41,13 @@ public class SeguridadService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if(username == null || username.trim().isEmpty()) {
-            return null;
+            throw new UsernameNotFoundException("Usuario no encontrado");
         }
         Usuario usuario = usuarioRepository.findByUsuario(username);
         if (usuario == null) {
-            return null;
+            throw new UsernameNotFoundException("Usuario " + username + " no esta en la base de datos");
+        } else if (!usuario.getActivo()) {
+            throw new UsernameNotFoundException("Usuario " + username + " no esta activo");
         }
         return new UsuarioSeguridad(usuario);
     }
