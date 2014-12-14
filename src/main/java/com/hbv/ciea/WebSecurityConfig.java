@@ -20,6 +20,7 @@ package com.hbv.ciea;
 import com.hbv.ciea.service.SeguridadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -41,9 +42,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 //        http.authorizeRequests().antMatchers("/api/**").hasRole("ADMIN").and().httpBasic(); //http://stackoverflow.com/questions/18729752/basic-and-form-based-authentication-with-spring-security-javaconfig
         http
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/welcome", "/error", "/webjars/**", "/resources/**").permitAll()
-//                .antMatchers("/usuario","/usuario/**").hasRole("ADMIN")
+//                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
         http
                 .formLogin().loginPage("/login").defaultSuccessUrl("/welcome").permitAll()
@@ -53,7 +55,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(seguridadService);
+        auth
+                .userDetailsService(seguridadService)
+                .passwordEncoder(new ShaPasswordEncoder(256));
     }
 
 }

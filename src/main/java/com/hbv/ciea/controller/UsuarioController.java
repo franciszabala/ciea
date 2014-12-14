@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class UsuarioController {
 
-    @RequestMapping("/usuario")
+    @RequestMapping("/admin/usuario")
 //    @Secured("ADMIN")
     public String usuario(Model model) {
         String nombre = "No logeado";

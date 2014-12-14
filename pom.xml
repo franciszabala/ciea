@@ -36,9 +36,9 @@
     <developers>
 
         <developer>
-            <id>herman.barrantes</id>
+            <id>barrantesgerman</id>
             <name>Herman Barrantes</name>
-            <email>herman.barrantes@gbsys.com</email>
+            <email>barrantesgerman@gmail.com</email>
             <url>http://www.codigofantasma.com</url>
             <organization>GBSYS S.A.</organization>
             <organizationUrl>http://www.gbsys.com</organizationUrl>
@@ -52,6 +52,20 @@
                 <gtalk>barrantesgerman@gmail.com</gtalk>
                 <picUrl>https://lh6.googleusercontent.com/-wZHbMUo7r48/AAAAAAAAAAI/AAAAAAAAAAA/fegpRTe0k54/s96-c/photo.jpg</picUrl>
             </properties>
+        </developer>
+
+        <developer>
+            <id>eilyn.05</id>
+            <name>Eilyn Salazar</name>
+            <email>eilyn.05@gmail.com </email>
+            <url>http://www.hp.com</url>
+            <organization>HP S.A.</organization>
+            <organizationUrl>http://www.hp.com</organizationUrl>
+            <roles>
+                <role>developer</role>
+                <role>architect</role>
+            </roles>
+            <timezone>-6</timezone>
         </developer>
         
     </developers>
