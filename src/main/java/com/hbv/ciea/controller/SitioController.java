@@ -28,19 +28,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.hbv.ciea.controller.ApiVersion.*;
+
 /**
  *
  * @author Herman
  * @since 2014-12-13
- * @see http://www.javacodegeeks.com/2014/05/spring-rest-controller-with-angularjs-resource.html
- * @see http://www.journaldev.com/2552/spring-restful-web-service-example-with-json-jackson-and-client-program
+ * @see
+ * http://www.javacodegeeks.com/2014/05/spring-rest-controller-with-angularjs-resource.html
+ * @see
+ * http://www.journaldev.com/2552/spring-restful-web-service-example-with-json-jackson-and-client-program
  */
 @RestController
-@RequestMapping("/api/sitio")
+@RequestMapping(SITIO_API)
 public class SitioController {
-
-    private static final String URL = "/api/sitio";
-    private static final String MEDIA_TYPE_JSON = "application/json";
 
     @Autowired
     private SitioRepository sitioRepository;
@@ -61,8 +62,8 @@ public class SitioController {
 //        return sitioRepository.save(editar);
 //    }
 //
-    @RequestMapping(value = {"/{id}"}, method = {RequestMethod.DELETE}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
-    public ResponseEntity borrar(@PathVariable("id") long id) {
+    @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
+    public ResponseEntity borrar(@PathVariable(ID) long id) {
         sitioRepository.delete(id);
         return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
     }
