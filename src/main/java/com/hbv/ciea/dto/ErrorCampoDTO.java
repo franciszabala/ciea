@@ -13,16 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hbv.ciea.controller;
+package com.hbv.ciea.dto;
 
 /**
  *
  * @author Herman
+ * @since 2014-12-16
  */
-public class ApiVersion {
+public class ErrorCampoDTO {
 
-    public static final String MEDIA_TYPE_JSON = "application/json";
-    public static final String ID = "id";
-    public static final String ID_URL = "/{id}";
-    public static final String SITIO_API = "/api/sitio";
+    private final String campo;
+
+    private final String mensaje;
+
+    public ErrorCampoDTO(String campo, String mensaje) {
+        this.campo = campo;
+        this.mensaje = mensaje;
+    }
+
+    public String getCampo() {
+        return campo;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
 }

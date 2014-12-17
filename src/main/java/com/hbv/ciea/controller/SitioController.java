@@ -15,11 +15,15 @@
  */
 package com.hbv.ciea.controller;
 
+import static com.hbv.ciea.controller.ApiConstantes.*;
+
 import com.hbv.ciea.model.Sitio;
 import com.hbv.ciea.repository.SitioRepository;
-import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,8 +31,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import static com.hbv.ciea.controller.ApiVersion.*;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -40,15 +43,17 @@ import static com.hbv.ciea.controller.ApiVersion.*;
  * http://www.journaldev.com/2552/spring-restful-web-service-example-with-json-jackson-and-client-program
  */
 @RestController
-@RequestMapping(SITIO_API)
+@RequestMapping(API_SITIO)
 public class SitioController {
 
     @Autowired
     private SitioRepository sitioRepository;
 
     @RequestMapping(method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
-    public List<Sitio> listar() {
-        return sitioRepository.findAll();
+    public Page<Sitio> listar(
+            @RequestParam(value = PAGE, required = false, defaultValue = PAGE_VALUE) int pagina,
+            @RequestParam(value = SIZE, required = false, defaultValue = SIZE_VALUE) int tamano) {
+        return sitioRepository.findAll(new PageRequest(pagina, tamano, Sort.Direction.ASC, ID));
     }
 
     @RequestMapping(method = {RequestMethod.POST}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
