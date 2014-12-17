@@ -81,7 +81,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="usuario in usuarios">
+                        <tr ng-repeat="usuario in usuarios" ng-click="editar(usuario)">
                             <td>{{ usuario.nombre }}</td>
                             <td>{{ usuario.apellido }}</td>
                             <td>

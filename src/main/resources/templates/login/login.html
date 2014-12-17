@@ -15,7 +15,7 @@
         <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.1/jquery.min.js"
         th:src="@{/webjars/jquery/2.1.1/jquery.min.js}"></script>
     </head>
-    <body onload="document.f.username.focus();">
+    <body onload="document.form.username.focus();">
         <div class="container">
 
             <div class="row">
@@ -42,7 +42,8 @@
                                class="form-control"
                                name="username"
                                value=""
-                               placeholder="Username" />
+                               placeholder="Username"
+                               autofocus="autofocus"/>
                     </div>
                     <div class="form-group">
                         <label for="password" class="control-label">Password</label>

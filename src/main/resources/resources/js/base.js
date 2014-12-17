@@ -36,7 +36,7 @@
     };
     $scope.editar = function (usuario) {
         alert("Editar " + usuario.nombre);
-        $scope.selecionado = usuario;
+//        $scope.selecionado = usuario;
         $scope.usuario = angular.copy(usuario);
         $scope.formulario = true;
     };
@@ -51,13 +51,13 @@
             //Al enviar a la BD obtengo el ID y asi lo meto a la lista
             $scope.usuarios.push(usuario);
         } else {
-            $scope.selecionado = usuario;
-            //for(var i = 0; i < $scope.usuarios.length; i++){
-            //    if($scope.usuarios[i].id == usuario.id){
-            //        $scope.usuarios.splice(i,1);
-            //    }
-            //}
-            //$scope.usuarios.push(usuario);
+//            $scope.selecionado = usuario;
+            for(var i = 0; i < $scope.usuarios.length; i++){
+                if($scope.usuarios[i].id == usuario.id){
+                    $scope.usuarios.splice(i,1);
+                }
+            }
+            $scope.usuarios.push(usuario);
         }
         $scope.formulario = false;
     };
