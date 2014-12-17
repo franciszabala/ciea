@@ -62,4 +62,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
     }
+    
+    //http://blog.fawnanddoug.com/2012/05/pagination-with-spring-mvc-spring-data.html
 }

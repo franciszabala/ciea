@@ -55,12 +55,11 @@ public class SitioController {
         return sitioRepository.save(sitio);
     }
 
-//    @RequestMapping(value = {URL}, method = {RequestMethod.PUT}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
-//    public Sitio editar(Sitio sitio) {
-//        Sitio editar = sitioRepository.findOne(sitio.getId());
-//        return sitioRepository.save(editar);
-//    }
-//
+    @RequestMapping(value = {URL}, method = {RequestMethod.PUT}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
+    public Sitio editar(@RequestBody @Valid Sitio sitio) {
+        return sitioRepository.save(sitio);
+    }
+
     @RequestMapping(value = {"/{id}"}, method = {RequestMethod.DELETE}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
     public ResponseEntity borrar(@PathVariable("id") long id) {
         sitioRepository.delete(id);
