@@ -47,7 +47,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver slr = new SessionLocaleResolver();
-        slr.setDefaultLocale(Locale.getDefault());
+        slr.setDefaultLocale(new Locale("es"));
         return slr;
     }
 
@@ -62,6 +62,15 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
     }
-    
+
     //http://blog.fawnanddoug.com/2012/05/pagination-with-spring-mvc-spring-data.html
+//    @Override
+//    public void addArgumentResolvers(
+//            List<HandlerMethodArgumentResolver> argumentResolvers) {
+//
+//        PageableArgumentResolver resolver = new PageableArgumentResolver();
+//        resolver.setFallbackPagable(new PageRequest(1, 10));
+//
+//        argumentResolvers.add(new ServletWebArgumentResolverAdapter(resolver));
+//    }
 }

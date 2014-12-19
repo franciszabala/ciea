@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @since 2014-12-16
  * @see
  * http://www.javacodegeeks.com/2013/05/spring-from-the-trenches-adding-validation-to-a-rest-api.html
+ * @see http://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
  */
 @ControllerAdvice
 public class RestErrorHandler {
@@ -45,7 +46,6 @@ public class RestErrorHandler {
     private MessageSource messageSource;
 
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorRestDTO errorRestGenerico(Exception ex) {
         Locale currentLocale = LocaleContextHolder.getLocale();
