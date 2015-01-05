@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
@@ -33,6 +34,7 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
  */
 @Configuration
 @EnableWebMvcSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -45,12 +47,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/welcome", "/error", "/webjars/**", "/resources/**").permitAll()
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated();
-        http
+                //                .antMatchers("/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
+                .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/welcome").permitAll()
                 .and()
-                .logout().deleteCookies("JSESSIONID").logoutSuccessUrl("/login?logout").permitAll();
+                .logout().deleteCookies("JSESSIONID").logoutSuccessUrl("/login?logout").permitAll()
+                .and()
+                .httpBasic();
     }
 
     @Override
