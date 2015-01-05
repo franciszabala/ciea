@@ -55,7 +55,7 @@ public class SitioController {
             @RequestParam(value = SIZE, required = false, defaultValue = SIZE_VALUE) int tamano) {
         return sitioRepository.findAll(new PageRequest(pagina, tamano, Sort.Direction.ASC, ID));
     }
-    
+
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
     public Sitio buscar(@PathVariable(ID) long id) {
         return sitioRepository.findOne(id);
@@ -68,7 +68,8 @@ public class SitioController {
 
     @RequestMapping(method = {RequestMethod.PUT}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
     public Sitio editar(@RequestBody @Valid Sitio sitio) {
-        return sitioRepository.save(sitio);
+        int actualizados = sitioRepository.updateNombreById(sitio.getNombre(), sitio.getId());
+        return sitio;
     }
 
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
