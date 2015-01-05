@@ -31,6 +31,9 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
  *
  * @author Herman Barrantes
  * @since 25-nov-2014
+ * @see http://stackoverflow.com/questions/18729752/basic-and-form-based-authentication-with-spring-security-javaconfig
+ * @see http://www.mkyong.com/spring-security/spring-security-form-login-using-database/
+ * @see http://kielczewski.eu/2014/12/spring-boot-security-application/
  */
 @Configuration
 @EnableWebMvcSecurity
@@ -42,7 +45,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests().antMatchers("/api/**").hasRole("ADMIN").and().httpBasic(); //http://stackoverflow.com/questions/18729752/basic-and-form-based-authentication-with-spring-security-javaconfig
         http
                 .csrf().disable()
                 .authorizeRequests()
@@ -50,9 +52,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").defaultSuccessUrl("/welcome").permitAll()
+                .formLogin().loginPage("/login").defaultSuccessUrl("/welcome").failureUrl("/login?error").permitAll()
                 .and()
-                .logout().deleteCookies("JSESSIONID").logoutSuccessUrl("/login?logout").permitAll()
+                .logout().logoutSuccessUrl("/login?logout").deleteCookies("JSESSIONID").permitAll()
+                //                .and()
+                //                .exceptionHandling().accessDeniedPage("/403")
                 .and()
                 .httpBasic();
     }
