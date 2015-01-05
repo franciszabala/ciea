@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hbv.ciea.controller;
+package com.hbv.ciea.rest;
 
 import static com.hbv.ciea.controller.ApiConstantes.*;
 
@@ -44,7 +44,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @RestController
 @RequestMapping(API_SITIO)
-public class SitioController {
+public class SitioRestController {
 
     @Autowired
     private SitioRepository sitioRepository;

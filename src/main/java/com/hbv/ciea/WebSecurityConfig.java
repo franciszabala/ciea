@@ -24,6 +24,7 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 
@@ -31,8 +32,10 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
  *
  * @author Herman Barrantes
  * @since 25-nov-2014
- * @see http://stackoverflow.com/questions/18729752/basic-and-form-based-authentication-with-spring-security-javaconfig
- * @see http://www.mkyong.com/spring-security/spring-security-form-login-using-database/
+ * @see
+ * http://stackoverflow.com/questions/18729752/basic-and-form-based-authentication-with-spring-security-javaconfig
+ * @see
+ * http://www.mkyong.com/spring-security/spring-security-form-login-using-database/
  * @see http://kielczewski.eu/2014/12/spring-boot-security-application/
  */
 @Configuration
@@ -44,11 +47,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private SeguridadService seguridadService;
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring().antMatchers("/", "/welcome", "/error", "/webjars/**", "/resources/**");
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/welcome", "/error", "/webjars/**", "/resources/**").permitAll()
+//                .antMatchers("/", "/welcome", "/error", "/webjars/**", "/resources/**").permitAll()
                 //                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
