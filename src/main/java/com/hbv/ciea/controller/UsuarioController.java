@@ -17,6 +17,7 @@ package com.hbv.ciea.controller;
 
 //import org.springframework.security.access.annotation.Secured;
 import com.hbv.ciea.model.UsuarioSeguridad;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,7 @@ public class UsuarioController {
 
     @RequestMapping("/admin/usuario")
 //    @Secured("ADMIN")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String usuario(Model model) {
         String nombre = "No logeado";
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
