@@ -15,10 +15,11 @@
  */
 package com.hbv.ciea.rest;
 
-import static com.hbv.ciea.controller.ApiConstantes.*;
+import static com.hbv.ciea.rest.ApiConstantes.*;
 
 import com.hbv.ciea.model.Sitio;
 import com.hbv.ciea.repository.SitioRepository;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -50,11 +51,16 @@ public class SitioRestController {
     private SitioRepository sitioRepository;
 
     @RequestMapping(method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
-    public Page<Sitio> listar(
-            @RequestParam(value = PAGE, required = false, defaultValue = PAGE_VALUE) int pagina,
-            @RequestParam(value = SIZE, required = false, defaultValue = SIZE_VALUE) int tamano) {
-        return sitioRepository.findAll(new PageRequest(pagina, tamano, Sort.Direction.ASC, ID));
+    public List<Sitio> listar() {
+        return sitioRepository.findAll();
     }
+//
+//    @RequestMapping(method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
+//    public Page<Sitio> listar(
+//            @RequestParam(value = PAGE, required = false, defaultValue = PAGE_VALUE) int pagina,
+//            @RequestParam(value = SIZE, required = false, defaultValue = SIZE_VALUE) int tamano) {
+//        return sitioRepository.findAll(new PageRequest(pagina, tamano, Sort.Direction.ASC, ID));
+//    }
 
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
     public Sitio buscar(@PathVariable(ID) long id) {

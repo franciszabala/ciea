@@ -22,24 +22,24 @@ app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
             .state('lista', {
                 url: '/lista',
-                templateUrl: URLS.partialsList,
+                templateUrl: "/html/sitio/lista.html",
                 controller: 'SitioCtrl'
             })
             .state('editar', {
                 url: '/editar/:sitioId',
-                templateUrl: URLS.partialsEdit,
+                templateUrl: "/html/sitio/editar.html",
                 controller: 'SitioEditarCtrl'
             })
             .state('nuevo', {
                 url: '/nuevo',
-                templateUrl: URLS.partialsCreate,
+                templateUrl: "/html/sitio/nuevo.html",
                 controller: 'SitioCtrl'
             });
 });
 
 
 app.factory("Sitio", function($resource) {
-    return $resource(URLS.hotels, {id: "@id"}, {
+    return $resource("/api/sitio/:id", {id: "@id"}, {
         update: {
             method: 'PUT'
         }
@@ -49,8 +49,7 @@ app.factory("Sitio", function($resource) {
 app.controller("SitioCtrl", function($scope, Sitio, $state) {
     function init() {
         $scope.getSitios();
-    }
-
+    };
 
     $scope.getSitios = function() {
         $scope.sitios = Sitio.query();
@@ -74,8 +73,9 @@ app.controller("SitioCtrl", function($scope, Sitio, $state) {
 
 app.controller("SitioEditarCtrl", function($scope, Sitio, $state, $stateParams) {
     function init() {
+        $scope.id = $stateParams.sitioId;
         $scope.sitio = Sitio.get({id: $stateParams.sitioId});
-    }
+    };
 
     $scope.updateSitio = function() {
         var sitio = new Sitio($scope.sitio);
@@ -83,6 +83,7 @@ app.controller("SitioEditarCtrl", function($scope, Sitio, $state, $stateParams) 
             $state.transitionTo("lista");
         });
     };
+    
     init();
 });
 
