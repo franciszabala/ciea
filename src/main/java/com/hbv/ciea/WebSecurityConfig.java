@@ -48,8 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web
-                .ignoring().antMatchers("/", "/welcome", "/error", "/webjars/**", "/resources/**");
+        web.ignoring().antMatchers("/", "/welcome", "/error", "/webjars/**", "/resources/**");
     }
 
     @Override
@@ -57,13 +56,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-//                .antMatchers("/", "/welcome", "/error", "/webjars/**", "/resources/**").permitAll()
+                //                .antMatchers("/", "/welcome", "/error", "/webjars/**", "/resources/**").permitAll()
                 //                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/welcome").failureUrl("/login?error").permitAll()
                 .and()
                 .logout().logoutSuccessUrl("/login?logout").deleteCookies("JSESSIONID").permitAll()
+                //                .and()
+                //                .sessionManagement().invalidSessionUrl("/login?expired")
                 //                .and()
                 //                .exceptionHandling().accessDeniedPage("/403")
                 .and()

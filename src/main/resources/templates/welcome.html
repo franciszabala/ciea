@@ -1,29 +1,20 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/plantilla">
     <head>
-        <title>Prueba</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.2.0/css/bootstrap.min.css"
-              th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}"
-              rel="stylesheet"
-              media="screen" />
-        <!--        <link href="../static/css/core.css"
-                      th:href="@{/css/core.css}"
-                      rel="stylesheet" media="screen" />-->
-        <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.1/jquery.min.js"
-        th:src="@{/webjars/jquery/2.1.1/jquery.min.js}"></script>
+        <title th:text="#{inicio.titulo}">Sitio</title>
     </head>
     <body>
-        <div class="container">
-            <h1 th:text="#{home.welcome}">Bienvenido</h1>
-            <p th:text="'Hello, ' + ${nombre} + '!'" >Hello, Herman</p>
-            <br/>
-            <label th:text="'Fecha: ' + ${#dates.format(fecha, 'dd/MMM/yyyy HH:mm')}" >Fecha: 25/nov/2014 10:25</label>
-            <p>
-                <a href="#" th:href="@{/hello}" class="btn btn-large btn-success">Hello</a>
-                <a href="#" th:href="@{/admin/usuario}" class="btn btn-large btn-success">Usuario</a>
-            </p>
+        <div class="container" >
+            <div layout:fragment="content">
+                <h1 th:text="#{inicio.titulo}">Bienvenido</h1>
+                <p th:text="'Hello, ' + ${nombre} + '!'" >Hello, Herman</p>
+                <br/>
+                <label th:text="'Fecha: ' + ${#dates.format(fecha, 'dd/MMM/yyyy HH:mm')}" >Fecha: 25/nov/2014 10:25</label>
+                <p>
+                    <a href="#" th:href="@{/hello}" class="btn btn-large btn-success">Hello</a>
+                    <a href="#" th:href="@{/admin/usuario}" class="btn btn-large btn-success">Usuario</a>
+                </p>
+            </div>
         </div>
     </body>
 </html>
