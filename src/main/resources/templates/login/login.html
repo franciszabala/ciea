@@ -2,50 +2,65 @@
 <html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/plantilla">
     <head>
         <title th:text="#{login.titulo}">Acceder</title>
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
     </head>
     <body>
         <div class="container" >
             <div layout:fragment="content">
                 <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2 jumbotron">
 
-                    <div th:if="${param.logout}" class="alert alert-info" role="alert">
-                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <strong>Info!</strong> You have been logged out.
-                    </div>
-                    <div th:if="${param.error}" class="alert alert-danger" role="alert">
-                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <strong>Error!</strong> There was an error, please try again.
-                    </div>
-                    <h1 th:text="#{login.titulo}">Acceder</h1>
-                    <form name="form"
-                          role="form"
-                          class="form-horizontal"
-                          th:action="@{/login}"
-                          action="/login"
-                          method="POST">
-                        <div class="form-group">
-                            <label for="username" class="control-label">User Name</label>
-                            <input id="username"
-                                   type="text"
-                                   class="form-control"
-                                   name="username"
-                                   value=""
-                                   placeholder="Username"
-                                   autofocus="autofocus"/>
+                        <div th:if="${param.logout}" class="alert alert-info" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <strong th:text="#{alerta.info}">Información</strong> You have been logged out.
                         </div>
-                        <div class="form-group">
-                            <label for="password" class="control-label">Password</label>
-                            <input id="password"
-                                   type="password"
-                                   class="form-control"
-                                   name="password"
-                                   placeholder="Password" />
+                        <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <strong th:text="#{alerta.error}">Error</strong> There was an error, please try again.
                         </div>
-                        <button type="submit"
-                                id="login"
-                                class="btn btn-primary pull-right" >Login</button>
-                    </form>
+                        <h1 th:text="#{login.titulo}">Acceder</h1>
+                        <form name="form"
+                              role="form"
+                              class="form-horizontal"
+                              th:action="@{/login}"
+                              action="/login"
+                              method="POST">
+                            <div class="form-group">
+                                <label for="username" class="col-sm-2 control-label" th:text="#{login.usuario}">Usuario</label>
+                                <div class="col-sm-10 input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input id="username"
+                                           type="text"
+                                           class="form-control"
+                                           name="username"
+                                           value=""
+                                           placeholder="Username"
+                                           th:placeholder="#{login.usuario}"
+                                           autofocus="autofocus"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-2 control-label" th:text="#{login.clave}">Clave</label>
+                                <div class="col-sm-10 input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input id="password"
+                                           type="password"
+                                           class="form-control"
+                                           name="password"
+                                           th:placeholder="#{login.clave}"
+                                           placeholder="Password" />
+                                </div>
+                            </div>
+                            <button type="submit"
+                                    id="login"
+                                    th:text="#{login.acceder}"
+                                    class="btn btn-primary pull-right" >Acceder</button>
+                        </form>
 
+                    </div>
                 </div>
             </div>
         </div>
