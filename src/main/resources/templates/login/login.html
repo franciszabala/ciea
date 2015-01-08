@@ -2,22 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/plantilla">
     <head>
         <title th:text="#{login.titulo}">Acceder</title>
-        <link rel="stylesheet"
-              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
-        <link rel="stylesheet"
-              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
     </head>
     <body>
         <div class="container" >
             <div layout:fragment="content">
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2 jumbotron">
-
                         <div th:if="${param.logout}" class="alert alert-info" role="alert">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                             <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                             <strong th:text="#{alerta.info}">Información</strong> You have been logged out.
                         </div>
                         <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
                             <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                             <strong th:text="#{alerta.error}">Error</strong> There was an error, please try again.
                         </div>
@@ -56,8 +53,9 @@
                             </div>
                             <button type="submit"
                                     id="login"
-                                    th:text="#{login.acceder}"
-                                    class="btn btn-primary pull-right" >Acceder</button>
+                                    class="btn btn-primary pull-right" >
+                                <span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;<span th:text="#{login.acceder}">Acceder</span>
+                            </button>
                         </form>
 
                     </div>
