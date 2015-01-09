@@ -23,11 +23,6 @@ public class ApiConstantes {
 
     /* MediaType del servicio Rest */
     public static final String MEDIA_TYPE_JSON = "application/json";
-    /* Constantes de Paginacion */
-    public static final String PAGE = "page";
-    public static final String PAGE_VALUE = "0";
-    public static final String SIZE = "size";
-    public static final String SIZE_VALUE = "10";
     /* Constantes de URL */
     public static final String ID = "id";
     public static final String ID_URL = "/{id}";

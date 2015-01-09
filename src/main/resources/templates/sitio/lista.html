@@ -20,15 +20,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="sitio in sitios">
+                            <tr ng-repeat="sitio in sitios.content">
                                 <td>{{ sitio.id}}</td>
                                 <td>{{ sitio.nombre}}</td>
                                 <td>
                                     <div class="btn-group btn-group-ms pull-right" role="group">
-                                        <button class="btn btn-primary" ui-sref="editar({ sitioId: sitio.id })">
+                                        <button class="btn btn-primary btn-sm" ui-sref="editar({ sitioId: sitio.id })">
                                             <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Editar
                                         </button>
-                                        <button class="btn btn-danger" ng-click="deleteSitio(sitio)">
+                                        <button class="btn btn-danger btn-sm" ng-click="deleteSitio(sitio)">
                                             <span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;Borrar
                                         </button>
                                     </div>

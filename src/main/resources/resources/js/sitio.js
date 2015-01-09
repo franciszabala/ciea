@@ -23,7 +23,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             .state('lista', {
                 url: '/lista',
                 templateUrl: "/sitios/lista",
-                controller: 'SitioCtrl'
+                controller: 'SitioListaCtrl'
             })
             .state('editar', {
                 url: '/editar/:sitioId',
@@ -33,7 +33,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             .state('nuevo', {
                 url: '/nuevo',
                 templateUrl: "/sitios/nuevo",
-                controller: 'SitioCtrl'
+                controller: 'SitioNuevoCtrl'
             });
 });
 
@@ -42,18 +42,26 @@ app.factory("Sitio", function($resource) {
     return $resource("/api/sitio/:id", {id: "@id"}, {
         update: {
             method: 'PUT'
+        },
+        page: {
+            method: 'GET'
         }
     });
 });
 
-app.controller("SitioCtrl", function($scope, Sitio, $state) {
+app.controller("SitioListaCtrl", function($scope, Sitio, $state) {
     function init() {
         $scope.getSitios();
     }
     ;
 
     $scope.getSitios = function() {
-        $scope.sitios = Sitio.query();
+        Sitio.page({}, function(data){
+            $scope.sitios = data;
+//            $scope.sitios = data.content;
+        });
+//        $scope.sitios = Sitio.query();
+        
     };
 
     $scope.deleteSitio = function(sitio) {
@@ -62,6 +70,10 @@ app.controller("SitioCtrl", function($scope, Sitio, $state) {
         });
     };
 
+    init();
+});
+
+app.controller("SitioNuevoCtrl", function($scope, Sitio, $state) {
     $scope.createSitio = function() {
         var sitio = new Sitio($scope.sitio);
         sitio.$save({}, function() {
@@ -72,8 +84,6 @@ app.controller("SitioCtrl", function($scope, Sitio, $state) {
     $scope.cancelar = function() {
         $state.transitionTo("lista");
     };
-
-    init();
 });
 
 app.controller("SitioEditarCtrl", function($scope, Sitio, $state, $stateParams) {

@@ -24,6 +24,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,17 +52,15 @@ public class SitioRestController {
     @Autowired
     private SitioRepository sitioRepository;
 
-    @RequestMapping(method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
-    public List<Sitio> listar() {
-        return sitioRepository.findAll();
-    }
-//
 //    @RequestMapping(method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
-//    public Page<Sitio> listar(
-//            @RequestParam(value = PAGE, required = false, defaultValue = PAGE_VALUE) int pagina,
-//            @RequestParam(value = SIZE, required = false, defaultValue = SIZE_VALUE) int tamano) {
-//        return sitioRepository.findAll(new PageRequest(pagina, tamano, Sort.Direction.ASC, ID));
+//    public List<Sitio> listar() {
+//        return sitioRepository.findAll();
 //    }
+
+    @RequestMapping(method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
+    public Page<Sitio> listar(Pageable pageable) {
+        return sitioRepository.findAll(pageable);
+    }
 
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
     public Sitio buscar(@PathVariable(ID) long id) {
@@ -77,7 +76,6 @@ public class SitioRestController {
     @Transactional
     public Sitio editar(@PathVariable(ID) long id, @RequestBody @Valid Sitio sitio) {
         int actualizados = sitioRepository.updateNombreById(sitio.getNombre(), id);
-//        sitioRepository.save(sitio);
         return sitio;
     }
 
