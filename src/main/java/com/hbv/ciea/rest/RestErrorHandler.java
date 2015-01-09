@@ -46,6 +46,7 @@ public class RestErrorHandler {
     private MessageSource messageSource;
 
     @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorRestDTO errorRestGenerico(Exception ex) {
         Locale currentLocale = LocaleContextHolder.getLocale();
@@ -54,6 +55,7 @@ public class RestErrorHandler {
     }
 
     @ExceptionHandler(ErrorRestDTO.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ErrorRestDTO errorRestEspecifico(ErrorRestDTO ex) {
         Locale currentLocale = LocaleContextHolder.getLocale();

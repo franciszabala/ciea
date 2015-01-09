@@ -27,6 +27,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,14 +73,16 @@ public class SitioRestController {
         return sitioRepository.save(sitio);
     }
 
-    @RequestMapping(method = {RequestMethod.PUT}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
-    public Sitio editar(@RequestBody @Valid Sitio sitio) {
-        int actualizados = sitioRepository.updateNombreById(sitio.getNombre(), sitio.getId());
+    @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
+    @Transactional
+    public Sitio editar(@PathVariable(ID) long id, @RequestBody @Valid Sitio sitio) {
+        int actualizados = sitioRepository.updateNombreById(sitio.getNombre(), id);
+//        sitioRepository.save(sitio);
         return sitio;
     }
 
-    @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
-    public ResponseEntity borrar(@PathVariable(ID) long id) {
+    @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MEDIA_TYPE_JSON})
+    public ResponseEntity<Boolean> borrar(@PathVariable(ID) long id) {
         sitioRepository.delete(id);
         return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
     }
