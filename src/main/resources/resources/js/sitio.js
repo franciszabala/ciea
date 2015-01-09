@@ -14,7 +14,7 @@
  * limitations under the License.
  * https://github.com/bijukunjummen/spring-boot-mvc-test/tree/withangular
  */
-var app = angular.module("sitioApp", ["ui.router", "ngResource"]);
+var app = angular.module("sitioApp", ["ui.router", "ngResource", "ui.bootstrap"]);
 
 app.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("lista");
@@ -51,12 +51,13 @@ app.factory("Sitio", function($resource) {
 
 app.controller("SitioListaCtrl", function($scope, Sitio, $state) {
     function init() {
+        $scope.pagina = 1;
         $scope.getSitios();
     }
     ;
 
     $scope.getSitios = function() {
-        Sitio.page({}, function(data){
+        Sitio.page({'page.page':$scope.pagina}, function(data){
             $scope.sitios = data;
 //            $scope.sitios = data.content;
         });
@@ -68,6 +69,10 @@ app.controller("SitioListaCtrl", function($scope, Sitio, $state) {
         return sitio.$delete({}, function() {
             $scope.sitios.splice($scope.sitios.indexOf(sitio), 1);
         });
+    };
+    
+    $scope.pageChanged = function() {
+        $scope.getSitios();
     };
 
     init();
