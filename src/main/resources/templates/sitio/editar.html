@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/plantilla">
+    <head>
+        <title th:text="#{sitio.titulo}">Sitio</title>
+    </head>
+    <body>
+        <div class="container">
+            <div th:fragment="content">
+                <h1>Editar Sitio</h1>
+                <pre>sitio = {{ id | json}}</pre>
+                <pre>sitio = {{ sitio | json}}</pre>
+            </div>
+        </div>
+    </body>
+</html>

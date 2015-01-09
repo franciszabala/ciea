@@ -22,17 +22,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
             .state('lista', {
                 url: '/lista',
-                templateUrl: "/html/sitio/lista.html",
+                templateUrl: "/sitios/lista",
                 controller: 'SitioCtrl'
             })
             .state('editar', {
                 url: '/editar/:sitioId',
-                templateUrl: "/html/sitio/editar.html",
+                templateUrl: "/sitios/editar",
                 controller: 'SitioEditarCtrl'
             })
             .state('nuevo', {
                 url: '/nuevo',
-                templateUrl: "/html/sitio/nuevo.html",
+                templateUrl: "/sitios/nuevo",
                 controller: 'SitioCtrl'
             });
 });
