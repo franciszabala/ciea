@@ -26,6 +26,7 @@ public class ApiConstantes {
     /* Constantes de URL */
     public static final String ID = "id";
     public static final String ID_URL = "/{id}";
+    public static final String PAGE_URL = "/page";
     /* Constantes de Servicios Rest */
     public static final String API_SITIO = "/api/sitio";
     public static final String API_CATEGORIA = "/api/categoria";

@@ -15,6 +15,7 @@
  */
 package com.hbv.ciea.rest;
 
+import com.hbv.ciea.dto.ErrorRestDTO;
 import static com.hbv.ciea.rest.ApiConstantes.*;
 
 import com.hbv.ciea.model.Sitio;
@@ -52,19 +53,24 @@ public class SitioRestController {
     @Autowired
     private SitioRepository sitioRepository;
 
-//    @RequestMapping(method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
-//    public List<Sitio> listar() {
-//        return sitioRepository.findAll();
-//    }
-
     @RequestMapping(method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
+    public List<Sitio> listar() {
+        return sitioRepository.findAll();
+    }
+
+    @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
     public Page<Sitio> listar(Pageable pageable) {
         return sitioRepository.findAll(pageable);
     }
 
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
     public Sitio buscar(@PathVariable(ID) long id) {
-        return sitioRepository.findOne(id);
+        Sitio sitio = sitioRepository.findOne(id);
+        if (sitio != null) {
+            return sitio;
+        } else {
+            throw new ErrorRestDTO("error.not_found");
+        }
     }
 
     @RequestMapping(method = {RequestMethod.POST}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})

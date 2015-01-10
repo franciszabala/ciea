@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * https://github.com/bijukunjummen/spring-boot-mvc-test/tree/withangular
+ * http://www.sitepoint.com/creating-crud-app-minutes-angulars-resource/
+ * http://draptik.github.io/blog/2013/07/28/restful-crud-with-angularjs/
  */
 var app = angular.module("sitioApp", ["ui.router", "ngResource", "ui.bootstrap"]);
 
@@ -44,32 +46,34 @@ app.factory("Sitio", function ($resource) {
             method: 'PUT'
         },
         page: {
-            method: 'GET'
+            method: 'GET',
+            params: {id: 'page'}
         }
     });
 });
 
-app.controller("SitioListaCtrl", function ($scope, Sitio, $state) {
-    function init() {
+app.controller("SitioListaCtrl", function ($scope, Sitio) {
+    $scope.init = function () {
         $scope.pagina = 1;
         $scope.getSitios();
-    }
-    ;
+    };
 
     $scope.getSitios = function () {
         Sitio.page({'page.page': $scope.pagina}, function (data) {
             $scope.sitios = data;
 //            $scope.total = data.totalElements;
 //            $scope.sitios = data.content;
+        }, function (error) {
+            //error
         });
 //        $scope.sitios = Sitio.query();
 
     };
 
     $scope.deleteSitio = function (sitio) {
-        return Sitio.delete({id:sitio.id}, function () {
-            $scope.sitios.content.splice($scope.sitios.content.indexOf(sitio), 1);
-//            $scope.getSitios();
+        return Sitio.delete({id: sitio.id}, function () {
+//            $scope.sitios.content.splice($scope.sitios.content.indexOf(sitio), 1);
+            $scope.getSitios();
         });
     };
 
@@ -77,7 +81,7 @@ app.controller("SitioListaCtrl", function ($scope, Sitio, $state) {
         $scope.getSitios();
     };
 
-    init();
+    $scope.init();
 });
 
 app.controller("SitioNuevoCtrl", function ($scope, Sitio, $state) {
