@@ -98,11 +98,10 @@ app.controller("SitioNuevoCtrl", function ($scope, Sitio, $state) {
 });
 
 app.controller("SitioEditarCtrl", function ($scope, Sitio, $state, $stateParams) {
-    function init() {
+    $scope.init = function () {
         $scope.id = $stateParams.sitioId;
         $scope.sitio = Sitio.get({id: $stateParams.sitioId});
-    }
-    ;
+    };
 
     $scope.updateSitio = function () {
         var sitio = new Sitio($scope.sitio);
@@ -115,6 +114,6 @@ app.controller("SitioEditarCtrl", function ($scope, Sitio, $state, $stateParams)
         $state.transitionTo("lista");
     };
 
-    init();
+    $scope.init();
 });
 
