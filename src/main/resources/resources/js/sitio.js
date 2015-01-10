@@ -16,7 +16,7 @@
  */
 var app = angular.module("sitioApp", ["ui.router", "ngResource", "ui.bootstrap"]);
 
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("lista");
 
     $stateProvider
@@ -38,7 +38,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 });
 
 
-app.factory("Sitio", function($resource) {
+app.factory("Sitio", function ($resource) {
     return $resource("/api/sitio/:id", {id: "@id"}, {
         update: {
             method: 'PUT'
@@ -49,63 +49,65 @@ app.factory("Sitio", function($resource) {
     });
 });
 
-app.controller("SitioListaCtrl", function($scope, Sitio, $state) {
+app.controller("SitioListaCtrl", function ($scope, Sitio, $state) {
     function init() {
         $scope.pagina = 1;
         $scope.getSitios();
     }
     ;
 
-    $scope.getSitios = function() {
-        Sitio.page({'page.page':$scope.pagina}, function(data){
+    $scope.getSitios = function () {
+        Sitio.page({'page.page': $scope.pagina}, function (data) {
             $scope.sitios = data;
+//            $scope.total = data.totalElements;
 //            $scope.sitios = data.content;
         });
 //        $scope.sitios = Sitio.query();
-        
+
     };
 
-    $scope.deleteSitio = function(sitio) {
-        return sitio.$delete({}, function() {
-            $scope.sitios.splice($scope.sitios.indexOf(sitio), 1);
+    $scope.deleteSitio = function (sitio) {
+        return Sitio.delete({id:sitio.id}, function () {
+            $scope.sitios.content.splice($scope.sitios.content.indexOf(sitio), 1);
+//            $scope.getSitios();
         });
     };
-    
-    $scope.pageChanged = function() {
+
+    $scope.pageChanged = function () {
         $scope.getSitios();
     };
 
     init();
 });
 
-app.controller("SitioNuevoCtrl", function($scope, Sitio, $state) {
-    $scope.createSitio = function() {
+app.controller("SitioNuevoCtrl", function ($scope, Sitio, $state) {
+    $scope.createSitio = function () {
         var sitio = new Sitio($scope.sitio);
-        sitio.$save({}, function() {
+        sitio.$save({}, function () {
             $state.transitionTo("lista");
         });
     };
 
-    $scope.cancelar = function() {
+    $scope.cancelar = function () {
         $state.transitionTo("lista");
     };
 });
 
-app.controller("SitioEditarCtrl", function($scope, Sitio, $state, $stateParams) {
+app.controller("SitioEditarCtrl", function ($scope, Sitio, $state, $stateParams) {
     function init() {
         $scope.id = $stateParams.sitioId;
         $scope.sitio = Sitio.get({id: $stateParams.sitioId});
     }
     ;
 
-    $scope.updateSitio = function() {
+    $scope.updateSitio = function () {
         var sitio = new Sitio($scope.sitio);
-        sitio.$update().then(function() {
+        sitio.$update().then(function () {
             $state.transitionTo("lista");
         });
     };
 
-    $scope.cancelar = function() {
+    $scope.cancelar = function () {
         $state.transitionTo("lista");
     };
 
