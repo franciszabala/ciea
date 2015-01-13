@@ -64,7 +64,7 @@ public class RestErrorHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     @ResponseBody
     public ErrorValidacionDTO errorValidacion(MethodArgumentNotValidException ex) {
         BindingResult result = ex.getBindingResult();

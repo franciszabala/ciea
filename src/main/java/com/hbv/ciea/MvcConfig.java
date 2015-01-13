@@ -44,12 +44,16 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
         //Login
         registry.addViewController("/login").setViewName("login/login");
+        //Directivas https://github.com/angular-ui/bootstrap/tree/master/template
+        registry.addViewController("/template/alert/alert.html").setViewName("directivas/alert/alert");
+        registry.addViewController("/template/pagination/pager.html").setViewName("directivas/pagination/pager");
+        registry.addViewController("/template/pagination/pagination.html").setViewName("directivas/pagination/pagination");
         //Sitios
         registry.addViewController("/sitios").setViewName("sitio/inicio");
         registry.addViewController("/sitios/nuevo").setViewName("sitio/nuevo :: content");
         registry.addViewController("/sitios/editar").setViewName("sitio/editar :: content");
         registry.addViewController("/sitios/lista").setViewName("sitio/lista :: content");
-        
+
         registry.addViewController("/hello").setViewName("hello");
     }
 
