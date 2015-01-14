@@ -13,9 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.hbv.ciea.service;
 
+import com.hbv.ciea.model.Proveedor;
+import com.hbv.ciea.repository.ProveedorRepository;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,5 +30,28 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProveedorService {
+
+    @Autowired
+    private ProveedorRepository proveedorRepository;
+
+    public List<Proveedor> findAll() {
+        return proveedorRepository.buscarTodos();
+    }
+
+    public Page<Proveedor> findAll(Pageable pageable) {
+        return proveedorRepository.buscarTodos(pageable);
+    }
+
+    public Proveedor findOne(long id) {
+        return proveedorRepository.findOne(id);
+    }
+
+    public Proveedor save(Proveedor proveedor) {
+        return proveedorRepository.save(proveedor);
+    }
+
+    public void delete(long id) {
+        proveedorRepository.delete(id);
+    }
 
 }

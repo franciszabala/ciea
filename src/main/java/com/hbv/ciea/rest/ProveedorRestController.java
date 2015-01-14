@@ -19,6 +19,7 @@ import static com.hbv.ciea.rest.ApiConstantes.*;
 import com.hbv.ciea.dto.ErrorRestDTO;
 import com.hbv.ciea.model.Proveedor;
 import com.hbv.ciea.repository.ProveedorRepository;
+import com.hbv.ciea.service.ProveedorService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProveedorRestController {
 
     @Autowired
-    private ProveedorRepository proveedorRepository;
+    private ProveedorService proveedorService;
 
     /**
      * Obtiene la lista completa de Proveedores.
@@ -52,7 +53,7 @@ public class ProveedorRestController {
      */
     @RequestMapping(method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
     public List<Proveedor> listar() {
-        return proveedorRepository.findAll();
+        return proveedorService.findAll();
     }
 
     /**
@@ -63,7 +64,7 @@ public class ProveedorRestController {
      */
     @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
     public Page<Proveedor> listar(Pageable pageable) {
-        return proveedorRepository.findAll(pageable);
+        return proveedorService.findAll(pageable);
     }
 
     /**
@@ -74,7 +75,7 @@ public class ProveedorRestController {
      */
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
     public Proveedor buscar(@PathVariable(ID) long id) {
-        Proveedor proveedor = proveedorRepository.findOne(id);
+        Proveedor proveedor = proveedorService.findOne(id);
         if (proveedor != null) {
             return proveedor;
         } else {
@@ -90,7 +91,7 @@ public class ProveedorRestController {
      */
     @RequestMapping(method = {RequestMethod.POST}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
     public Proveedor nuevo(@RequestBody @Valid Proveedor proveedor) {
-        return proveedorRepository.save(proveedor);
+        return proveedorService.save(proveedor);
     }
 
     /**
@@ -102,7 +103,7 @@ public class ProveedorRestController {
      */
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
     public Proveedor editar(@PathVariable(ID) long id, @RequestBody @Valid Proveedor proveedor) {
-        return proveedorRepository.save(proveedor);
+        return proveedorService.save(proveedor);
     }
 
     /**
@@ -113,7 +114,7 @@ public class ProveedorRestController {
      */
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MEDIA_TYPE_JSON})
     public ResponseEntity<Boolean> borrar(@PathVariable(ID) long id) {
-        proveedorRepository.delete(id);
+        proveedorService.delete(id);
         return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
     }
 
