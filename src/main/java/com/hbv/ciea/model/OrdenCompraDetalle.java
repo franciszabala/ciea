@@ -37,7 +37,7 @@ import javax.validation.constraints.NotNull;
  * @since 24-nov-2014
  */
 @Entity
-@Table(name = "oder_compra_detalle")
+@Table(name = "orden_compra_detalle")
 public class OrdenCompraDetalle implements Serializable {
 
     private static final long serialVersionUID = 1L;
