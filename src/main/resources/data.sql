@@ -13,12 +13,18 @@ insert into usuario_perfil(id_usuario,id_perfil)values(3,3);
 --Correo
 insert into correo(id,correo,tipo)values(1,'barrantesgerman@gmail.com','PERSONAL');
 insert into correo(id,correo,tipo)values(2,'barrantesherman@gmail.com','PERSONAL');
+insert into correo(id,correo,tipo)values(10,'epa@gmail.com','TRABAJO');
+insert into correo(id,correo,tipo)values(11,'epa@hotmail.com','TRABAJO');
+insert into correo(id,correo,tipo)values(12,'empleados@pm.com','TRABAJO');
 --Usuario Correo
 insert into usuario_correo(id_usuario,id_correo)values(1,1);
 insert into usuario_correo(id_usuario,id_correo)values(1,2);
 --Telefono
 insert into telefono(id,telefono,tipo)values(1,'88922819','CELULAR');
 insert into telefono(id,telefono,tipo)values(2,'24655201','CASA');
+insert into telefono(id,telefono,tipo)values(10,'22223333','TRABAJO');
+insert into telefono(id,telefono,tipo)values(11,'33334444','TRABAJO');
+insert into telefono(id,telefono,tipo)values(12,'44445555','TRABAJO');
 --Usuario Telefono
 insert into usuario_telefono(id_usuario,id_telefono)values(1,1);
 insert into usuario_telefono(id_usuario,id_telefono)values(1,2);
@@ -46,3 +52,11 @@ insert into categoria(id,descripcion)values(3,'Cocina');
 --Proveedor
 insert into proveedor(id,nombre,direccion,sitio_web)values(1,'EPA Curridabat','200mts Oeste de la Pops de Curridabat.','http://www.epa.com');
 insert into proveedor(id,nombre,direccion,sitio_web)values(2,'Pequeño Mundo Curridabat','200mts Este de el Mall San Pedro.','http://www.pequeñomundo.com');
+--Proveedor Correo
+insert into proveedor_correo(id_proveedor,id_correo)values(1,10);
+insert into proveedor_correo(id_proveedor,id_correo)values(1,11);
+insert into proveedor_correo(id_proveedor,id_correo)values(2,12);
+--Proveedor Telefono
+insert into proveedor_telefono(id_proveedor,id_telefono)values(1,10);
+insert into proveedor_telefono(id_proveedor,id_telefono)values(1,11);
+insert into proveedor_telefono(id_proveedor,id_telefono)values(2,12);
