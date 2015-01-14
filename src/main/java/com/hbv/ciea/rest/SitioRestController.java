@@ -24,9 +24,7 @@ import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,9 +33,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
+ * Servicio Restful para Sitios.
  *
  * @author Herman
  * @since 2014-12-13
@@ -53,16 +51,33 @@ public class SitioRestController {
     @Autowired
     private SitioRepository sitioRepository;
 
+    /**
+     * Obtiene la lista completa de Sitios.
+     *
+     * @return Lista completa de Sitios.
+     */
     @RequestMapping(method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
     public List<Sitio> listar() {
         return sitioRepository.findAll();
     }
 
+    /**
+     * Obtiene la lista paginada de Sitios.
+     *
+     * @param pageable Paginación
+     * @return Lista paginada de Sitios.
+     */
     @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
     public Page<Sitio> listar(Pageable pageable) {
         return sitioRepository.findAll(pageable);
     }
 
+    /**
+     * Obtiene un Sitio por su ID.
+     *
+     * @param id ID del Sitio
+     * @return Sitio correspondiente al ID
+     */
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
     public Sitio buscar(@PathVariable(ID) long id) {
         Sitio sitio = sitioRepository.findOne(id);
@@ -73,11 +88,24 @@ public class SitioRestController {
         }
     }
 
+    /**
+     * Inserta un Sitio.
+     *
+     * @param sitio Sitio a Insertar
+     * @return Sitio Insertado
+     */
     @RequestMapping(method = {RequestMethod.POST}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
     public Sitio nuevo(@RequestBody @Valid Sitio sitio) {
         return sitioRepository.save(sitio);
     }
 
+    /**
+     * Edita un Sitio por su ID.
+     *
+     * @param id ID del Sitio
+     * @param sitio Sitio a Actualizar
+     * @return Sitio Actualizado
+     */
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
     @Transactional
     public Sitio editar(@PathVariable(ID) long id, @RequestBody @Valid Sitio sitio) {
@@ -85,6 +113,12 @@ public class SitioRestController {
         return sitio;
     }
 
+    /**
+     * Borra un Sitio por su ID.
+     *
+     * @param id ID del Sitio
+     * @return True si el Sitio fue borrado
+     */
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MEDIA_TYPE_JSON})
     public ResponseEntity<Boolean> borrar(@PathVariable(ID) long id) {
         sitioRepository.delete(id);

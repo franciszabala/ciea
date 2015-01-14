@@ -46,7 +46,7 @@ public class ProveedorRestController {
     private ProveedorRepository proveedorRepository;
 
     /**
-     * Obtiene la lista complenta de Proveedores.
+     * Obtiene la lista completa de Proveedores.
      *
      * @return Lista completa de Proveedores.
      */
@@ -56,9 +56,10 @@ public class ProveedorRestController {
     }
 
     /**
+     * Obtiene la lista paginada de Proveedores.
      *
-     * @param pageable
-     * @return
+     * @param pageable Paginación
+     * @return Lista paginada de Proveedores.
      */
     @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
     public Page<Proveedor> listar(Pageable pageable) {
@@ -66,9 +67,10 @@ public class ProveedorRestController {
     }
 
     /**
+     * Obtiene un Proveedor por su ID.
      *
-     * @param id
-     * @return
+     * @param id ID del Proveedor
+     * @return Proveedor correspondiente al ID
      */
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
     public Proveedor buscar(@PathVariable(ID) long id) {
@@ -81,9 +83,10 @@ public class ProveedorRestController {
     }
 
     /**
+     * Inserta un Proveedor.
      *
-     * @param proveedor
-     * @return
+     * @param proveedor Proveedor a Insertar
+     * @return Proveedor Insertado
      */
     @RequestMapping(method = {RequestMethod.POST}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
     public Proveedor nuevo(@RequestBody @Valid Proveedor proveedor) {
@@ -91,10 +94,11 @@ public class ProveedorRestController {
     }
 
     /**
+     * Edita un Proveedor por su ID.
      *
-     * @param id
-     * @param proveedor
-     * @return
+     * @param id ID del Proveedor
+     * @param proveedor Proveedor a Actualizar
+     * @return Proveedor Actualizado
      */
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
     public Proveedor editar(@PathVariable(ID) long id, @RequestBody @Valid Proveedor proveedor) {
@@ -102,9 +106,10 @@ public class ProveedorRestController {
     }
 
     /**
+     * Borra un Proveedor por su ID.
      *
-     * @param id
-     * @return
+     * @param id ID del Proveedor
+     * @return True si el Proveedor fue borrado
      */
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MEDIA_TYPE_JSON})
     public ResponseEntity<Boolean> borrar(@PathVariable(ID) long id) {
