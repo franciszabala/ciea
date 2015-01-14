@@ -42,7 +42,7 @@ public class Sitio implements Serializable {
     @Column(name = "id")
     private long id;
     @NotNull
-    @Size(min = 1, max = 30)
+    @Size(min = 5, max = 30)
     @Column(name = "nombre")
     private String nombre;
 

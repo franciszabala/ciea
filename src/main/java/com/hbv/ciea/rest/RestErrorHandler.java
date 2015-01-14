@@ -86,14 +86,7 @@ public class RestErrorHandler {
 
     private String resolverMensajeError(FieldError errorCampo) {
         Locale currentLocale = LocaleContextHolder.getLocale();
-        String localizedErrorMessage = messageSource.getMessage(errorCampo, currentLocale);
-
-        //If the message was not found, return the most accurate field error code instead.
-        //You can remove this check if you prefer to get the default error message.
-        if (localizedErrorMessage.equals(errorCampo.getDefaultMessage())) {
-            String[] fieldErrorCodes = errorCampo.getCodes();
-            localizedErrorMessage = fieldErrorCodes[0];
-        }
+        String localizedErrorMessage = messageSource.getMessage(errorCampo.getCodes()[0], errorCampo.getArguments(), currentLocale);
 
         return localizedErrorMessage;
     }

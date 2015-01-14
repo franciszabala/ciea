@@ -232,6 +232,36 @@
                     <useSystemClassLoader>false</useSystemClassLoader>
                 </configuration>
             </plugin>
+            
+<!--            <plugin>
+                <groupId>com.samaxes.maven</groupId>
+                <artifactId>minify-maven-plugin</artifactId>
+                <version>1.7.4</version>
+                <executions>
+                    <execution>
+                        <id>default-minify</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <cssSourceDir>src/main/resources/resources/css</cssSourceDir>
+                            <cssSourceFiles>
+                                <cssSourceFile>estilo.css</cssSourceFile>
+                            </cssSourceFiles>
+                            <cssFinalFile>estilo.min.css</cssFinalFile>
+                            <jsSourceDir>src/main/resources/resources/js</jsSourceDir>
+                            <jsSourceFiles>
+                                <jsSourceFile>sitio.js</jsSourceFile>
+                                <jsSourceFile>sitio.service.js</jsSourceFile>
+                                <jsSourceFile>sitio.controller.js</jsSourceFile>
+                                <jsSourceFile>alerta.controller.js</jsSourceFile>
+                            </jsSourceFiles>
+                            <jsFinalFile>script.min.js</jsFinalFile>
+                        </configuration>
+                        <goals>
+                            <goal>minify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
         
         </plugins>
        
