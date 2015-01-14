@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/plantilla">
+    <head>
+        <title th:text="#{error.titulo}">Error</title>
+    </head>
+    <body>
+        <div class="container" >
+            <div layout:fragment="content">
+                <h1>403</h1>
+                <p>Acceso denegado</p>
+            </div>
+        </div>
+    </body>
+</html>

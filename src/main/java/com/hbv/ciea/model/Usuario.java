@@ -87,7 +87,7 @@ public class Usuario implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Correo> correos;
     @JoinColumn(name = "id_sitio", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Sitio sitio;
     @JoinTable(name = "usuario_perfil", joinColumns = {
         @JoinColumn(name = "id_usuario", referencedColumnName = "id")}, inverseJoinColumns = {

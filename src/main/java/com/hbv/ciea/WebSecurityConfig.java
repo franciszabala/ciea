@@ -40,7 +40,7 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
  */
 @Configuration
 @EnableWebMvcSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 //                .antMatchers("/", "/welcome", "/error", "/webjars/**", "/resources/**").permitAll()
-                //                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/welcome").failureUrl("/login?error").permitAll()
@@ -65,8 +65,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().logoutSuccessUrl("/login?logout").deleteCookies("JSESSIONID").permitAll()
                 //                .and()
                 //                .sessionManagement().invalidSessionUrl("/login?expired")
-                //                .and()
-                //                .exceptionHandling().accessDeniedPage("/403")
+                .and()
+                .exceptionHandling().accessDeniedPage("/403")
                 .and()
                 .httpBasic();
     }

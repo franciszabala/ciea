@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -61,6 +62,13 @@ public class RestErrorHandler {
         Locale currentLocale = LocaleContextHolder.getLocale();
         String mensaje = messageSource.getMessage(ex.getMensaje(), ex.getArgumentos(), currentLocale);
         return new ErrorRestDTO(mensaje, ex.getMensajeError());
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ResponseBody
+    public ErrorRestDTO errorRestEspecifico(AccessDeniedException ex) {
+        return new ErrorRestDTO(ex.getMessage(), ex);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
