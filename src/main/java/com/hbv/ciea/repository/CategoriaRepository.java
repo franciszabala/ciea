@@ -15,14 +15,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.hbv.ciea.repository;
 
 import com.hbv.ciea.model.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * 
+ * Repositorio de Categorías.
+ *
  * @author Herman Barrantes
  * @since 24-nov-2014
  */

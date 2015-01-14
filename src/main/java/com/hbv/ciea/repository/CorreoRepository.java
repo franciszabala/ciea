@@ -17,28 +17,23 @@
  */
 package com.hbv.ciea.repository;
 
-import com.hbv.ciea.model.Sitio;
+import com.hbv.ciea.model.Correo;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 /**
- * Repositorio de Sitios.
+ * Repositorio de Correos.
  *
  * @author Herman Barrantes
- * @since 24-nov-2014
+ * @since 2015-01-13
  */
-public interface SitioRepository extends JpaRepository<Sitio, Long> {
+public interface CorreoRepository extends JpaRepository<Correo, Long> {
 
-    /**
-     * Actualiza el Nombre de un Sitio por su ID.
-     *
-     * @param nombre Nuevo nombre del Sitio.
-     * @param id ID del Sitio.
-     * @return Cantidad de filas afectadas.
-     */
-    @Modifying
-    @Query("update Sitio s set s.nombre = ?1 where s.id = ?2")
-    int updateNombreById(String nombre, long id);
+    @Query("select c from Proveedor p left join p.correos c where p.id = ?1")
+    List<Correo> findByProveedorId(long id);
+
+    @Query("select c from Usuario u left join u.correos c where u.id = ?1")
+    List<Correo> findByUsuarioId(long id);
 
 }

@@ -17,28 +17,15 @@
  */
 package com.hbv.ciea.repository;
 
-import com.hbv.ciea.model.Sitio;
+import com.hbv.ciea.model.Proveedor;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 
 /**
- * Repositorio de Sitios.
+ * Repositorio de Proveedores.
  *
  * @author Herman Barrantes
  * @since 24-nov-2014
  */
-public interface SitioRepository extends JpaRepository<Sitio, Long> {
-
-    /**
-     * Actualiza el Nombre de un Sitio por su ID.
-     *
-     * @param nombre Nuevo nombre del Sitio.
-     * @param id ID del Sitio.
-     * @return Cantidad de filas afectadas.
-     */
-    @Modifying
-    @Query("update Sitio s set s.nombre = ?1 where s.id = ?2")
-    int updateNombreById(String nombre, long id);
+public interface ProveedorRepository extends JpaRepository<Proveedor, Long> {
 
 }

@@ -21,6 +21,7 @@ import com.hbv.ciea.model.Articulo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
+ * Repositorio de Artículos.
  *
  * @author Herman Barrantes
  * @since 26-nov-2014

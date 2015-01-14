@@ -15,14 +15,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.hbv.ciea.repository;
 
 import com.hbv.ciea.model.Activo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * 
+ * Repositorio de Activos.
+ *
  * @author Herman Barrantes
  * @since 26-nov-2014
  */
