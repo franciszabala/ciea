@@ -15,13 +15,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.hbv.ciea.repository;
 
 import com.hbv.ciea.model.OrdenCompra;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
+ * Repositorio de Ordenes de Compra.
  *
  * @author Herman Barrantes
  * @since 26-nov-2014

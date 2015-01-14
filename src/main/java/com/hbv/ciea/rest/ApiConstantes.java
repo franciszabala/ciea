@@ -30,4 +30,5 @@ public class ApiConstantes {
     /* Constantes de Servicios Rest */
     public static final String API_SITIO = "/api/sitio";
     public static final String API_CATEGORIA = "/api/categoria";
+    public static final String API_PROVEEDOR = "/api/proveedor";
 }

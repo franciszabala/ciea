@@ -23,6 +23,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 /**
+ * Repositorio de Usuarios.
  *
  * @author Herman Barrantes
  * @since 21-oct-2014
