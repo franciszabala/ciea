@@ -18,11 +18,7 @@
 package com.hbv.ciea.repository;
 
 import com.hbv.ciea.model.Proveedor;
-import java.util.List;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 /**
  * Repositorio de Proveedores.
