@@ -45,8 +45,9 @@ public class ProveedorService {
     }
 
     public Page<ProveedorDTO> findAll(Pageable pageable) {
-        List<ProveedorDTO> proveedoresDTO = util.copiarLista(proveedorRepository.findAll(pageable), ProveedorDTO.class);
-        return new PageImpl<ProveedorDTO>(proveedoresDTO, pageable, proveedoresDTO.size());
+        Page<Proveedor> proveedores = proveedorRepository.findAll(pageable);
+        List<ProveedorDTO> proveedoresDTO = util.copiarLista(proveedores, ProveedorDTO.class);
+        return new PageImpl<ProveedorDTO>(proveedoresDTO, pageable, proveedores.getTotalElements());
     }
 
     public Proveedor findOne(long id) {
