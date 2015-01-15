@@ -22,7 +22,7 @@ import java.util.Locale;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.web.PageableArgumentResolver;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -30,7 +30,6 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-import org.springframework.web.servlet.mvc.method.annotation.ServletWebArgumentResolverAdapter;
 
 /**
  *
@@ -86,13 +85,13 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     }
 
     //http://blog.fawnanddoug.com/2012/05/pagination-with-spring-mvc-spring-data.html
+    //http://docs.spring.io/spring-data/jpa/docs/1.6.4.RELEASE/reference/html/repositories.html#web-pagination
     @Override
     public void addArgumentResolvers(
             List<HandlerMethodArgumentResolver> argumentResolvers) {
-
-        PageableArgumentResolver resolver = new PageableArgumentResolver();
-        resolver.setFallbackPagable(new PageRequest(1, 10));
-
-        argumentResolvers.add(new ServletWebArgumentResolverAdapter(resolver));
+        PageableHandlerMethodArgumentResolver resolver = new PageableHandlerMethodArgumentResolver();
+        resolver.setOneIndexedParameters(true);
+        resolver.setFallbackPageable(new PageRequest(1, 10));
+        argumentResolvers.add(resolver);
     }
 }

@@ -23,7 +23,7 @@ ctrl.controller("ProveedorListaCtrl", function ($scope, Proveedor) {
     };
 
     $scope.getProveedores = function () {
-        Proveedor.page({'page.page': $scope.pagina}, function (data) {
+        Proveedor.page({'page': $scope.pagina}, function (data) {
             $scope.proveedores = data;
         }, function (error) {
             $scope.alertaError(error);

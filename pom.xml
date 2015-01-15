@@ -120,7 +120,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <start-class>com.hbv.ciea.Application</start-class>
-        <spring-data-commons-core-version>1.4.1.RELEASE</spring-data-commons-core-version>
     </properties>
     
     <dependencies>
@@ -142,9 +141,8 @@
         </dependency>
         
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-commons-core</artifactId>
-            <version>${spring-data-commons-core-version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
         </dependency>
         
         <dependency>

@@ -23,7 +23,7 @@ ctrl.controller("SitioListaCtrl", function ($scope, Sitio) {
     };
 
     $scope.getSitios = function () {
-        Sitio.page({'page.page': $scope.pagina}, function (data) {
+        Sitio.page({'page': $scope.pagina}, function (data) {
             $scope.sitios = data;
         }, function (error) {
             $scope.alertaError(error);
