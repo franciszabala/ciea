@@ -57,8 +57,8 @@
                         <li><a href="#" th:text="#{menu.ordenes_compra}">Ordenes de Compra</a></li>                    
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" th:href="@{/login}" th:text="#{menu.acceder}">Acceder</a></li>
-                        <li class="dropdown">
+                        <li sec:authorize="!isAuthenticated()"><a href="#" th:href="@{/login}" th:text="#{menu.acceder}">Acceder</a></li>
+                        <li sec:authorize="isAuthenticated()" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Usuario<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#" th:href="@{/perfil}" th:text="#{menu.perfil}">Perfil</a></li>
