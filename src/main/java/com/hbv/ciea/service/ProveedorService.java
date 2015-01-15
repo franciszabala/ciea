@@ -18,7 +18,7 @@ package com.hbv.ciea.service;
 import com.hbv.ciea.dto.ProveedorDTO;
 import com.hbv.ciea.model.Proveedor;
 import com.hbv.ciea.repository.ProveedorRepository;
-import java.util.ArrayList;
+import com.hbv.ciea.util.CopyConstructorUtil;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,22 +37,16 @@ public class ProveedorService {
     @Autowired
     private ProveedorRepository proveedorRepository;
 
+    @Autowired
+    private CopyConstructorUtil util;
+
     public List<ProveedorDTO> findAll() {
-        List<Proveedor> proveedores = proveedorRepository.findAll();
-        List<ProveedorDTO> proveedoresDTO = new ArrayList<ProveedorDTO>(proveedores.size());
-        for (Proveedor proveedor : proveedores) {
-            proveedoresDTO.add(new ProveedorDTO(proveedor));
-        }
-        return proveedoresDTO;
+        return util.copiarLista(proveedorRepository.findAll(), ProveedorDTO.class);
     }
 
     public Page<ProveedorDTO> findAll(Pageable pageable) {
-        Page<Proveedor> proveedores = proveedorRepository.findAll(pageable);
-        List<ProveedorDTO> proveedoresDTO = new ArrayList<ProveedorDTO>(proveedores.getSize());
-        for (Proveedor proveedor : proveedores) {
-            proveedoresDTO.add(new ProveedorDTO(proveedor));
-        }
-        return new PageImpl<ProveedorDTO>(proveedoresDTO, pageable, proveedores.getTotalElements());
+        List<ProveedorDTO> proveedoresDTO = util.copiarLista(proveedorRepository.findAll(pageable), ProveedorDTO.class);
+        return new PageImpl<ProveedorDTO>(proveedoresDTO, pageable, proveedoresDTO.size());
     }
 
     public Proveedor findOne(long id) {
