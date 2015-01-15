@@ -37,7 +37,8 @@
                         </tbody>
                     </table>
                 </div>
-                <pagination total-items="sitios.totalElements" ng-model="pagina" ng-change="pageChanged()"/>
+                <pagination class="hidden-xs" total-items="sitios.totalElements" ng-model="pagina" ng-change="pageChanged()"/>
+                <pager class="visible-xs-block" total-items="sitios.totalElements" ng-model="pagina" ng-change="pageChanged()"></pager>
                 <br/>
                 <pre>sitios = {{ sitios | json}}</pre>
             </div>
