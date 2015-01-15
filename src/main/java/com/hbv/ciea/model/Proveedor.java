@@ -31,9 +31,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-//import org.hibernate.annotations.BatchSize;
-//import org.hibernate.annotations.Fetch;
-//import org.hibernate.annotations.FetchMode;
 
 /**
  *
@@ -63,8 +60,6 @@ public class Proveedor implements Serializable {
         @JoinColumn(name = "id_proveedor", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_telefono", referencedColumnName = "id")})
     @ManyToMany(fetch = FetchType.LAZY)
-//    @Fetch(FetchMode.SELECT)
-//    @BatchSize(size = 10)
     private List<Telefono> telefonos;
     @JoinTable(name = "proveedor_correo", joinColumns = {
         @JoinColumn(name = "id_proveedor", referencedColumnName = "id")}, inverseJoinColumns = {

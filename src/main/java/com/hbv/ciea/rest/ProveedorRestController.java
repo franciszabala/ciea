@@ -17,8 +17,8 @@ package com.hbv.ciea.rest;
 
 import static com.hbv.ciea.rest.ApiConstantes.*;
 import com.hbv.ciea.dto.ErrorRestDTO;
+import com.hbv.ciea.dto.ProveedorDTO;
 import com.hbv.ciea.model.Proveedor;
-import com.hbv.ciea.repository.ProveedorRepository;
 import com.hbv.ciea.service.ProveedorService;
 import java.util.List;
 import javax.validation.Valid;
@@ -38,6 +38,13 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Herman
  * @since 2015-01-13
+ * @see http://spring.io/guides/tutorials/bookmarks/
+ * @see http://spring.io/guides/gs/accessing-data-rest/
+ * @see http://spring.io/guides/gs/rest-hateoas/
+ * @see
+ * http://patrickgrimard.com/2014/05/16/pagination-with-spring-data-and-hateoas-in-an-angularjs-app/
+ * @see
+ * http://blog.zenika.com/index.php?post/2012/06/15/HATEOAS-paging-with-Spring-MVC-and-Spring-Data-JPA
  */
 @RestController
 @RequestMapping(API_PROVEEDOR)
@@ -52,7 +59,7 @@ public class ProveedorRestController {
      * @return Lista completa de Proveedores.
      */
     @RequestMapping(method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
-    public List<Proveedor> listar() {
+    public List<ProveedorDTO> listar() {
         return proveedorService.findAll();
     }
 
@@ -63,7 +70,7 @@ public class ProveedorRestController {
      * @return Lista paginada de Proveedores.
      */
     @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
-    public Page<Proveedor> listar(Pageable pageable) {
+    public Page<ProveedorDTO> listar(Pageable pageable) {
         return proveedorService.findAll(pageable);
     }
 

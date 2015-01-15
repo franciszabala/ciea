@@ -32,10 +32,4 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface ProveedorRepository extends JpaRepository<Proveedor, Long> {
 
-    @Query("select p from Proveedor p")
-    public List<Proveedor> buscarTodos();
-
-    @Query("select p from Proveedor p")
-    public Page<Proveedor> buscarTodos(Pageable pageable);
-
 }
