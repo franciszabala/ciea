@@ -1,33 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/plantilla">
     <head>
-        <title th:text="#{sitio.titulo}">Sitio</title>
+        <title th:text="#{proveedor.titulo}">Sitio</title>
     </head>
     <body>
         <div class="container">
             <div th:fragment="content">
                 <div class="row">
-                    <h1>Editar Sitio</h1>
-                    <form role="form" class="form-horizontal">
+                    <h1 th:text="#{proveedor.editar}">Editar Proveedor</h1>
+                    <form name="form" role="form" class="form-horizontal">
                         <div class="form-group">
-                            <label for="nombre" class="col-sm-2 control-label">Nombre:</label>
-                            <div class="col-sm-10 input-group">
-                                <input type="text" class="form-control" id="nombre" placeholder="Nombre" ng-model="sitio.nombre"/>
+                            <label for="nombre" class="col-sm-2 control-label" th:text="#{proveedor.nombre}">Nombre:</label>
+                            <div class="col-sm-10 col-xs-12 input-group">
+                                <input type="text" class="form-control" id="nombre" th:placeholder="#{proveedor.nombre}" placeholder="Nombre" ng-model="proveedor.nombre" autofocus="autofocus"/>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="direccion" class="col-sm-2 control-label" th:text="#{proveedor.direccion}">Dirección:</label>
+                            <div class="col-sm-10 col-xs-12 input-group">
+                                <input type="text" class="form-control" id="direccion" th:placeholder="#{proveedor.direccion}" placeholder="Dirección" ng-model="proveedor.direccion"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sitioWeb" class="col-sm-2 control-label" th:text="#{proveedor.sitioWeb}">Sitio Web:</label>
+                            <div class="col-sm-10 col-xs-12 input-group">
+                                <input type="text" class="form-control" id="sitioWeb" th:placeholder="#{proveedor.sitioWeb}" placeholder="Sitio Web" ng-model="proveedor.sitioWeb"/>
+                            </div>
+                        </div>
+
                         <div class="btn-group btn-group-ms pull-right" role="group">
-                            <button class="btn btn-primary" ng-click="updateSitio()">
-                                <span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;Aceptar
+                            <button class="btn btn-primary" ng-click="updateProveedor()">
+                                <span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;<span th:text="#{boton.aceptar}">Aceptar</span>
                             </button>
                             <button class="btn btn-default" ng-click="cancelar()">
-                                <span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp;Cancelar
+                                <span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp;<span th:text="#{boton.cancelar}">Cancelar</span>
                             </button>
                         </div>
                     </form>
-                    <br/>
                 </div>
+                <br/>
                 <div class="row">
-                    <pre>sitio = {{ sitio | json}}</pre>
+                    <pre>proveedor = {{ proveedor | json}}</pre>
                 </div>
             </div>
         </div>

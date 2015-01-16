@@ -28,6 +28,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -46,6 +47,7 @@ public class Correo implements Serializable {
     private long id;
     @NotNull
     @Size(min = 1, max = 100)
+    @Pattern(regexp = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$", flags = Pattern.Flag.CASE_INSENSITIVE)
     @Column(name = "correo")
     private String correo;
     @Enumerated(EnumType.STRING)

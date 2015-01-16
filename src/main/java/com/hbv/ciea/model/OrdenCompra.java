@@ -66,7 +66,7 @@ public class OrdenCompra implements Serializable {
     @JoinColumn(name = "id_proveedor", referencedColumnName = "id")
     @ManyToOne
     private Proveedor proveedor;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenCompra", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenCompra", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<OrdenCompraDetalle> detalles;
 
     public OrdenCompra() {
