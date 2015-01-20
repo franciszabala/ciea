@@ -58,6 +58,10 @@ public class ProveedorService {
         return proveedorRepository.save(proveedor);
     }
 
+    public Proveedor update(Proveedor proveedor) {
+        return proveedorRepository.save(proveedor);
+    }
+
     public void delete(long id) {
         proveedorRepository.delete(id);
     }

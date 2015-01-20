@@ -18,9 +18,7 @@
 package com.hbv.ciea.repository;
 
 import com.hbv.ciea.model.Correo;
-import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 /**
  * Repositorio de Correos.
@@ -29,11 +27,5 @@ import org.springframework.data.jpa.repository.Query;
  * @since 2015-01-13
  */
 public interface CorreoRepository extends JpaRepository<Correo, Long> {
-
-    @Query("select c from Proveedor p left join p.correos c where p.id = ?1")
-    List<Correo> findByProveedorId(long id);
-
-    @Query("select c from Usuario u left join u.correos c where u.id = ?1")
-    List<Correo> findByUsuarioId(long id);
 
 }

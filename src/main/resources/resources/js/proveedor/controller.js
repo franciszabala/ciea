@@ -23,7 +23,7 @@ ctrl.controller("ProveedorListaCtrl", function ($scope, Proveedor) {
     };
 
     $scope.getProveedores = function () {
-        Proveedor.page({'page': $scope.pagina}, function (data) {
+        Proveedor.page({page: $scope.pagina}, function (data) {
             $scope.proveedores = data;
         }, function (error) {
             $scope.alertaError(error);
@@ -61,8 +61,10 @@ ctrl.controller("ProveedorNuevoCtrl", function ($scope, Proveedor, $state) {
     };
 });
 
-ctrl.controller("ProveedorEditarCtrl", function ($scope, Proveedor, $state, $stateParams) {
+ctrl.controller("ProveedorEditarCtrl", function ($scope, Proveedor, TiposTelefono, TiposCorreo, $state, $stateParams) {
     $scope.init = function () {
+        $scope.tiposTelefono = TiposTelefono;
+        $scope.tiposCorreo = TiposCorreo;
         $scope.proveedor = Proveedor.get({id: $stateParams.proveedorId}, function () {
         }, function (error) {
             $scope.alertaError(error);
@@ -76,6 +78,14 @@ ctrl.controller("ProveedorEditarCtrl", function ($scope, Proveedor, $state, $sta
         }, function (error) {
             $scope.alertaError(error);
         });
+    };
+
+    $scope.deleteTelefono = function (telefono) {
+        $scope.proveedor.telefonos.splice($scope.proveedor.telefonos.indexOf(telefono), 1);
+    };
+
+    $scope.deleteCorreo = function (correo) {
+        $scope.proveedor.correos.splice($scope.proveedor.correos.indexOf(correo), 1);
     };
 
     $scope.cancelar = function () {

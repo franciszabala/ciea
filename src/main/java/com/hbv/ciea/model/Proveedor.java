@@ -65,7 +65,7 @@ public class Proveedor implements Serializable {
     @JoinTable(name = "proveedor_correo", joinColumns = {
         @JoinColumn(name = "id_proveedor", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_correo", referencedColumnName = "id")})
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Correo> correos;
 
     public Proveedor() {

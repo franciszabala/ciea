@@ -110,7 +110,7 @@ public class ProveedorRestController {
      */
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
     public Proveedor editar(@PathVariable(ID) long id, @RequestBody @Valid Proveedor proveedor) {
-        return proveedorService.save(proveedor);
+        return proveedorService.update(proveedor);
     }
 
     /**
