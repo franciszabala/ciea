@@ -94,7 +94,7 @@ public class RestErrorHandler {
 
     private String resolverMensajeError(FieldError errorCampo) {
         Locale currentLocale = LocaleContextHolder.getLocale();
-        String localizedErrorMessage = messageSource.getMessage(errorCampo.getCodes()[0], errorCampo.getArguments(), currentLocale);
+        String localizedErrorMessage = messageSource.getMessage(errorCampo.getCodes()[0].replaceAll("\\[\\d+\\]", ""), errorCampo.getArguments(), currentLocale);
 
         return localizedErrorMessage;
     }

@@ -46,7 +46,13 @@ ctrl.controller("ProveedorListaCtrl", function ($scope, Proveedor) {
     $scope.init();
 });
 
-ctrl.controller("ProveedorNuevoCtrl", function ($scope, Proveedor, $state) {
+ctrl.controller("ProveedorNuevoCtrl", function ($scope, Proveedor, TiposTelefono, TiposCorreo, $state) {
+    $scope.init = function () {
+        $scope.tiposTelefono = TiposTelefono;
+        $scope.tiposCorreo = TiposCorreo;
+        $scope.proveedor = {telefonos: [], correos: []};
+    };
+
     $scope.createProveedor = function () {
         var proveedor = new Proveedor($scope.proveedor);
         proveedor.$save({}, function () {
@@ -56,9 +62,27 @@ ctrl.controller("ProveedorNuevoCtrl", function ($scope, Proveedor, $state) {
         });
     };
 
+    $scope.createTelefono = function () {
+        $scope.proveedor.telefonos.push({id: 0});
+    };
+
+    $scope.deleteTelefono = function (telefono) {
+        $scope.proveedor.telefonos.splice($scope.proveedor.telefonos.indexOf(telefono), 1);
+    };
+
+    $scope.createCorreo = function () {
+        $scope.proveedor.correos.push({id: 0});
+    };
+
+    $scope.deleteCorreo = function (correo) {
+        $scope.proveedor.correos.splice($scope.proveedor.correos.indexOf(correo), 1);
+    };
+
     $scope.cancelar = function () {
         $state.transitionTo("lista");
     };
+
+    $scope.init();
 });
 
 ctrl.controller("ProveedorEditarCtrl", function ($scope, Proveedor, TiposTelefono, TiposCorreo, $state, $stateParams) {
@@ -80,8 +104,16 @@ ctrl.controller("ProveedorEditarCtrl", function ($scope, Proveedor, TiposTelefon
         });
     };
 
+    $scope.createTelefono = function () {
+        $scope.proveedor.telefonos.push({id: 0});
+    };
+
     $scope.deleteTelefono = function (telefono) {
         $scope.proveedor.telefonos.splice($scope.proveedor.telefonos.indexOf(telefono), 1);
+    };
+
+    $scope.createCorreo = function () {
+        $scope.proveedor.correos.push({id: 0});
     };
 
     $scope.deleteCorreo = function (correo) {

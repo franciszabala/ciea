@@ -26,6 +26,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -43,10 +45,13 @@ public class Telefono implements Serializable {
     @Column(name = "id")
     private long id;
     @NotNull
+    @Min(10000000)
+    @Max(99999999)
     @Column(name = "telefono")
     private int telefono;
     @Column(name = "extension")
     private Integer extension;
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo")
     private TelefonoTipo tipo;
