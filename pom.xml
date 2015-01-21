@@ -119,6 +119,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.6</java.version>
         <start-class>com.hbv.ciea.Application</start-class>
     </properties>
     
@@ -131,6 +132,11 @@
         </dependency>
         
         <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+        </dependency>
+        
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
@@ -139,7 +145,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-<!--        
+        <!--        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-rest</artifactId>
@@ -232,35 +238,45 @@
                 </configuration>
             </plugin>
             
-<!--            <plugin>
+            <plugin>
                 <groupId>com.samaxes.maven</groupId>
                 <artifactId>minify-maven-plugin</artifactId>
                 <version>1.7.4</version>
                 <executions>
                     <execution>
                         <id>default-minify</id>
-                        <phase>package</phase>
+                        <!--<phase>package</phase>-->
                         <configuration>
-                            <cssSourceDir>src/main/resources/resources/css</cssSourceDir>
+                            <verbose>true</verbose>
+                            <jsEngine>CLOSURE</jsEngine>
+                            <webappSourceDir>src/main/resources</webappSourceDir>
+                            <webappTargetDir>${project.build.directory}/classes</webappTargetDir>
+                            <!--<closureAngularPass>true</closureAngularPass>-->
+                            
+                            <cssSourceDir>resources/css</cssSourceDir>
+                            <cssTargetDir>resources/css</cssTargetDir>
                             <cssSourceFiles>
                                 <cssSourceFile>estilo.css</cssSourceFile>
                             </cssSourceFiles>
-                            <cssFinalFile>estilo.min.css</cssFinalFile>
-                            <jsSourceDir>src/main/resources/resources/js</jsSourceDir>
+                            <cssFinalFile>style.css</cssFinalFile>
+                            
+                            <jsSourceDir>resources/js</jsSourceDir>
+                            <jsTargetDir>resources/js/sitio</jsTargetDir>
                             <jsSourceFiles>
-                                <jsSourceFile>sitio.js</jsSourceFile>
-                                <jsSourceFile>sitio.service.js</jsSourceFile>
-                                <jsSourceFile>sitio.controller.js</jsSourceFile>
-                                <jsSourceFile>alerta.controller.js</jsSourceFile>
+                                <jsSourceFile>sitio/app.js</jsSourceFile>
+                                <jsSourceFile>alerta.js</jsSourceFile>
+                                <jsSourceFile>sitio/service.js</jsSourceFile>
+                                <jsSourceFile>sitio/controller.js</jsSourceFile>
                             </jsSourceFiles>
-                            <jsFinalFile>script.min.js</jsFinalFile>
+                            <jsFinalFile>sitio.js</jsFinalFile>
+                            
                         </configuration>
                         <goals>
                             <goal>minify</goal>
                         </goals>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
         
         </plugins>
        
