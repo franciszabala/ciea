@@ -30,6 +30,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -37,6 +38,9 @@ import javax.validation.constraints.Size;
  *
  * @author Herman Barrantes
  * @since 24-nov-2014
+ * @see https://docs.jboss.org/hibernate/validator/4.0.1/reference/en/html/validator-usingvalidator.html
+ * @see https://jersey.java.net/documentation/latest/bean-validation.html
+ * @see http://spring.io/guides/gs/validating-form-input/
  */
 @Entity
 @Table(name = "proveedor")
@@ -57,11 +61,13 @@ public class Proveedor implements Serializable {
     @Size(max = 100)
     @Column(name = "sitio_web")
     private String sitioWeb;
+    @Valid
     @JoinTable(name = "proveedor_telefono", joinColumns = {
         @JoinColumn(name = "id_proveedor", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_telefono", referencedColumnName = "id")})
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Telefono> telefonos;
+    @Valid
     @JoinTable(name = "proveedor_correo", joinColumns = {
         @JoinColumn(name = "id_proveedor", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_correo", referencedColumnName = "id")})

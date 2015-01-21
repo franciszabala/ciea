@@ -50,6 +50,7 @@ public class Correo implements Serializable {
     @Pattern(regexp = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$", flags = Pattern.Flag.CASE_INSENSITIVE)
     @Column(name = "correo")
     private String correo;
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo")
     private CorreoTipo tipo;

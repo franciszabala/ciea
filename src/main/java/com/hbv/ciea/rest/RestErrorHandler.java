@@ -68,7 +68,7 @@ public class RestErrorHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
     public ErrorRestDTO errorRestEspecifico(AccessDeniedException ex) {
-        return new ErrorRestDTO(ex.getMessage(), ex);
+        return new ErrorRestDTO("error.access_denied", ex);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -94,7 +94,7 @@ public class RestErrorHandler {
 
     private String resolverMensajeError(FieldError errorCampo) {
         Locale currentLocale = LocaleContextHolder.getLocale();
-        String localizedErrorMessage = messageSource.getMessage(errorCampo.getCodes()[0], errorCampo.getArguments(), currentLocale);
+        String localizedErrorMessage = messageSource.getMessage(errorCampo.getCodes()[0].replaceAll("\\[\\d+\\]", ""), errorCampo.getArguments(), currentLocale);
 
         return localizedErrorMessage;
     }
