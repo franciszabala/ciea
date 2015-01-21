@@ -131,10 +131,10 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         
-        <dependency>
+<!--        <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
-        </dependency>
+        </dependency>-->
         
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -238,20 +238,20 @@
                 </configuration>
             </plugin>
             
-            <plugin>
+<!--            <plugin>
                 <groupId>com.samaxes.maven</groupId>
                 <artifactId>minify-maven-plugin</artifactId>
                 <version>1.7.4</version>
                 <executions>
                     <execution>
                         <id>default-minify</id>
-                        <!--<phase>package</phase>-->
+                        <phase>package</phase>
                         <configuration>
                             <verbose>true</verbose>
                             <jsEngine>CLOSURE</jsEngine>
                             <webappSourceDir>src/main/resources</webappSourceDir>
                             <webappTargetDir>${project.build.directory}/classes</webappTargetDir>
-                            <!--<closureAngularPass>true</closureAngularPass>-->
+                            <closureAngularPass>true</closureAngularPass>
                             
                             <cssSourceDir>resources/css</cssSourceDir>
                             <cssTargetDir>resources/css</cssTargetDir>
@@ -276,7 +276,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
         
         </plugins>
        
