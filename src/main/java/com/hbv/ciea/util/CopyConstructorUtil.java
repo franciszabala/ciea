@@ -45,7 +45,7 @@ public class CopyConstructorUtil {
             Y instancia = constructor.newInstance(objeto);
             return instancia;
         } catch (Exception ex) {
-            throw new ErrorRestDTO("error.copy.constructor", ex);
+            throw new ErrorRestDTO("error.copy_constructor", ex);
         }
     }
 

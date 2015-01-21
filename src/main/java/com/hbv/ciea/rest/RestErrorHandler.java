@@ -68,7 +68,7 @@ public class RestErrorHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
     public ErrorRestDTO errorRestEspecifico(AccessDeniedException ex) {
-        return new ErrorRestDTO(ex.getMessage(), ex);
+        return new ErrorRestDTO("error.access_denied", ex);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
