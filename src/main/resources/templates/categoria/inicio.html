@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/plantilla">
+    <head>
+        <title th:text="#{categoria.titulo}">Categoria</title>
+    </head>
+    <body>
+        <div class="container">
+            <div layout:fragment="content">
+                <div id="categoria" ng-app="categoriaApp">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div>
+                                <div class="ui-view"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div layout:fragment="script" >
+            <script th:src="@{/js/categoria.js}" src="../../resources/js/categoria.js"></script>
+        </div>
+    </body>
+</html>

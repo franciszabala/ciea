@@ -19,13 +19,17 @@ package com.hbv.ciea.repository;
 
 import com.hbv.ciea.model.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 
 /**
- * Repositorio de Categorías.
  *
  * @author Herman Barrantes
  * @since 24-nov-2014
  */
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
+    @Modifying
+    @Query("update Categoria c set c.descripcion = ?1 where c.id = ?2")  
+    int updateDescriptionById(String descripcion, long id);
 }
