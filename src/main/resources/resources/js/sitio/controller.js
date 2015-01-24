@@ -61,9 +61,8 @@ ctrl.controller("SitioNuevoCtrl", function ($scope, Sitio, $state) {
     };
 });
 
-ctrl.controller("SitioEditarCtrl", function ($scope, Sitio, $state, $stateParams, TiposTelefono) {
+ctrl.controller("SitioEditarCtrl", function ($scope, Sitio, $state, $stateParams) {
     $scope.init = function () {
-        $scope.tipoTelefono = TiposTelefono;
         $scope.sitio = Sitio.get({id: $stateParams.sitioId}, function () {
         }, function (error) {
             $scope.alertaError(error);
