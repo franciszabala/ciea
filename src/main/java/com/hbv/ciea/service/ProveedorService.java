@@ -27,6 +27,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
+ * Servicio para el mantenimiento de Proveedores.
  *
  * @author Herman Barrantes
  * @since 14-ene-2015
@@ -40,28 +41,62 @@ public class ProveedorService {
     @Autowired
     private CopyConstructorUtil util;
 
+    /**
+     * Obtiene la lista completa de Proveedores.
+     *
+     * @return Lista completa de Proveedores.
+     */
     public List<ProveedorDTO> findAll() {
         return util.copiarLista(proveedorRepository.findAll(), ProveedorDTO.class);
     }
 
+    /**
+     * Obtiene la lista paginada de Proveedores.
+     *
+     * @param pageable Paginación
+     * @return Lista paginada de Proveedores.
+     */
     public Page<ProveedorDTO> findAll(Pageable pageable) {
         Page<Proveedor> proveedores = proveedorRepository.findAll(pageable);
         List<ProveedorDTO> proveedoresDTO = util.copiarLista(proveedores, ProveedorDTO.class);
         return new PageImpl<ProveedorDTO>(proveedoresDTO, pageable, proveedores.getTotalElements());
     }
 
+    /**
+     * Obtiene un Proveedor por su ID.
+     *
+     * @param id ID del Proveedor
+     * @return Proveedor correspondiente al ID
+     */
     public Proveedor findOne(long id) {
         return proveedorRepository.findOne(id);
     }
 
+    /**
+     * Inserta un Proveedor.
+     *
+     * @param proveedor Proveedor a Insertar
+     * @return Proveedor Insertado
+     */
     public Proveedor save(Proveedor proveedor) {
         return proveedorRepository.save(proveedor);
     }
 
+    /**
+     * Edita un Proveedor.
+     *
+     * @param proveedor Proveedor a Actualizar
+     * @return Proveedor Actualizado
+     */
     public Proveedor update(Proveedor proveedor) {
         return proveedorRepository.save(proveedor);
     }
 
+    /**
+     * Borra un Proveedor por su ID.
+     *
+     * @param id ID del Proveedor
+     */
     public void delete(long id) {
         proveedorRepository.delete(id);
     }
