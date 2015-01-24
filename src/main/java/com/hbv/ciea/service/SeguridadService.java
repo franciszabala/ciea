@@ -27,10 +27,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
+ * Servicio que se encarga de la autenticación de Usuarios al sistema.
  *
  * @author Herman Barrantes
  * @since 26-nov-2014
- * @see http://www.javacodegeeks.com/2014/03/springmvc4-spring-data-jpa-springsecurity-configuration-using-javaconfig.html
+ * @see
+ * http://www.javacodegeeks.com/2014/03/springmvc4-spring-data-jpa-springsecurity-configuration-using-javaconfig.html
  */
 @Service
 public class SeguridadService implements UserDetailsService {
@@ -38,9 +40,16 @@ public class SeguridadService implements UserDetailsService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    /**
+     * Obtiene un Usuario por su nombre de Usuario.
+     *
+     * @param username Nombre de Usuario
+     * @return Modelo de Usuario autenticado
+     * @throws UsernameNotFoundException En caso de no encontrar el Usuario
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if(username == null || username.trim().isEmpty()) {
+        if (username == null || username.trim().isEmpty()) {
             throw new UsernameNotFoundException("Usuario no encontrado");
         }
         Usuario usuario = usuarioRepository.findByUsuario(username);

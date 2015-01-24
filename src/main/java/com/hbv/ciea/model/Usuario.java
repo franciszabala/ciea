@@ -30,7 +30,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -48,22 +50,22 @@ public class Usuario implements Serializable {
     @Column(name = "id")
     private long id;
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 9, max = 20)
     @Column(name = "identificacion")
     private String identificacion;
     @NotNull
-    @Size(min = 1, max = 15)
+    @Size(min = 3, max = 15)
     @Column(name = "nombre")
     private String nombre;
     @NotNull
-    @Size(min = 1, max = 15)
+    @Size(min = 3, max = 15)
     @Column(name = "primer_apellido")
     private String primerApellido;
     @Size(max = 15)
     @Column(name = "segundo_apellido")
     private String segundoApellido;
     @NotNull
-    @Size(min = 1, max = 15)
+    @Size(min = 3, max = 15)
     @Column(name = "usuario")
     private String usuario;
     @NotNull
@@ -76,19 +78,23 @@ public class Usuario implements Serializable {
     @NotNull
     @Column(name = "activo")
     private boolean activo;
+    @Valid
     @JoinTable(name = "usuario_telefono", joinColumns = {
         @JoinColumn(name = "id_usuario", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_telefono", referencedColumnName = "id")})
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Telefono> telefonos;
+    @Valid
     @JoinTable(name = "usuario_correo", joinColumns = {
         @JoinColumn(name = "id_usuario", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_correo", referencedColumnName = "id")})
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Correo> correos;
+    @Valid
     @JoinColumn(name = "id_sitio", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Sitio sitio;
+    @Valid
     @JoinTable(name = "usuario_perfil", joinColumns = {
         @JoinColumn(name = "id_usuario", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_perfil", referencedColumnName = "id")})

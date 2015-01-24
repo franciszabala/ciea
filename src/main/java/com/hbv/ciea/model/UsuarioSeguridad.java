@@ -43,7 +43,6 @@ public class UsuarioSeguridad extends Usuario implements UserDetails {
         this.setSegundoApellido(usuario.getSegundoApellido());
         this.setUsuario(usuario.getUsuario());
         this.setClave(usuario.getClave());
-        this.setPuesto(usuario.getPuesto());
         this.setActivo(usuario.getActivo());
         this.setPerfiles(usuario.getPerfiles());
     }
