@@ -46,11 +46,19 @@ ctrl.controller("UsuarioListaCtrl", function ($scope, Usuario) {
     $scope.init();
 });
 
-ctrl.controller("UsuarioNuevoCtrl", function ($scope, Usuario, TiposTelefono, TiposCorreo, $state) {
+ctrl.controller("UsuarioNuevoCtrl", function ($scope, Usuario, Sitio, Perfil, TiposTelefono, TiposCorreo, $state) {
     $scope.init = function () {
         $scope.tiposTelefono = TiposTelefono;
         $scope.tiposCorreo = TiposCorreo;
-        $scope.usuario = {telefonos: [], correos: []};
+        $scope.usuario = {telefonos: [], correos: [], perfiles: []};
+        $scope.sitios = Sitio.query({}, function () {
+        }, function (error) {
+            $scope.alertaError(error);
+        });
+        $scope.perfiles = Perfil.query({}, function () {
+        }, function (error) {
+            $scope.alertaError(error);
+        });
     };
 
     $scope.createUsuario = function () {

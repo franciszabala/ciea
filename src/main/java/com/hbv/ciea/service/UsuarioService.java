@@ -16,15 +16,25 @@
 package com.hbv.ciea.service;
 
 import com.hbv.ciea.dto.UsuarioDTO;
+import com.hbv.ciea.model.Perfil;
+import com.hbv.ciea.model.Sitio;
 import com.hbv.ciea.model.Usuario;
+import com.hbv.ciea.repository.PerfilRepository;
+import com.hbv.ciea.repository.SitioRepository;
 import com.hbv.ciea.repository.UsuarioRepository;
 import com.hbv.ciea.util.CopyConstructorUtil;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Servicio para el mantenimiento de Usuarios.
@@ -37,6 +47,12 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private SitioRepository sitioRepository;
+
+    @Autowired
+    private PerfilRepository perfilRepository;
 
     @Autowired
     private CopyConstructorUtil util;
@@ -78,7 +94,20 @@ public class UsuarioService {
      * @param usuario Usuario a Insertar
      * @return Usuario Insertado
      */
+//    @Transactional(propagation = Propagation.REQUIRED)
     public Usuario save(Usuario usuario) {
+        if (usuario.getSitio() != null) {
+            Sitio sitio = sitioRepository.findOne(usuario.getSitio().getId());
+            usuario.setSitio(sitio);
+        }
+        if (usuario.getPerfiles() != null && !usuario.getPerfiles().isEmpty()) {
+            Set<Perfil> perfiles = new HashSet<Perfil>();
+            for (Perfil elemento : usuario.getPerfiles()) {
+                Perfil perfil = perfilRepository.findOne(elemento.getId());
+                perfiles.add(perfil);
+            }
+            usuario.setPerfiles(perfiles);
+        }
         return usuarioRepository.save(usuario);
     }
 

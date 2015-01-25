@@ -20,6 +20,7 @@ package com.hbv.ciea.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -103,7 +104,7 @@ public class Usuario implements Serializable {
         @JoinColumn(name = "id_usuario", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_perfil", referencedColumnName = "id")})
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Perfil> perfiles;
+    private Set<Perfil> perfiles;
 
     public Usuario() {
     }
@@ -204,11 +205,11 @@ public class Usuario implements Serializable {
         this.correos = correos;
     }
 
-    public List<Perfil> getPerfiles() {
+    public Set<Perfil> getPerfiles() {
         return perfiles;
     }
 
-    public void setPerfiles(List<Perfil> perfiles) {
+    public void setPerfiles(Set<Perfil> perfiles) {
         this.perfiles = perfiles;
     }
 
