@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/plantilla">
+    <head>
+        <title th:text="#{activo.titulo}">Activo</title>
+    </head>
+    <body>
+        <div class="container">
+            <div th:fragment="content">
+                <div class="row">
+                    <h1 th:text="#{activo.editar}">Editar Activo</h1>
+                    <form role="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="Placa" class="col-sm-2 control-label" th:text="#{activo.placa}">Placa:</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <input type="text" class="form-control" id="nombre" th:placeholder="#{activo.placa}" placeholder="placa" ng-model="activo.placa" autofocus="autofocus"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Serie" class="col-sm-2 control-label" th:text="#{activo.serie}">Serie:</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <input type="text" class="form-control" id="direccion" th:placeholder="#{activo.serie}" placeholder="Serie" ng-model="activo.serie"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Estado" class="col-sm-2 control-label" th:text="#{activo.estado}">Estado:</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <select id="estado" class="form-control" ng-model="activo.estado" ng-options="estado for estado in estados"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Sitio" class="col-sm-2 control-label" th:text="#{activo.sitio}">Sitio:</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <select class="form-control" id="sitio" ng-model="activo.sitio" ng-options="sitio.nombre for sitio in sitios track by sitio.id"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Articulo" class="col-sm-2 control-label" th:text="#{activo.articulo}">Articulo:</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <select class="form-control" id="articulo" ng-model="activo.articulo" ng-options="articulo.descripcion for articulo in articulos track by articulo.id"></select>
+                            </div>
+                        </div>
+
+                        <div class="btn-group btn-group-ms pull-right" role="group">
+                            <button class="btn btn-primary" ng-click="updateActivo()">
+                                <span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;<span th:text="#{boton.aceptar}">Aceptar</span>
+                            </button>
+                            <button class="btn btn-default" ng-click="cancelar()">
+                                <span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp;<span th:text="#{boton.cancelar}">Cancelar</span>
+                            </button>
+                        </div>
+                    </form>
+                    <br/>
+                </div>
+                <div class="row">
+                    <pre>activo = {{ activo | json}}</pre>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
