@@ -23,9 +23,7 @@ import com.hbv.ciea.repository.PerfilRepository;
 import com.hbv.ciea.repository.SitioRepository;
 import com.hbv.ciea.repository.UsuarioRepository;
 import com.hbv.ciea.util.CopyConstructorUtil;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +31,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Servicio para el mantenimiento de Usuarios.
