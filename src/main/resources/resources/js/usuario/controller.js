@@ -85,11 +85,19 @@ ctrl.controller("UsuarioNuevoCtrl", function ($scope, Usuario, TiposTelefono, Ti
     $scope.init();
 });
 
-ctrl.controller("UsuarioEditarCtrl", function ($scope, Usuario, TiposTelefono, TiposCorreo, $state, $stateParams) {
+ctrl.controller("UsuarioEditarCtrl", function ($scope, Usuario, Sitio, Perfil, TiposTelefono, TiposCorreo, $state, $stateParams) {
     $scope.init = function () {
         $scope.tiposTelefono = TiposTelefono;
         $scope.tiposCorreo = TiposCorreo;
         $scope.usuario = Usuario.get({id: $stateParams.usuarioId}, function () {
+        }, function (error) {
+            $scope.alertaError(error);
+        });
+        $scope.sitios = Sitio.query({}, function () {
+        }, function (error) {
+            $scope.alertaError(error);
+        });
+        $scope.perfiles = Perfil.query({}, function () {
         }, function (error) {
             $scope.alertaError(error);
         });
