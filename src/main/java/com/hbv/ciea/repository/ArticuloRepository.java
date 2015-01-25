@@ -18,7 +18,11 @@
 package com.hbv.ciea.repository;
 
 import com.hbv.ciea.model.Articulo;
+import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  * Repositorio de Artículos.
@@ -28,4 +32,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ArticuloRepository extends JpaRepository<Articulo, Long> {
 
+    @Override
+    @Query(value="SELECT a FROM Articulo a JOIN FETCH a.categoria", countQuery = "select count(a.id) from Articulo a")
+    Page findAll(Pageable pageable);
+
+    @Override
+    @Query("SELECT a FROM Articulo a JOIN FETCH a.categoria")
+    List<Articulo> findAll();
 }

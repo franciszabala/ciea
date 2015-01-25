@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/plantilla">
     <head>
-        <title th:text="#{categoria.titulo}">Sitio</title>
+        <title th:text="#{categoria.titulo}">Categoria</title>
     </head>
     <body>
         <div class="container">
             <div th:fragment="content">
                 <div class="row">
-                    <h1>Nueva Categoria</h1>
+                    <h1 th:text="#{categoria.titulo}">Nueva Categoria</h1>
                     <form role="form" class="form-horizontal">
                         <div class="form-group">
-                            <label for="descripcion" class="col-sm-2 control-label">Descripción:</label>
+                            <label for="descripcion" class="col-sm-2 control-label" th:text="#{categoria.descripcion}">Descripción:</label>
                             <div class="col-sm-10 input-group">
-                                <input type="text" class="form-control" id="descripcion" placeholder="Descripción" ng-model="categoria.descripcion"/>
+                                <input type="text" class="form-control" id="descripcion" placeholder="Descripción" ng-model="categoria.descripcion" />
                             </div>
                         </div>
                         <div class="btn-group btn-group-ms pull-right" role="group">
                             <button class="btn btn-primary" ng-click="updateCategoria()">
-                                <span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;Aceptar
+                                <span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;<span th:text="#{boton.aceptar}">Aceptar</span>
                             </button>
                             <button class="btn btn-default" ng-click="cancelar()">
-                                <span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp;Cancelar
+                                <span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp;<span th:text="#{boton.cancelar}">Cancelar</span>
                             </button>
                         </div>
                     </form>
