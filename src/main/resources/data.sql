@@ -65,3 +65,9 @@ insert into proveedor_telefono(id_proveedor,id_telefono)values(2,12);
 insert into articulo(id,descripcion,modelo,marca,id_categoria)values(1,'Pupitre','NA', 'Patito',2);
 insert into articulo(id,descripcion,modelo,marca,id_categoria)values(2,'Server', 'DL 380', 'HP', 1);
 insert into articulo(id,descripcion,modelo,marca,id_categoria)values(3,'Licuadora','AXZW', 'Cuisinar', 3);
+
+
+--Activos
+insert into activo(id,placa,serie,estado,id_sitio, id_articulo)values(1,'EAC-01','123', 'BUENO',12,3);
+insert into activo(id,placa,serie,estado,id_sitio, id_articulo)values(2,'EAD-01','456', 'BUENO',1,2);
+insert into activo(id,placa,serie,estado,id_sitio, id_articulo)values(3,'EA-01','789', 'BUENO',2, 3);

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/plantilla">
+    <head>
+        <title th:text="#{activo.titulo}">Activo</title>
+    </head>
+    <body>
+        <div class="container">
+            <div layout:fragment="content">
+                <div id="articulo" ng-app="activoApp">
+
+                    <div ng-controller="AlertaCtrl">
+                        <alert ng-repeat="alerta in alertas" type="{{alerta.type}}" close="cerrarAlerta($index)">{{alerta.msg}}</alert>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div>
+                                    <div class="ui-view"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div layout:fragment="script" >
+            <script th:src="@{/js/activo/app.js}" src="../../resources/js/activo/app.js"></script>
+            <script th:src="@{/js/activo/service.js}" src="../../resources/js/activo/service.js"></script>
+            <script th:src="@{/js/sitio/service.js}" src="../../resources/js/categoria/sitio.js"></script>
+            <script th:src="@{/js/articulo/service.js}" src="../../resources/js/articulo/sitio.js"></script>
+            <script th:src="@{/js/activo/controller.js}" src="../../resources/js/activo/controller.js"></script>
+            <script th:src="@{/js/alerta.js}" src="../../resources/js/alerta.js"></script>
+        </div>
+    </body>
+</html>
