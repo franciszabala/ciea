@@ -30,7 +30,6 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
-
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 /**
@@ -72,6 +71,12 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/usuarios/nuevo").setViewName("usuario/nuevo :: content");
         registry.addViewController("/usuarios/editar").setViewName("usuario/editar :: content");
         registry.addViewController("/usuarios/lista").setViewName("usuario/lista :: content");
+
+        //articulo
+        registry.addViewController("/articulos").setViewName("articulo/inicio");
+        registry.addViewController("/articulos/nuevo").setViewName("articulo/nuevo :: content");
+        registry.addViewController("/articulos/editar").setViewName("articulo/editar :: content");
+        registry.addViewController("/articulos/lista").setViewName("articulo/lista :: content");
 
         registry.addViewController("/hello").setViewName("hello");
     }

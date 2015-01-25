@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/plantilla">
+    <head>
+        <title th:text="#{articulo.titulo}">Articulo</title>
+    </head>
+    <body>
+        <div class="container">
+            <div th:fragment="content">
+                <div class="row">
+                    <h1 th:text="#{articulo.nuevo}">Nuevo Articulo</h1>
+                    <form role="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="descripcion" class="col-sm-2 control-label" th:text="#{articulo.descripcion}">Descripción:</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <input type="text" class="form-control" id="nombre" th:placeholder="#{articulo.descripcion}" placeholder="Descripcion" ng-model="articulo.descripcion" autofocus="autofocus"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="modelo" class="col-sm-2 control-label" th:text="#{articulo.modelo}">Modelo:</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <input type="text" class="form-control" id="direccion" th:placeholder="#{articulo.modelo}" placeholder="Dirección" ng-model="articulo.modelo"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="marca" class="col-sm-2 control-label" th:text="#{articulo.marca}">Marca:</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <input type="text" class="form-control" id="marca" th:placeholder="#{articulo.marca}" placeholder="Marca" ng-model="articulo.marca"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="categoria" class="col-sm-2 control-label" th:text="#{articulo.categoria}">Categoria:</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <select class="form-control" id="categoria" ng-model="articulo.categoria" ng-options="categoria.descripcion for categoria in categorias"></select>
+                            </div>
+                        </div>
+                        
+                        <div class="btn-group btn-group-ms pull-right" role="group">
+                            <button class="btn btn-primary" ng-click="updateArticulo()">
+                                <span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;<span th:text="#{boton.aceptar}">Aceptar</span>
+                            </button>
+                            <button class="btn btn-default" ng-click="cancelar()">
+                                <span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp;<span th:text="#{boton.cancelar}">Cancelar</span>
+                            </button>
+                        </div>
+                    </form>
+                    <br/>
+                </div>
+                <div class="row">
+                    <pre>articulo = {{ articulo | json}}</pre>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

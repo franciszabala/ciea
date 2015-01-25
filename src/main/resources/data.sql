@@ -60,3 +60,8 @@ insert into proveedor_correo(id_proveedor,id_correo)values(2,12);
 insert into proveedor_telefono(id_proveedor,id_telefono)values(1,10);
 insert into proveedor_telefono(id_proveedor,id_telefono)values(1,11);
 insert into proveedor_telefono(id_proveedor,id_telefono)values(2,12);
+
+--Articulo
+insert into articulo(id,descripcion,modelo,marca,id_categoria)values(1,'Pupitre','NA', 'Patito',2);
+insert into articulo(id,descripcion,modelo,marca,id_categoria)values(2,'Server', 'DL 380', 'HP', 1);
+insert into articulo(id,descripcion,modelo,marca,id_categoria)values(3,'Licuadora','AXZW', 'Cuisinar', 3);

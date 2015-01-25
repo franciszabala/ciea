@@ -13,45 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+var ctrl = angular.module("categoria.controller", []);
 
-var app = angular.module("categoriaApp", ["ui.router", "ngResource", "ui.bootstrap"]);
-
-app.config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("lista");
-
-    $stateProvider
-            .state('lista', {
-                url: '/lista',
-                templateUrl: "/categorias/lista",
-                controller: 'CategoriaListaCtrl'
-            })
-            .state('editar', {
-                url: '/editar/:categoriaId',
-                templateUrl: "/categorias/editar",
-                controller: 'CategoriaEditarCtrl'
-            })
-            .state('nuevo', {
-                url: '/nuevo',
-                templateUrl: "/categorias/nuevo",
-                controller: 'CategoriaNuevoCtrl'
-            });
-});
-
-
-app.factory("Categoria", function ($resource) {
-    return $resource("/api/categoria/:id", {id: "@id"}, {
-        update: {
-            method: 'PUT'
-        },
-        page: {
-            method: 'GET',
-            params: {id: 'page'}
-        }
-    });
-});
-
-app.controller("CategoriaListaCtrl", function ($scope, Categoria) {
+ctrl.controller("CategoriaListaCtrl", function ($scope, Categoria) {
     $scope.init = function () {
+        $scope.limpiarAlertas();
         $scope.pagina = 1;
         $scope.getCategorias();
     };
@@ -60,13 +26,24 @@ app.controller("CategoriaListaCtrl", function ($scope, Categoria) {
         Categoria.page({'page': $scope.pagina}, function (data) {
             $scope.categorias = data;
         }, function (error) {
-            //error
+            $scope.alertaError(error);
+        });
+    };
+
+    $scope.getCategoriasList = function () {
+        Categoria.query({}, function (data) {
+            $scope.categorias = data;
+        }, function (error) {
+            $scope.alertaError(error);
         });
     };
 
     $scope.deleteCategoria = function (categoria) {
         return Categoria.delete({id: categoria.id}, function () {
             $scope.getCategorias();
+            $scope.alertaExito('Se borro correctamente');
+        }, function (error) {
+            $scope.alertaError(error);
         });
     };
 
@@ -77,11 +54,13 @@ app.controller("CategoriaListaCtrl", function ($scope, Categoria) {
     $scope.init();
 });
 
-app.controller("CategoriaNuevoCtrl", function ($scope, Categoria, $state) {
+ctrl.controller("CategoriaNuevoCtrl", function ($scope, Categoria, $state) {
     $scope.createCategoria = function () {
         var categoria = new Categoria($scope.categoria);
         categoria.$save({}, function () {
             $state.transitionTo("lista");
+        }, function (error) {
+            $scope.alertaError(error);
         });
     };
 
@@ -90,7 +69,7 @@ app.controller("CategoriaNuevoCtrl", function ($scope, Categoria, $state) {
     };
 });
 
-app.controller("CategoriaEditarCtrl", function ($scope, Categoria, $state, $stateParams) {
+ctrl.controller("CategoriaEditarCtrl", function ($scope, Categoria, $state, $stateParams) {
     $scope.init = function () {
         $scope.categoria = Categoria.get({id: $stateParams.categoriaId});
     };
@@ -99,6 +78,8 @@ app.controller("CategoriaEditarCtrl", function ($scope, Categoria, $state, $stat
         var categoria = new Categoria($scope.categoria);
         categoria.$update().then(function () {
             $state.transitionTo("lista");
+        }, function (error) {
+            $scope.alertaError(error);
         });
     };
 

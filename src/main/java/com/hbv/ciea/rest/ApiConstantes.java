@@ -33,4 +33,5 @@ public class ApiConstantes {
     public static final String API_CATEGORIA = "/api/categoria";
     public static final String API_PROVEEDOR = "/api/proveedor";
     public static final String API_USUARIO = "/api/usuario";
+    public static final String API_ARTICULO  = "/api/articulo";
 }
