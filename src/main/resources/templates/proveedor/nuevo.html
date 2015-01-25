@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/plantilla">
     <head>
-        <title th:text="#{proveedor.titulo}">Sitio</title>
+        <title th:text="#{proveedor.titulo}">Proveedor</title>
     </head>
     <body>
         <div class="container">
@@ -11,19 +11,19 @@
                     <form name="form" role="form" class="form-horizontal">
                         <div class="form-group">
                             <label for="nombre" class="col-sm-2 control-label" th:text="#{proveedor.nombre}">Nombre:</label>
-                            <div class="col-sm-10 col-xs-12 input-group">
+                            <div class="col-sm-10 col-xs-12">
                                 <input type="text" class="form-control" id="nombre" th:placeholder="#{proveedor.nombre}" placeholder="Nombre" ng-model="proveedor.nombre" autofocus="autofocus"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="direccion" class="col-sm-2 control-label" th:text="#{proveedor.direccion}">Dirección:</label>
-                            <div class="col-sm-10 col-xs-12 input-group">
+                            <div class="col-sm-10 col-xs-12">
                                 <input type="text" class="form-control" id="direccion" th:placeholder="#{proveedor.direccion}" placeholder="Dirección" ng-model="proveedor.direccion"/>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="sitioWeb" class="col-sm-2 control-label" th:text="#{proveedor.sitioWeb}">Sitio Web:</label>
-                            <div class="col-sm-10 col-xs-12 input-group">
+                            <div class="col-sm-10 col-xs-12">
                                 <input type="text" class="form-control" id="sitioWeb" th:placeholder="#{proveedor.sitioWeb}" placeholder="Sitio Web" ng-model="proveedor.sitioWeb"/>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="correo in proveedor.correos">
-                                            <td><input type="text" class="form-control" id="correo_correo" placeholder="Correo" ng-model="correo.correo"/></td>
+                                            <td><input type="email" class="form-control" id="correo_correo" th:placeholder="#{proveedor.correo}" placeholder="Correo" ng-model="correo.correo"/></td>
                                             <td><select id="correo_tipo" class="form-control" ng-model="correo.tipo" ng-options="tipo for tipo in tiposCorreo"></select></td>
                                             <td>
                                                 <button class="btn btn-danger btn-sm" ng-click="deleteCorreo(correo)">
@@ -74,8 +74,8 @@
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="telefono in proveedor.telefonos">
-                                            <td><input type="number" class="form-control" id="telefono_telefono" placeholder="Teléfono" ng-model="telefono.telefono"/></td>
-                                            <td><input type="number" class="form-control" id="telefono_extension" placeholder="Extensión" ng-model="telefono.extension"/></td>
+                                            <td><input type="number" class="form-control" id="telefono_telefono" th:placeholder="#{proveedor.telefono}" placeholder="Teléfono" ng-model="telefono.telefono"/></td>
+                                            <td><input type="number" class="form-control" id="telefono_extension" th:placeholder="#{proveedor.extension}" placeholder="Extensión" ng-model="telefono.extension"/></td>
                                             <td><select id="telefono_tipo" class="form-control" ng-model="telefono.tipo" ng-options="tipo for tipo in tiposTelefono"></select></td>
                                             <td>
                                                 <button class="btn btn-danger btn-sm" ng-click="deleteTelefono(telefono)">

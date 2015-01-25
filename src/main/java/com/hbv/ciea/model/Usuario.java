@@ -17,8 +17,10 @@
  */
 package com.hbv.ciea.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -66,6 +68,7 @@ public class Usuario implements Serializable {
     private String segundoApellido;
     @NotNull
     @Size(min = 3, max = 15)
+    @Pattern(regexp = "[a-zA-Z0-9]+")
     @Column(name = "usuario")
     private String usuario;
     @NotNull
@@ -82,23 +85,24 @@ public class Usuario implements Serializable {
     @JoinTable(name = "usuario_telefono", joinColumns = {
         @JoinColumn(name = "id_usuario", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_telefono", referencedColumnName = "id")})
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Telefono> telefonos;
     @Valid
     @JoinTable(name = "usuario_correo", joinColumns = {
         @JoinColumn(name = "id_usuario", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_correo", referencedColumnName = "id")})
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Correo> correos;
     @Valid
     @JoinColumn(name = "id_sitio", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Sitio sitio;
     @Valid
     @JoinTable(name = "usuario_perfil", joinColumns = {
         @JoinColumn(name = "id_usuario", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_perfil", referencedColumnName = "id")})
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Perfil> perfiles;
 
     public Usuario() {

@@ -1,35 +1,84 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/plantilla">
     <head>
-        <title th:text="#{proveedor.titulo}">Sitio</title>
+        <title th:text="#{usuario.titulo}">Usuario</title>
     </head>
     <body>
         <div class="container">
             <div th:fragment="content">
                 <div class="row">
-                    <h1 th:text="#{proveedor.editar}">Editar Proveedor</h1>
+                    <h1 th:text="#{usuario.editar}">Editar Usuario</h1>
                     <form name="form" role="form" class="form-horizontal">
                         <div class="form-group">
-                            <label for="nombre" class="col-sm-2 control-label" th:text="#{proveedor.nombre}">Nombre:</label>
-                            <div class="col-sm-10 col-xs-12 input-group">
-                                <input type="text" class="form-control" id="nombre" th:placeholder="#{proveedor.nombre}" placeholder="Nombre" ng-model="proveedor.nombre" autofocus="autofocus"/>
+                            <label for="identificacion" class="col-sm-2 control-label" th:text="#{usuario.identificacion}">Identificación</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <input type="text" class="form-control" id="identificacion" th:placeholder="#{usuario.identificacion}" placeholder="Identificación" ng-model="usuario.identificacion" autofocus="autofocus"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="direccion" class="col-sm-2 control-label" th:text="#{proveedor.direccion}">Dirección:</label>
-                            <div class="col-sm-10 col-xs-12 input-group">
-                                <input type="text" class="form-control" id="direccion" th:placeholder="#{proveedor.direccion}" placeholder="Dirección" ng-model="proveedor.direccion"/>
+                            <label for="nombre" class="col-sm-2 control-label" th:text="#{usuario.nombre}">Nombre</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <input type="text" class="form-control" id="nombre" th:placeholder="#{usuario.nombre}" placeholder="Nombre" ng-model="usuario.nombre"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="sitioWeb" class="col-sm-2 control-label" th:text="#{proveedor.sitioWeb}">Sitio Web:</label>
-                            <div class="col-sm-10 col-xs-12 input-group">
-                                <input type="text" class="form-control" id="sitioWeb" th:placeholder="#{proveedor.sitioWeb}" placeholder="Sitio Web" ng-model="proveedor.sitioWeb"/>
+                            <label for="primer_apellido" class="col-sm-2 control-label" th:text="#{usuario.primer_apellido}">Primer Apellido</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <input type="text" class="form-control" id="primer_apellido" th:placeholder="#{usuario.primer_apellido}" placeholder="Primer Apellido" ng-model="usuario.primerApellido"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="segundo_apellido" class="col-sm-2 control-label" th:text="#{usuario.segundo_apellido}">Segundo Apellido</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <input type="text" class="form-control" id="segundo_apellido" th:placeholder="#{usuario.segundo_apellido}" placeholder="Segundo Apellido" ng-model="usuario.segundoApellido"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="puesto" class="col-sm-2 control-label" th:text="#{usuario.puesto}">Puesto</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <input type="text" class="form-control" id="puesto" th:placeholder="#{usuario.puesto}" placeholder="Puesto" ng-model="usuario.puesto"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="usuario" class="col-sm-2 control-label" th:text="#{usuario.usuario}">Usuario</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <input type="text" class="form-control" id="usuario" th:placeholder="#{usuario.usuario}" placeholder="Usuario" ng-model="usuario.usuario"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="clave" class="col-sm-2 control-label" th:text="#{usuario.clave}">Clave</label>
+                            <div class="col-sm-10 col-xs-12">
+                                <input type="password" class="form-control" id="clave" th:placeholder="#{usuario.clave}" placeholder="Clave" ng-model="usuario.clave"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sitio" class="col-xs-2 col-sm-2 control-label" th:text="#{usuario.sitio}">Sitio</label>
+                            <div class="col-xs-12 col-sm-10">
+                                <select id="sitio" class="form-control" ng-model="usuario.sitio" ng-options="sitio as sitio.nombre for sitio in sitios track by sitio.id">
+                                    <option value="">[Sin Sitio]</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="perfil" class="col-xs-2 col-sm-2 control-label" th:text="#{usuario.perfil}">Perfil</label>
+                            <div class="col-xs-12 col-sm-10">
+                                <select id="perfil" class="form-control" ng-model="usuario.perfiles" ng-options="perfil as perfil.nombre for perfil in perfiles track by perfil.id" multiple="multiple">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="activo" class="col-sm-2 control-label" th:text="#{usuario.activo}">Activo</label>
+                            <div class="col-sm-10 col-xs-10">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="activo" ng-model="usuario.activo"/>
+                                    </label>
+                                </div>
                             </div>
                         </div>
 
                         <fieldset>
-                            <legend th:text="#{proveedor.correos}">Correos</legend>
+                            <legend th:text="#{usuario.correos}">Correos</legend>
                             <button class="btn btn-success btn-sm" ng-click="createCorreo()">
                                 <span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;<span th:text="#{boton.nuevo}">Nuevo</span>
                             </button>
@@ -37,14 +86,14 @@
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th th:text="#{proveedor.correo}">Correo</th>
+                                            <th th:text="#{usuario.correo}">Correo</th>
                                             <th th:text="#{etiqueta.tipo}">Tipo</th>
                                             <th th:text="#{etiqueta.accion}">Acción</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="correo in proveedor.correos">
-                                            <td><input type="text" class="form-control" id="correo_correo" placeholder="Correo" ng-model="correo.correo"/></td>
+                                        <tr ng-repeat="correo in usuario.correos">
+                                            <td><input type="email" class="form-control" id="correo_correo" th:placeholder="#{usuario.correo}" placeholder="Correo" ng-model="correo.correo"/></td>
                                             <td><select id="correo_tipo" class="form-control" ng-model="correo.tipo" ng-options="tipo for tipo in tiposCorreo"></select></td>
                                             <td>
                                                 <button class="btn btn-danger btn-sm" ng-click="deleteCorreo(correo)">
@@ -58,7 +107,7 @@
                         </fieldset>
 
                         <fieldset>
-                            <legend th:text="#{proveedor.telefonos}">Teléfonos</legend>
+                            <legend th:text="#{usuario.telefonos}">Teléfonos</legend>
                             <button class="btn btn-success btn-sm" ng-click="createTelefono()">
                                 <span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;<span th:text="#{boton.nuevo}">Nuevo</span>
                             </button>
@@ -66,16 +115,16 @@
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th th:text="#{proveedor.telefono}">Teléfono</th>
-                                            <th th:text="#{proveedor.extension}">Extensión</th>
+                                            <th th:text="#{usuario.telefono}">Teléfono</th>
+                                            <th th:text="#{usuario.extension}">Extensión</th>
                                             <th th:text="#{etiqueta.tipo}">Tipo</th>
                                             <th th:text="#{etiqueta.accion}">Acción</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="telefono in proveedor.telefonos">
-                                            <td><input type="number" class="form-control" id="telefono_telefono" placeholder="Teléfono" ng-model="telefono.telefono"/></td>
-                                            <td><input type="number" class="form-control" id="telefono_extension" placeholder="Extensión" ng-model="telefono.extension"/></td>
+                                        <tr ng-repeat="telefono in usuario.telefonos">
+                                            <td><input type="number" class="form-control" id="telefono_telefono" th:placeholder="#{usuario.telefono}" placeholder="Teléfono" ng-model="telefono.telefono"/></td>
+                                            <td><input type="number" class="form-control" id="telefono_extension" th:placeholder="#{usuario.extension}" placeholder="Extensión" ng-model="telefono.extension"/></td>
                                             <td><select id="telefono_tipo" class="form-control" ng-model="telefono.tipo" ng-options="tipo for tipo in tiposTelefono"></select></td>
                                             <td>
                                                 <button class="btn btn-danger btn-sm" ng-click="deleteTelefono(telefono)">
@@ -89,7 +138,7 @@
                         </fieldset>
 
                         <div class="btn-group btn-group-ms pull-right" role="group">
-                            <button class="btn btn-primary" ng-click="updateProveedor()">
+                            <button class="btn btn-primary" ng-click="updateUsuario()">
                                 <span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;<span th:text="#{boton.aceptar}">Aceptar</span>
                             </button>
                             <button class="btn btn-default" ng-click="cancelar()">
@@ -100,7 +149,7 @@
                 </div>
                 <br/>
                 <div class="row">
-                    <pre>proveedor = {{ proveedor | json}}</pre>
+                    <pre>usuario = {{ usuario | json}}</pre>
                 </div>
             </div>
         </div>
