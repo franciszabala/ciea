@@ -33,7 +33,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface ArticuloRepository extends JpaRepository<Articulo, Long> {
 
     @Override
-    @Query(value="SELECT a FROM Articulo a JOIN FETCH a.categoria", countQuery = "select count(a.id) from Articulo a")
+    @Query(value="SELECT a FROM Articulo a JOIN FETCH a.categoria", countQuery = "SELECT COUNT(a.id) FROM Articulo a")
     Page findAll(Pageable pageable);
 
     @Override

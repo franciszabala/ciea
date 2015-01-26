@@ -24,6 +24,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,30 +52,31 @@ public class ArticuloRestController {
     private Page<Articulo> listar(Pageable pageable) {
         return articuloRepository.findAll(pageable);
     }
-    
+
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
-    private Articulo buscar (@PathVariable(ID) long id){
+    private Articulo buscar(@PathVariable(ID) long id) {
         Articulo articulo = articuloRepository.findOne(id);
-        if(articulo != null){
+        if (articulo != null) {
             return articulo;
-        }else{
-              throw new ErrorRestDTO("error.not_found");
+        } else {
+            throw new ErrorRestDTO("error.not_found");
         }
     }
-    
+
     @RequestMapping(method = {RequestMethod.POST}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
-    private void nuevo(@RequestBody @Valid Articulo articulo){
-        articuloRepository.save(articulo);
-    }
-    
-    @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
-    private Articulo editar(@PathVariable(ID) long id, @RequestBody @Valid Articulo articulo){
+    private Articulo nuevo(@RequestBody @Valid Articulo articulo) {
         return articuloRepository.save(articulo);
     }
-    
+
+    @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
+    private Articulo editar(@PathVariable(ID) long id, @RequestBody @Valid Articulo articulo) {
+        return articuloRepository.save(articulo);
+    }
+
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MEDIA_TYPE_JSON})
-    private void borrar(@PathVariable(ID) long id){
+    private ResponseEntity<Boolean> borrar(@PathVariable(ID) long id) {
         articuloRepository.delete(id);
+        return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
     }
 
 }
