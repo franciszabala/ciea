@@ -12,6 +12,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * @see https://code.google.com/p/crypto-js/
+ * @see http://cursoangularjs.es/doku.php?id=unidades:03_servicios:08_factory
+ * @see http://cursoangularjs.es/doku.php?id=unidades:03_servicios:09_provider
  */
 
 var srvc = angular.module("usuario.service", []);
@@ -26,4 +29,10 @@ srvc.factory("Usuario", function($resource) {
             params: {ruta: 'page'}
         }
     });
+});
+
+srvc.factory("Encriptar", function() {
+    return function(mensaje) {
+        return CryptoJS.SHA256(mensaje).toString();
+    };
 });

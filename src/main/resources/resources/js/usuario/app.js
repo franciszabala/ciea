@@ -24,17 +24,17 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
             .state('lista', {
                 url: '/lista',
-                templateUrl: "/usuarios/lista",
+                templateUrl: "/admin/usuarios/lista",
                 controller: 'UsuarioListaCtrl'
             })
             .state('editar', {
                 url: '/editar/:usuarioId',
-                templateUrl: "/usuarios/editar",
+                templateUrl: "/admin/usuarios/editar",
                 controller: 'UsuarioEditarCtrl'
             })
             .state('nuevo', {
                 url: '/nuevo',
-                templateUrl: "/usuarios/nuevo",
+                templateUrl: "/admin/usuarios/nuevo",
                 controller: 'UsuarioNuevoCtrl'
             });
 });

@@ -31,6 +31,7 @@ import javax.validation.constraints.Size;
  *
  * @author Herman Barrantes
  * @since 24-nov-2014
+ * @see https://aykutakin.wordpress.com/2013/07/08/spring-security-spring-custom-authentication-provider/
  */
 @Entity
 @Table(name = "perfil")
