@@ -43,7 +43,7 @@ public class Activo implements Serializable {
     @NotNull
     @Column(name = "id")
     private long id;
-    @NotNull
+    @Size(max = 50)
     @Column(name = "placa")
     private String placa;
     @Size(max = 50)

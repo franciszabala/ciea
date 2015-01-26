@@ -43,10 +43,10 @@ public class ProveedorDTO implements Serializable {
     private final String sitioWeb;
 
     public ProveedorDTO(Proveedor proveedor) {
-        id = proveedor.getId();
-        nombre = proveedor.getNombre();
-        direccion = proveedor.getDireccion();
-        sitioWeb = proveedor.getSitioWeb();
+        this.id = proveedor.getId();
+        this.nombre = proveedor.getNombre();
+        this.direccion = proveedor.getDireccion();
+        this.sitioWeb = proveedor.getSitioWeb();
     }
 
     public long getId() {

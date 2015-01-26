@@ -29,6 +29,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 /**
@@ -53,11 +54,35 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/sitios/nuevo").setViewName("sitio/nuevo :: content");
         registry.addViewController("/sitios/editar").setViewName("sitio/editar :: content");
         registry.addViewController("/sitios/lista").setViewName("sitio/lista :: content");
+
+        //categorias
+        registry.addViewController("/categorias").setViewName("categoria/inicio");
+        registry.addViewController("/categorias/nuevo").setViewName("categoria/nuevo :: content");
+        registry.addViewController("/categorias/editar").setViewName("categoria/editar :: content");
+        registry.addViewController("/categorias/lista").setViewName("categoria/lista :: content");
+
         //Proveedores
         registry.addViewController("/proveedores").setViewName("proveedor/inicio");
         registry.addViewController("/proveedores/nuevo").setViewName("proveedor/nuevo :: content");
         registry.addViewController("/proveedores/editar").setViewName("proveedor/editar :: content");
         registry.addViewController("/proveedores/lista").setViewName("proveedor/lista :: content");
+        //Usuarios
+        registry.addViewController("/usuarios").setViewName("usuario/inicio");
+        registry.addViewController("/usuarios/nuevo").setViewName("usuario/nuevo :: content");
+        registry.addViewController("/usuarios/editar").setViewName("usuario/editar :: content");
+        registry.addViewController("/usuarios/lista").setViewName("usuario/lista :: content");
+
+        //Articulo
+        registry.addViewController("/articulos").setViewName("articulo/inicio");
+        registry.addViewController("/articulos/nuevo").setViewName("articulo/nuevo :: content");
+        registry.addViewController("/articulos/editar").setViewName("articulo/editar :: content");
+        registry.addViewController("/articulos/lista").setViewName("articulo/lista :: content");
+
+        //Activo
+        registry.addViewController("/activos").setViewName("activo/inicio");
+        registry.addViewController("/activos/nuevo").setViewName("activo/nuevo :: content");
+        registry.addViewController("/activos/editar").setViewName("activo/editar :: content");
+        registry.addViewController("/activos/lista").setViewName("activo/lista :: content");
 
         registry.addViewController("/hello").setViewName("hello");
     }

@@ -21,6 +21,9 @@ package com.hbv.ciea.rest;
  */
 public class ApiConstantes {
 
+    /* MediaType del servicio Rest */
+    public static final String MEDIA_TYPE_JSON = "application/json";
+    public static final String MEDIA_TYPE_XML = "application/xml";
     /* Constantes de URL */
     public static final String ID = "id";
     public static final String ID_URL = "/{id}";
@@ -29,4 +32,8 @@ public class ApiConstantes {
     public static final String API_SITIO = "/api/sitio";
     public static final String API_CATEGORIA = "/api/categoria";
     public static final String API_PROVEEDOR = "/api/proveedor";
+    public static final String API_USUARIO = "/api/usuario";
+    public static final String API_PERFIL = "/api/perfil";
+    public static final String API_ARTICULO = "/api/articulo";
+    public static final String API_ACTIVO = "/api/activo";
 }

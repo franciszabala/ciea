@@ -13,43 +13,51 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var ctrl = angular.module("sitio.controller", []);
+var ctrl = angular.module("categoria.controller", []);
 
-ctrl.controller("SitioListaCtrl", function ($scope, Sitio) {
+ctrl.controller("CategoriaListaCtrl", function ($scope, Categoria) {
     $scope.init = function () {
         $scope.limpiarAlertas();
         $scope.pagina = 1;
-        $scope.getSitios();
+        $scope.getCategorias();
     };
 
-    $scope.getSitios = function () {
-        Sitio.page({'page': $scope.pagina}, function (data) {
-            $scope.sitios = data;
+    $scope.getCategorias = function () {
+        Categoria.page({'page': $scope.pagina}, function (data) {
+            $scope.categorias = data;
         }, function (error) {
             $scope.alertaError(error);
         });
     };
 
-    $scope.deleteSitio = function (sitio) {
-        return Sitio.delete({id: sitio.id}, function () {
+    $scope.getCategoriasList = function () {
+        Categoria.query({}, function (data) {
+            $scope.categorias = data;
+        }, function (error) {
+            $scope.alertaError(error);
+        });
+    };
+
+    $scope.deleteCategoria = function (categoria) {
+        return Categoria.delete({id: categoria.id}, function () {
+            $scope.getCategorias();
             $scope.alertaExito('Se borro correctamente');
-            $scope.getSitios();
         }, function (error) {
             $scope.alertaError(error);
         });
     };
 
     $scope.pageChanged = function () {
-        $scope.getSitios();
+        $scope.getCategorias();
     };
 
     $scope.init();
 });
 
-ctrl.controller("SitioNuevoCtrl", function ($scope, Sitio, $state) {
-    $scope.createSitio = function () {
-        var sitio = new Sitio($scope.sitio);
-        sitio.$save({}, function () {
+ctrl.controller("CategoriaNuevoCtrl", function ($scope, Categoria, $state) {
+    $scope.createCategoria = function () {
+        var categoria = new Categoria($scope.categoria);
+        categoria.$save({}, function () {
             $state.transitionTo("lista");
         }, function (error) {
             $scope.alertaError(error);
@@ -61,17 +69,14 @@ ctrl.controller("SitioNuevoCtrl", function ($scope, Sitio, $state) {
     };
 });
 
-ctrl.controller("SitioEditarCtrl", function ($scope, Sitio, $state, $stateParams) {
+ctrl.controller("CategoriaEditarCtrl", function ($scope, Categoria, $state, $stateParams) {
     $scope.init = function () {
-        $scope.sitio = Sitio.get({id: $stateParams.sitioId}, function () {
-        }, function (error) {
-            $scope.alertaError(error);
-        });
+        $scope.categoria = Categoria.get({id: $stateParams.categoriaId});
     };
 
-    $scope.updateSitio = function () {
-        var sitio = new Sitio($scope.sitio);
-        sitio.$update({}, function () {
+    $scope.updateCategoria = function () {
+        var categoria = new Categoria($scope.categoria);
+        categoria.$update().then(function () {
             $state.transitionTo("lista");
         }, function (error) {
             $scope.alertaError(error);
@@ -80,7 +85,7 @@ ctrl.controller("SitioEditarCtrl", function ($scope, Sitio, $state, $stateParams
 
     $scope.cancelar = function () {
         $state.transitionTo("lista");
-    };
+    }
 
     $scope.init();
 });

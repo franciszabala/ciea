@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/plantilla">
+    <head>
+        <title th:text="#{categoria.titulo}">Categoria</title>
+    </head>
+    <body>
+        <div class="container">
+            <div layout:fragment="content">
+                <div id="categoria" ng-app="categoriaApp">
+                    <div ng-controller="AlertaCtrl">
+                        <alert ng-repeat="alerta in alertas" type="{{alerta.type}}" close="cerrarAlerta($index)">{{alerta.msg}}</alert>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div>
+                                    <div class="ui-view"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div layout:fragment="script" >
+            <script th:src="@{/js/categoria/app.js}" src="../../resources/js/categoria/app.js"></script>
+            <script th:src="@{/js/categoria/service.js}" src="../../resources/js/categoria/service.js"></script>
+            <script th:src="@{/js/categoria/controller.js}" src="../../resources/js/categoria/controller.js"></script>
+            <script th:src="@{/js/alerta.js}" src="../../resources/js/alerta.js"></script>
+        </div>
+    </body>
+</html>
