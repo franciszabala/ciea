@@ -18,7 +18,6 @@
 package com.hbv.ciea.repository;
 
 import com.hbv.ciea.model.Activo;
-import com.hbv.ciea.model.Articulo;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

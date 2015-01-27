@@ -23,7 +23,7 @@ ctrl.controller("ArticuloListaCtrl", function ($scope, Articulo) {
     };
 
     $scope.getArticulos = function () {
-        Articulo.page({'page': $scope.pagina}, function (data) {
+        Articulo.page({page: $scope.pagina}, function (data) {
             $scope.articulos = data;
         }, function (error) {
             $scope.alertaError(error);

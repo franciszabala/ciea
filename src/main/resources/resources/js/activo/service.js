@@ -16,13 +16,13 @@
 var srvc = angular.module("activo.service", []);
 
 srvc.factory("Activo", function ($resource) {
-    return $resource("/api/activo/:id", {id: "@id"}, {
+    return $resource("/api/activo/:id:ruta", {id: "@id"}, {
         update: {
             method: 'PUT'
         },
         page: {
             method: 'GET',
-            params: {id: 'page'}
+            params: {ruta: 'page'}
         }
     });
 });

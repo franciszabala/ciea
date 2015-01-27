@@ -15,10 +15,13 @@
  */
 package com.hbv.ciea.rest;
 
-import static com.hbv.ciea.rest.ApiConstantes.*;
 import com.hbv.ciea.dto.ErrorRestDTO;
 import com.hbv.ciea.dto.UsuarioDTO;
 import com.hbv.ciea.model.Usuario;
+import static com.hbv.ciea.rest.ApiConstantes.API_USUARIO;
+import static com.hbv.ciea.rest.ApiConstantes.ID;
+import static com.hbv.ciea.rest.ApiConstantes.ID_URL;
+import static com.hbv.ciea.rest.ApiConstantes.PAGE_URL;
 import com.hbv.ciea.service.UsuarioService;
 import java.util.List;
 import javax.validation.Valid;
@@ -26,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,7 +55,7 @@ public class UsuarioRestController {
      *
      * @return Lista completa de Usuarios.
      */
-    @RequestMapping(method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
+    @RequestMapping(method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<UsuarioDTO> listar() {
         return usuarioService.findAll();
     }
@@ -62,7 +66,7 @@ public class UsuarioRestController {
      * @param pageable Paginación
      * @return Lista paginada de Usuarios.
      */
-    @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
+    @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public Page<UsuarioDTO> listar(Pageable pageable) {
         return usuarioService.findAll(pageable);
     }
@@ -73,7 +77,7 @@ public class UsuarioRestController {
      * @param id ID del Usuario
      * @return Usuario correspondiente al ID
      */
-    @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
+    @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public Usuario buscar(@PathVariable(ID) long id) {
         Usuario usuario = usuarioService.findOne(id);
         if (usuario != null) {
@@ -89,7 +93,7 @@ public class UsuarioRestController {
      * @param usuario Usuario a Insertar
      * @return Usuario Insertado
      */
-    @RequestMapping(method = {RequestMethod.POST}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
+    @RequestMapping(method = {RequestMethod.POST}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public Usuario nuevo(@RequestBody @Valid Usuario usuario) {
         return usuarioService.save(usuario);
     }
@@ -101,7 +105,7 @@ public class UsuarioRestController {
      * @param usuario Usuario a Actualizar
      * @return Usuario Actualizado
      */
-    @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
+    @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public Usuario editar(@PathVariable(ID) long id, @RequestBody @Valid Usuario usuario) {
         return usuarioService.update(usuario);
     }
@@ -112,7 +116,7 @@ public class UsuarioRestController {
      * @param id ID del Usuario
      * @return True si el Usuario fue borrado
      */
-    @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MEDIA_TYPE_JSON})
+    @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Boolean> borrar(@PathVariable(ID) long id) {
         usuarioService.delete(id);
         return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);

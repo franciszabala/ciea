@@ -23,7 +23,7 @@ ctrl.controller("ActivoListaCtrl", function ($scope, Activo) {
     };
 
     $scope.getActivos = function () {
-        Activo.page({'page': $scope.pagina}, function (data) {
+        Activo.page({page: $scope.pagina}, function (data) {
             $scope.activos = data;
         }, function (error) {
             $scope.alertaError(error);

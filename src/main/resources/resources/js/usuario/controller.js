@@ -51,6 +51,7 @@ ctrl.controller("UsuarioNuevoCtrl", function($scope, Usuario, Sitio, Perfil, Tip
         $scope.tiposTelefono = TiposTelefono;
         $scope.tiposCorreo = TiposCorreo;
         $scope.usuario = {telefonos: [], correos: [], perfiles: []};
+        
         $scope.sitios = Sitio.query({}, function() {
         }, function(error) {
             $scope.alertaError(error);

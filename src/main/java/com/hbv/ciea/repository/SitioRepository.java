@@ -21,6 +21,7 @@ import com.hbv.ciea.model.Sitio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Repositorio de Sitios.
@@ -28,6 +29,7 @@ import org.springframework.data.jpa.repository.Query;
  * @author Herman Barrantes
  * @since 24-nov-2014
  */
+@Transactional(readOnly = true)
 public interface SitioRepository extends JpaRepository<Sitio, Long> {
 
     /**
@@ -38,7 +40,8 @@ public interface SitioRepository extends JpaRepository<Sitio, Long> {
      * @return Cantidad de filas afectadas.
      */
     @Modifying
-    @Query("update Sitio s set s.nombre = ?1 where s.id = ?2")
+    @Transactional
+    @Query("UPDATE Sitio s SET s.nombre = ?1 WHERE s.id = ?2")
     int updateNombreById(String nombre, long id);
 
 }

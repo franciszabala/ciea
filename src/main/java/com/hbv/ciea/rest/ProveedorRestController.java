@@ -15,10 +15,13 @@
  */
 package com.hbv.ciea.rest;
 
-import static com.hbv.ciea.rest.ApiConstantes.*;
 import com.hbv.ciea.dto.ErrorRestDTO;
 import com.hbv.ciea.dto.ProveedorDTO;
 import com.hbv.ciea.model.Proveedor;
+import static com.hbv.ciea.rest.ApiConstantes.API_PROVEEDOR;
+import static com.hbv.ciea.rest.ApiConstantes.ID;
+import static com.hbv.ciea.rest.ApiConstantes.ID_URL;
+import static com.hbv.ciea.rest.ApiConstantes.PAGE_URL;
 import com.hbv.ciea.service.ProveedorService;
 import java.util.List;
 import javax.validation.Valid;
