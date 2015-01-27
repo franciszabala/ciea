@@ -27,4 +27,4 @@ srvc.factory("Activo", function ($resource) {
     });
 });
 
-srvc.value("TipoEstados", ["BUENO", "REGULAR", "MALO"]);
+srvc.value("ActivoEstado", ["BUENO", "REGULAR", "MALO"]);
