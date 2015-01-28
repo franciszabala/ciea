@@ -51,7 +51,7 @@ ctrl.controller("UsuarioNuevoCtrl", function($scope, Usuario, Sitio, Perfil, Tip
         $scope.tiposTelefono = TiposTelefono;
         $scope.tiposCorreo = TiposCorreo;
         $scope.usuario = {telefonos: [], correos: [], perfiles: []};
-        
+
         $scope.sitios = Sitio.query({}, function() {
         }, function(error) {
             $scope.alertaError(error);
@@ -63,8 +63,10 @@ ctrl.controller("UsuarioNuevoCtrl", function($scope, Usuario, Sitio, Perfil, Tip
     };
 
     $scope.createUsuario = function() {
-        var hash = Encriptar($scope.usuario.clave);
-        $scope.usuario.clave = hash.toString();
+        if ($scope.usuario.clave) {
+            var hash = Encriptar($scope.usuario.clave);
+            $scope.usuario.clave = hash.toString();
+        }
         var usuario = new Usuario($scope.usuario);
         usuario.$save({}, function() {
             $state.transitionTo("lista");
@@ -96,10 +98,11 @@ ctrl.controller("UsuarioNuevoCtrl", function($scope, Usuario, Sitio, Perfil, Tip
     $scope.init();
 });
 
-ctrl.controller("UsuarioEditarCtrl", function($scope, Usuario, Sitio, Perfil, TiposTelefono, TiposCorreo, $state, $stateParams) {
+ctrl.controller("UsuarioEditarCtrl", function($scope, Usuario, Sitio, Perfil, TiposTelefono, TiposCorreo, Encriptar, $state, $stateParams) {
     $scope.init = function() {
         $scope.tiposTelefono = TiposTelefono;
         $scope.tiposCorreo = TiposCorreo;
+        $scope.cambio = false;
         $scope.usuario = Usuario.get({id: $stateParams.usuarioId}, function() {
         }, function(error) {
             $scope.alertaError(error);
@@ -114,7 +117,18 @@ ctrl.controller("UsuarioEditarCtrl", function($scope, Usuario, Sitio, Perfil, Ti
         });
     };
 
+    $scope.cambioClave = function() {
+        if (!$scope.cambio) {
+            $scope.cambio = true;
+            $scope.usuario.clave = "";
+        }
+    };
+
     $scope.updateUsuario = function() {
+        if ($scope.usuario.clave && $scope.cambio) {
+            var hash = Encriptar($scope.usuario.clave);
+            $scope.usuario.clave = hash.toString();
+        }
         var usuario = new Usuario($scope.usuario);
         usuario.$update({}, function() {
             $state.transitionTo("lista");
