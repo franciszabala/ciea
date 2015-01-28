@@ -22,6 +22,11 @@ ctrl.controller("SitioListaCtrl", function ($scope, Sitio) {
         $scope.getSitios();
     };
 
+    $scope.showModal = false;
+    $scope.toggleModal = function(){
+        $scope.showModal = !$scope.showModal;
+    };
+    
     $scope.getSitios = function () {
         Sitio.page({page: $scope.pagina}, function (data) {
             $scope.sitios = data;
