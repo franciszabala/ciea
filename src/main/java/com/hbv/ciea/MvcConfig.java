@@ -46,6 +46,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/403").setViewName("403");
         //Directivas https://github.com/angular-ui/bootstrap/tree/master/template
         registry.addViewController("/template/alert/alert.html").setViewName("directivas/alert/alert");
+        registry.addViewController("/template/modal/modal.html").setViewName("directivas/modal/modal");
         registry.addViewController("/template/pagination/pager.html").setViewName("directivas/pagination/pager :: content");
         registry.addViewController("/template/pagination/pagination.html").setViewName("directivas/pagination/pagination :: content");
         registry.addRedirectViewController("/admin/template/alert/alert.html", "/template/alert/alert.html");
