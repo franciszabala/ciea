@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-var app = angular.module("articuloApp", ["ui.router", "ngResource", "ui.bootstrap", "alerta.controller", , "categoria.service", "articulo.service", "articulo.controller"]);
+var app = angular.module("articuloApp", ["ui.router", "ngResource", "ui.bootstrap", "alerta.controller", "modal.directiva", "categoria.service", "articulo.service", "articulo.controller"]);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("lista");

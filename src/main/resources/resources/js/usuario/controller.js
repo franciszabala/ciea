@@ -22,6 +22,16 @@ ctrl.controller("UsuarioListaCtrl", function($scope, Usuario) {
         $scope.getUsuarios();
     };
 
+    $scope.showModal = function (id) {
+        $scope.borrarId = id;
+        $scope.alertaBorrado = false;
+        $scope.modalBorrado = true;
+    };
+
+    $scope.hideModal = function () {
+        $scope.modalBorrado = false;
+    };
+
     $scope.getUsuarios = function() {
         Usuario.page({page: $scope.pagina}, function(data) {
             $scope.usuarios = data;
@@ -30,9 +40,10 @@ ctrl.controller("UsuarioListaCtrl", function($scope, Usuario) {
         });
     };
 
-    $scope.deleteUsuario = function(usuario) {
-        return Usuario.delete({id: usuario.id}, function() {
-            $scope.alertaExito('Se borro correctamente');
+    $scope.deleteUsuario = function() {
+        $scope.modalBorrado = false;
+        return Usuario.delete({id: $scope.borrarId}, function() {
+            $scope.alertaBorrado = true;
             $scope.getUsuarios();
         }, function(error) {
             $scope.alertaError(error);

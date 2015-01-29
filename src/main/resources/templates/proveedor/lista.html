@@ -6,6 +6,16 @@
     <body>
         <div class="container">
             <div th:fragment="content">
+                <alert ng-show="alertaBorrado" type="success" close="alertaBorrado = false" th:text="#{proveedor.alerta.borrado}">Se borró correctamente el proveedor</alert>
+                <modal th:attr="title=#{modal.confirmacion.titulo}" title="Borrar" visible="modalBorrado">
+                    <p th:text="#{proveedor.confirmacion.borrar}">¿Realmente desea borrar el proveedor?</p>
+                    <button class="btn btn-primary btn-sm" ng-click="deleteProveedor()">
+                        <span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;<span th:text="#{boton.aceptar}">Aceptar</span>
+                    </button>
+                    <button class="btn btn-default btn-sm" ng-click="hideModal()">
+                        <span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp;<span th:text="#{boton.cancelar}">Cancelar</span>
+                    </button>
+                </modal>
                 <h1 th:text="#{proveedor.lista}">Lista de Proveedores</h1>
                 <button class="btn btn-success btn-sm" ui-sref="nuevo">
                     <span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;<span th:text="#{boton.nuevo}">Nuevo</span>
@@ -32,7 +42,7 @@
                                         <button class="btn btn-primary btn-sm" ui-sref="editar({ proveedorId: proveedor.id })">
                                             <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;<span th:text="#{boton.editar}">Editar</span>
                                         </button>
-                                        <button class="btn btn-danger btn-sm" ng-click="deleteProveedor(proveedor)">
+                                        <button class="btn btn-danger btn-sm" ng-click="showModal(proveedor.id)">
                                             <span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;<span th:text="#{boton.borrar}">Borrar</span>
                                         </button>
                                     </div>

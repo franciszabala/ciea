@@ -96,14 +96,14 @@ public class Usuario implements Serializable {
     private List<Correo> correos;
     @Valid
     @JoinColumn(name = "id_sitio", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Sitio sitio;
     @Valid
     @JoinTable(name = "usuario_perfil", joinColumns = {
         @JoinColumn(name = "id_usuario", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_perfil", referencedColumnName = "id")})
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     private Set<Perfil> perfiles;
 
     public Usuario() {

@@ -6,6 +6,16 @@
     <body>
         <div class="container">
             <div th:fragment="content">
+                <alert ng-show="alertaBorrado" type="success" close="alertaBorrado = false" th:text="#{usuario.alerta.borrado}">Se borró correctamente el usuario</alert>
+                <modal th:attr="title=#{modal.confirmacion.titulo}" title="Borrar" visible="modalBorrado">
+                    <p th:text="#{usuario.confirmacion.borrar}">¿Realmente desea borrar el usuario?</p>
+                    <button class="btn btn-primary btn-sm" ng-click="deleteUsuario()">
+                        <span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;<span th:text="#{boton.aceptar}">Aceptar</span>
+                    </button>
+                    <button class="btn btn-default btn-sm" ng-click="hideModal()">
+                        <span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp;<span th:text="#{boton.cancelar}">Cancelar</span>
+                    </button>
+                </modal>
                 <h1 th:text="#{usuario.lista}">Lista de Usuarios</h1>
                 <button class="btn btn-success btn-sm" ui-sref="nuevo">
                     <span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;<span th:text="#{boton.nuevo}">Nuevo</span>
@@ -25,18 +35,18 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="usuario in usuarios.content">
-                                <td>{{ usuario.id }}</td>
-                                <td>{{ usuario.usuario }}</td>
-                                <td>{{ usuario.identificacion }}</td>
-                                <td>{{ usuario.nombre }}</td>
-                                <td>{{ usuario.primerApellido }}</td>
-                                <td>{{ usuario.segundoApellido }}</td>
+                                <td>{{ usuario.id}}</td>
+                                <td>{{ usuario.usuario}}</td>
+                                <td>{{ usuario.identificacion}}</td>
+                                <td>{{ usuario.nombre}}</td>
+                                <td>{{ usuario.primerApellido}}</td>
+                                <td>{{ usuario.segundoApellido}}</td>
                                 <td>
                                     <div class="btn-group btn-group-ms pull-right" role="group">
                                         <button class="btn btn-primary btn-sm" ui-sref="editar({ usuarioId: usuario.id })">
                                             <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;<span th:text="#{boton.editar}">Editar</span>
                                         </button>
-                                        <button class="btn btn-danger btn-sm" ng-click="deleteUsuario(usuario)">
+                                        <button class="btn btn-danger btn-sm" ng-click="showModal(usuario.id)">
                                             <span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;<span th:text="#{boton.borrar}">Borrar</span>
                                         </button>
                                     </div>

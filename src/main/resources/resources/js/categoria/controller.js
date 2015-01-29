@@ -22,6 +22,16 @@ ctrl.controller("CategoriaListaCtrl", function($scope, Categoria) {
         $scope.getCategorias();
     };
 
+    $scope.showModal = function (id) {
+        $scope.borrarId = id;
+        $scope.alertaBorrado = false;
+        $scope.modalBorrado = true;
+    };
+
+    $scope.hideModal = function () {
+        $scope.modalBorrado = false;
+    };
+
     $scope.getCategorias = function() {
         Categoria.page({page: $scope.pagina}, function(data) {
             $scope.categorias = data;
@@ -38,10 +48,11 @@ ctrl.controller("CategoriaListaCtrl", function($scope, Categoria) {
         });
     };
 
-    $scope.deleteCategoria = function(categoria) {
-        return Categoria.delete({id: categoria.id}, function() {
+    $scope.deleteCategoria = function() {
+        $scope.modalBorrado = false;
+        return Categoria.delete({id: $scope.borrarId}, function() {
+            $scope.alertaBorrado = true;
             $scope.getCategorias();
-            $scope.alertaExito('Se borro correctamente');
         }, function(error) {
             $scope.alertaError(error);
         });
@@ -88,7 +99,7 @@ ctrl.controller("CategoriaEditarCtrl", function($scope, Categoria, $state, $stat
 
     $scope.cancelar = function() {
         $state.transitionTo("lista");
-    }
+    };
 
     $scope.init();
 });

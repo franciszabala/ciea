@@ -22,6 +22,16 @@ ctrl.controller("ActivoListaCtrl", function ($scope, Activo) {
         $scope.getActivos();
     };
 
+    $scope.showModal = function (id) {
+        $scope.borrarId = id;
+        $scope.alertaBorrado = false;
+        $scope.modalBorrado = true;
+    };
+
+    $scope.hideModal = function () {
+        $scope.modalBorrado = false;
+    };
+
     $scope.getActivos = function () {
         Activo.page({page: $scope.pagina}, function (data) {
             $scope.activos = data;
@@ -30,10 +40,11 @@ ctrl.controller("ActivoListaCtrl", function ($scope, Activo) {
         });
     };
 
-    $scope.deleteActivo = function (activo) {
-        return Activo.delete({id: activo.id}, function () {
+    $scope.deleteActivo = function () {
+        $scope.modalBorrado = false;
+        return Activo.delete({id: $scope.borrarId}, function () {
+            $scope.alertaBorrado = true;
             $scope.getActivos();
-            $scope.alertaExito('Se borro correctamente');
         }, function (error) {
             $scope.alertaError(error);
         });
@@ -47,9 +58,12 @@ ctrl.controller("ActivoListaCtrl", function ($scope, Activo) {
 });
 
 ctrl.controller("ActivoNuevoCtrl", function ($scope, Activo, Sitio, Articulo, ActivoEstado, $state) {
-    $scope.sitios = Sitio.query();
-    $scope.articulos = Articulo.query();
-    $scope.estados = ActivoEstado;
+    $scope.init = function () {
+        $scope.sitios = Sitio.query();
+        $scope.articulos = Articulo.query();
+        $scope.estados = ActivoEstado;
+    };
+    
     $scope.createActivo = function () {
         var activo = new Activo($scope.activo);
         activo.$save({}, function () {
@@ -62,6 +76,8 @@ ctrl.controller("ActivoNuevoCtrl", function ($scope, Activo, Sitio, Articulo, Ac
     $scope.cancelar = function () {
         $state.transitionTo("lista");
     };
+
+    $scope.init();
 });
 
 ctrl.controller("ActivoEditarCtrl", function ($scope, Activo, Sitio, Articulo, ActivoEstado, $state, $stateParams) {
@@ -74,7 +90,7 @@ ctrl.controller("ActivoEditarCtrl", function ($scope, Activo, Sitio, Articulo, A
 
     $scope.updateActivo = function () {
         var activo = new Activo($scope.activo);
-        activo.$update().then(function () {
+        activo.$update({}, function () {
             $state.transitionTo("lista");
         }, function (error) {
             $scope.alertaError(error);
@@ -83,7 +99,7 @@ ctrl.controller("ActivoEditarCtrl", function ($scope, Activo, Sitio, Articulo, A
 
     $scope.cancelar = function () {
         $state.transitionTo("lista");
-    }
+    };
 
     $scope.init();
 });

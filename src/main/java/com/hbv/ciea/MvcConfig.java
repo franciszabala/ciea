@@ -50,6 +50,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/template/pagination/pager.html").setViewName("directivas/pagination/pager :: content");
         registry.addViewController("/template/pagination/pagination.html").setViewName("directivas/pagination/pagination :: content");
         registry.addRedirectViewController("/admin/template/alert/alert.html", "/template/alert/alert.html");
+        registry.addRedirectViewController("/admin/template/modal/modal.html", "/template/modal/modal.html");
         registry.addRedirectViewController("/admin/template/pagination/pager.html", "/template/pagination/pager.html");
         registry.addRedirectViewController("/admin/template/pagination/pagination.html", "/template/pagination/pagination.html");
         //Sitios
