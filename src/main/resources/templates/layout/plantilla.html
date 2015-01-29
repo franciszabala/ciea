@@ -36,19 +36,19 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#" th:text="#{menu.titulo}">Control de Inventario</a>
+                    <a class="navbar-brand" href="#" th:href="@{/welcome}" th:text="#{menu.titulo}">Control de Inventario</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#" th:href="@{/welcome}" th:text="#{menu.inicio}">Inicio</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Inventario<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span th:text="#{menu.inventario}">Inventario</span><span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li class="dropdown-header">Mantenimientos</li>
+                                <li class="dropdown-header" th:text="#{menu.mantenimientos}">Mantenimientos</li>
                                 <li><a href="#" th:href="@{/activos}" th:text="#{menu.activos}">Activos</a></li>
                                 <li><a href="#" th:href="@{/articulos}" th:text="#{menu.articulos}">Artículos</a></li>
                                 <li class="divider"></li>
-                                <li class="dropdown-header">Catálogos</li>
+                                <li class="dropdown-header" th:text="#{menu.catalogos}">Catálogos</li>
                                 <li><a href="#" th:href="@{/categorias}" th:text="#{menu.categorias}">Categorías</a></li>
                                 <li><a href="#" th:href="@{/sitios}" th:text="#{menu.sitios}">Sitios</a></li>
                             </ul>
