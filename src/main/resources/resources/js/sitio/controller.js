@@ -22,11 +22,16 @@ ctrl.controller("SitioListaCtrl", function ($scope, Sitio) {
         $scope.getSitios();
     };
 
-    $scope.showModal = false;
-    $scope.toggleModal = function(){
-        $scope.showModal = !$scope.showModal;
+    $scope.showModal = function (id) {
+        $scope.borrarId = id;
+        $scope.alertaBorrado = false;
+        $scope.modalBorrado = true;
     };
-    
+
+    $scope.hideModal = function () {
+        $scope.modalBorrado = false;
+    };
+
     $scope.getSitios = function () {
         Sitio.page({page: $scope.pagina}, function (data) {
             $scope.sitios = data;
@@ -35,9 +40,10 @@ ctrl.controller("SitioListaCtrl", function ($scope, Sitio) {
         });
     };
 
-    $scope.deleteSitio = function (sitio) {
-        return Sitio.delete({id: sitio.id}, function () {
-            $scope.alertaExito('Se borro correctamente');
+    $scope.deleteSitio = function () {
+        $scope.modalBorrado = false;
+        return Sitio.delete({id: $scope.borrarId}, function () {
+            $scope.alertaBorrado = true;
             $scope.getSitios();
         }, function (error) {
             $scope.alertaError(error);
