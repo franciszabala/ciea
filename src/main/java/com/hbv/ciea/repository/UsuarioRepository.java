@@ -21,6 +21,7 @@ import com.hbv.ciea.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Repositorio de Usuarios.
@@ -28,8 +29,10 @@ import org.springframework.data.repository.query.Param;
  * @author Herman Barrantes
  * @since 21-oct-2014
  */
+@Transactional(readOnly = true)
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
+    @Transactional(readOnly = true)
     @Query("SELECT u FROM Usuario u JOIN FETCH u.perfiles WHERE u.usuario = :usuario")
     Usuario findByUsuario(@Param("usuario") String usuario);
 }

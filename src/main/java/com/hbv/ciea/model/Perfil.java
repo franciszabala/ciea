@@ -18,79 +18,23 @@
 package com.hbv.ciea.model;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import org.springframework.security.core.GrantedAuthority;
 
 /**
  *
  * @author Herman Barrantes
  * @since 24-nov-2014
- * @see https://aykutakin.wordpress.com/2013/07/08/spring-security-spring-custom-authentication-provider/
+ * @see
+ * https://aykutakin.wordpress.com/2013/07/08/spring-security-spring-custom-authentication-provider/
  */
-@Entity
-@Table(name = "perfil")
-public class Perfil implements Serializable {
+public enum Perfil implements Serializable, GrantedAuthority {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
-    @NotNull
-    @Size(min = 1, max = 15)
-    @Column(name = "nombre")
-    private String nombre;
-
-    public Perfil() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    ADMIN,
+    DIRECTOR,
+    PROFESOR;
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + (int) (this.id ^ (this.id >>> 32));
-        return hash;
+    public String getAuthority() {
+        return this.name();
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Perfil other = (Perfil) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Perfil[ id=" + id + " ]";
-    }
-
 }

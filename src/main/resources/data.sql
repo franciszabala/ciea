@@ -20,13 +20,14 @@ insert into usuario(id,identificacion,nombre,primer_apellido,segundo_apellido,us
 insert into usuario(id,identificacion,nombre,primer_apellido,segundo_apellido,usuario,clave,puesto,activo)values(2,'106340152','Eilyn','Salazar','Miranda','eilyn','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','Desarrollador',true);
 insert into usuario(id,identificacion,nombre,primer_apellido,segundo_apellido,usuario,clave,puesto,activo,id_sitio)values(3,'306340152','Prueba','Prueba','Prueba','prueba','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','Prueba',true,1);
 --Perfiles
-insert into perfil(id,nombre)values(1,'ADMIN');
-insert into perfil(id,nombre)values(2,'DIRECTOR');
-insert into perfil(id,nombre)values(3,'PROFESOR');
+--insert into perfil(id,nombre)values(1,'ADMIN');
+--insert into perfil(id,nombre)values(2,'DIRECTOR');
+--insert into perfil(id,nombre)values(3,'PROFESOR');
 --UsuarioPerfil
-insert into usuario_perfil(id_usuario,id_perfil)values(1,1);
-insert into usuario_perfil(id_usuario,id_perfil)values(2,1);
-insert into usuario_perfil(id_usuario,id_perfil)values(3,3);
+insert into usuario_perfil(id_usuario,perfil)values(1,'ADMIN');
+insert into usuario_perfil(id_usuario,perfil)values(1,'DIRECTOR');
+insert into usuario_perfil(id_usuario,perfil)values(2,'DIRECTOR');
+insert into usuario_perfil(id_usuario,perfil)values(3,'PROFESOR');
 --Correo
 insert into correo(id,correo,tipo)values(1,'barrantesgerman@gmail.com','PERSONAL');
 insert into correo(id,correo,tipo)values(2,'barrantesherman@gmail.com','PERSONAL');

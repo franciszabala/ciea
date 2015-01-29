@@ -53,8 +53,8 @@
                         </tbody>
                     </table>
                 </div>
-                <pagination class="hidden-xs" total-items="articulos.totalElements" ng-model="pagina" ng-change="pageChanged()"/>
-                <pager class="visible-xs-block" total-items="articulos.totalElements" ng-model="pagina" ng-change="pageChanged()"></pager>
+                <pagination class="hidden-xs" total-items="articulos.totalElements" ng-model="pagina" ng-change="pageChanged()" th:attr="previous-text=#{boton.anterior},next-text=#{boton.siguiente},first-text=#{boton.primera},last-text=#{boton.ultima}"/>
+                <pager class="visible-xs-block" total-items="articulos.totalElements" ng-model="pagina" ng-change="pageChanged()" th:attr="previous-text=#{boton.anterior},next-text=#{boton.siguiente}"/>
                 <br/>
                 <pre>articulos = {{ articulos | json}}</pre>
             </div>

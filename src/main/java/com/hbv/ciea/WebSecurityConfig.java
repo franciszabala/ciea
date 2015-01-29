@@ -17,6 +17,7 @@
  */
 package com.hbv.ciea;
 
+import com.hbv.ciea.model.Perfil;
 import com.hbv.ciea.service.SeguridadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -57,7 +58,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/welcome", "/error").permitAll()
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/admin/usuarios", "/admin/usuarios/**").hasAnyAuthority(Perfil.ADMIN.getAuthority(), Perfil.DIRECTOR.getAuthority())
+                .antMatchers("/admin/**").hasAuthority(Perfil.ADMIN.getAuthority())
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/welcome").failureUrl("/login?error").permitAll()

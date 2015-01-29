@@ -57,17 +57,14 @@ ctrl.controller("UsuarioListaCtrl", function($scope, Usuario) {
     $scope.init();
 });
 
-ctrl.controller("UsuarioNuevoCtrl", function($scope, Usuario, Sitio, Perfil, TiposTelefono, TiposCorreo, Encriptar, $state) {
+ctrl.controller("UsuarioNuevoCtrl", function($scope, Usuario, Sitio, TiposPerfil, TiposTelefono, TiposCorreo, Encriptar, $state) {
     $scope.init = function() {
         $scope.tiposTelefono = TiposTelefono;
         $scope.tiposCorreo = TiposCorreo;
+        $scope.perfiles = TiposPerfil;
         $scope.usuario = {telefonos: [], correos: [], perfiles: []};
 
         $scope.sitios = Sitio.query({}, function() {
-        }, function(error) {
-            $scope.alertaError(error);
-        });
-        $scope.perfiles = Perfil.query({}, function() {
         }, function(error) {
             $scope.alertaError(error);
         });
@@ -109,20 +106,17 @@ ctrl.controller("UsuarioNuevoCtrl", function($scope, Usuario, Sitio, Perfil, Tip
     $scope.init();
 });
 
-ctrl.controller("UsuarioEditarCtrl", function($scope, Usuario, Sitio, Perfil, TiposTelefono, TiposCorreo, Encriptar, $state, $stateParams) {
+ctrl.controller("UsuarioEditarCtrl", function($scope, Usuario, Sitio, TiposPerfil, TiposTelefono, TiposCorreo, Encriptar, $state, $stateParams) {
     $scope.init = function() {
         $scope.tiposTelefono = TiposTelefono;
         $scope.tiposCorreo = TiposCorreo;
+        $scope.perfiles = TiposPerfil;
         $scope.cambio = false;
         $scope.usuario = Usuario.get({id: $stateParams.usuarioId}, function() {
         }, function(error) {
             $scope.alertaError(error);
         });
         $scope.sitios = Sitio.query({}, function() {
-        }, function(error) {
-            $scope.alertaError(error);
-        });
-        $scope.perfiles = Perfil.query({}, function() {
         }, function(error) {
             $scope.alertaError(error);
         });

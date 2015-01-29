@@ -17,10 +17,8 @@
  */
 package com.hbv.ciea.model;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -49,12 +47,7 @@ public class UsuarioSeguridad extends Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        ArrayList<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        for (Perfil perfil : this.getPerfiles()) {
-            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(perfil.getNombre());
-            authorities.add(authority);
-        }
-        return authorities;
+        return this.getPerfiles();
     }
 
     @Override

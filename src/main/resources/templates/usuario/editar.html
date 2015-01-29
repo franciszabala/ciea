@@ -62,7 +62,7 @@
                         <div class="form-group">
                             <label for="perfil" class="col-xs-2 col-sm-2 control-label" th:text="#{usuario.perfil}">Perfil</label>
                             <div class="col-xs-12 col-sm-10">
-                                <select id="perfil" class="form-control" ng-model="usuario.perfiles" ng-options="perfil as perfil.nombre for perfil in perfiles track by perfil.id" multiple="multiple">
+                                <select id="perfil" class="form-control" ng-model="usuario.perfiles" ng-options="perfil.id as perfil.nombre for perfil in perfiles" multiple="multiple">
                                 </select>
                             </div>
                         </div>
