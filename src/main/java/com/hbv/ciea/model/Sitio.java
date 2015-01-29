@@ -26,14 +26,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
  * @author Herman Barrantes
  * @since 24-nov-2014
+ * @see
+ * http://docs.spring.io/spring-boot/docs/current/reference/html/howto-spring-mvc.html
  */
 @Entity
 @Table(name = "sitio")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "sitio", propOrder = {
+    "id",
+    "nombre"
+})
 public class Sitio implements Serializable {
 
     private static final long serialVersionUID = 1L;

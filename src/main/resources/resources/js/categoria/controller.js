@@ -15,75 +15,78 @@
  */
 var ctrl = angular.module("categoria.controller", []);
 
-ctrl.controller("CategoriaListaCtrl", function ($scope, Categoria) {
-    $scope.init = function () {
+ctrl.controller("CategoriaListaCtrl", function($scope, Categoria) {
+    $scope.init = function() {
         $scope.limpiarAlertas();
         $scope.pagina = 1;
         $scope.getCategorias();
     };
 
-    $scope.getCategorias = function () {
-        Categoria.page({'page': $scope.pagina}, function (data) {
+    $scope.getCategorias = function() {
+        Categoria.page({page: $scope.pagina}, function(data) {
             $scope.categorias = data;
-        }, function (error) {
+        }, function(error) {
             $scope.alertaError(error);
         });
     };
 
-    $scope.getCategoriasList = function () {
-        Categoria.query({}, function (data) {
+    $scope.getCategoriasList = function() {
+        Categoria.query({}, function(data) {
             $scope.categorias = data;
-        }, function (error) {
+        }, function(error) {
             $scope.alertaError(error);
         });
     };
 
-    $scope.deleteCategoria = function (categoria) {
-        return Categoria.delete({id: categoria.id}, function () {
+    $scope.deleteCategoria = function(categoria) {
+        return Categoria.delete({id: categoria.id}, function() {
             $scope.getCategorias();
             $scope.alertaExito('Se borro correctamente');
-        }, function (error) {
+        }, function(error) {
             $scope.alertaError(error);
         });
     };
 
-    $scope.pageChanged = function () {
+    $scope.pageChanged = function() {
         $scope.getCategorias();
     };
 
     $scope.init();
 });
 
-ctrl.controller("CategoriaNuevoCtrl", function ($scope, Categoria, $state) {
-    $scope.createCategoria = function () {
+ctrl.controller("CategoriaNuevoCtrl", function($scope, Categoria, $state) {
+    $scope.createCategoria = function() {
         var categoria = new Categoria($scope.categoria);
-        categoria.$save({}, function () {
+        categoria.$save({}, function() {
             $state.transitionTo("lista");
-        }, function (error) {
+        }, function(error) {
             $scope.alertaError(error);
         });
     };
 
-    $scope.cancelar = function () {
+    $scope.cancelar = function() {
         $state.transitionTo("lista");
     };
 });
 
-ctrl.controller("CategoriaEditarCtrl", function ($scope, Categoria, $state, $stateParams) {
-    $scope.init = function () {
-        $scope.categoria = Categoria.get({id: $stateParams.categoriaId});
-    };
-
-    $scope.updateCategoria = function () {
-        var categoria = new Categoria($scope.categoria);
-        categoria.$update().then(function () {
-            $state.transitionTo("lista");
-        }, function (error) {
+ctrl.controller("CategoriaEditarCtrl", function($scope, Categoria, $state, $stateParams) {
+    $scope.init = function() {
+        $scope.categoria = Categoria.get({id: $stateParams.categoriaId}, function() {
+        }, function(error) {
             $scope.alertaError(error);
         });
     };
 
-    $scope.cancelar = function () {
+    $scope.updateCategoria = function() {
+        var categoria = new Categoria($scope.categoria);
+        categoria.$update({}, function() {
+            $state.transitionTo("lista");
+        }, function(error) {
+            $scope.alertaError(error);
+        });
+    };
+
+    $scope.cancelar = function() {
         $state.transitionTo("lista");
     }
 

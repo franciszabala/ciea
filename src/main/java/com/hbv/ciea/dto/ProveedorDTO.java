@@ -17,12 +17,24 @@ package com.hbv.ciea.dto;
 
 import com.hbv.ciea.model.Proveedor;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
  * @author Herman
  * @since 14/01/2015
  */
+@XmlRootElement(name = "proveedor")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "proveedor", propOrder = {
+    "id",
+    "nombre",
+    "direccion",
+    "sitioWeb"
+})
 public class ProveedorDTO implements Serializable {
 
     private final long id;

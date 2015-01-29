@@ -16,7 +16,7 @@
  * http://www.sitepoint.com/creating-crud-app-minutes-angulars-resource/
  * http://draptik.github.io/blog/2013/07/28/restful-crud-with-angularjs/
  */
-var app = angular.module("sitioApp", ["ui.router", "ngResource", "ui.bootstrap", "alerta.controller", "sitio.service", "sitio.controller"]);
+var app = angular.module("sitioApp", ["ui.router", "ngResource", "ui.bootstrap", "alerta.controller", "modal.directiva", "sitio.service", "sitio.controller"]);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("lista");

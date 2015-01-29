@@ -15,7 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.hbv.ciea.model;
 
 import java.io.Serializable;
@@ -30,16 +29,25 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 /**
- * 
+ *
  * @author Herman Barrantes
  * @since 24-nov-2014
  */
 @Entity
 @Table(name = "correo")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "correo", propOrder = {
+    "id",
+    "correo",
+    "tipo"
+})
 public class Correo implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -107,7 +115,7 @@ public class Correo implements Serializable {
         }
         return true;
     }
-    
+
     @Override
     public String toString() {
         return "Correo[ id=" + id + " ]";

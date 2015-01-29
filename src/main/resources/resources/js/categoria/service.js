@@ -16,13 +16,13 @@
 var srvc = angular.module("categoria.service", []);
 
 srvc.factory("Categoria", function ($resource) {
-    return $resource("/api/categoria/:id", {id: "@id"}, {
+    return $resource("/api/categoria/:id:ruta", {id: "@id"}, {
         update: {
             method: 'PUT'
         },
         page: {
             method: 'GET',
-            params: {id: 'page'}
+            params: {ruta: 'page'}
         }
     });
 });

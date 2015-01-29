@@ -23,7 +23,7 @@ ctrl.controller("ActivoListaCtrl", function ($scope, Activo) {
     };
 
     $scope.getActivos = function () {
-        Activo.page({'page': $scope.pagina}, function (data) {
+        Activo.page({page: $scope.pagina}, function (data) {
             $scope.activos = data;
         }, function (error) {
             $scope.alertaError(error);
@@ -46,10 +46,10 @@ ctrl.controller("ActivoListaCtrl", function ($scope, Activo) {
     $scope.init();
 });
 
-ctrl.controller("ActivoNuevoCtrl", function ($scope, Activo, Sitio, Articulo, TipoEstados, $state) {
+ctrl.controller("ActivoNuevoCtrl", function ($scope, Activo, Sitio, Articulo, ActivoEstado, $state) {
     $scope.sitios = Sitio.query();
     $scope.articulos = Articulo.query();
-    $scope.estados = TipoEstados;
+    $scope.estados = ActivoEstado;
     $scope.createActivo = function () {
         var activo = new Activo($scope.activo);
         activo.$save({}, function () {
@@ -64,11 +64,11 @@ ctrl.controller("ActivoNuevoCtrl", function ($scope, Activo, Sitio, Articulo, Ti
     };
 });
 
-ctrl.controller("ActivoEditarCtrl", function ($scope, Activo, Sitio, Articulo, TipoEstados, $state, $stateParams) {
+ctrl.controller("ActivoEditarCtrl", function ($scope, Activo, Sitio, Articulo, ActivoEstado, $state, $stateParams) {
     $scope.init = function () {
         $scope.activo = Activo.get({id: $stateParams.activoId});
         $scope.sitios = Sitio.query();
-        $scope.estados = TipoEstados;
+        $scope.estados = ActivoEstado;
         $scope.articulos = Articulo.query();
     };
 

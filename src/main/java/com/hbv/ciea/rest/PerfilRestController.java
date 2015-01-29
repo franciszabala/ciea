@@ -15,21 +15,12 @@
  */
 package com.hbv.ciea.rest;
 
-import com.hbv.ciea.dto.ErrorRestDTO;
 import com.hbv.ciea.model.Perfil;
-import static com.hbv.ciea.rest.ApiConstantes.*;
-
 import com.hbv.ciea.repository.PerfilRepository;
+import static com.hbv.ciea.rest.ApiConstantes.API_PERFIL;
 import java.util.List;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,7 +43,7 @@ public class PerfilRestController {
      *
      * @return Lista completa de Perfiles.
      */
-    @RequestMapping(method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
+    @RequestMapping(method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Perfil> listar() {
         return perfilRepository.findAll();
     }
@@ -63,7 +54,7 @@ public class PerfilRestController {
 //     * @param pageable Paginación
 //     * @return Lista paginada de Perfiles.
 //     */
-//    @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
+//    @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
 //    public Page<Perfil> listar(Pageable pageable) {
 //        return perfilRepository.findAll(pageable);
 //    }
@@ -74,7 +65,7 @@ public class PerfilRestController {
 //     * @param id ID del Perfil
 //     * @return Perfil correspondiente al ID
 //     */
-//    @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
+//    @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
 //    public Perfil buscar(@PathVariable(ID) long id) {
 //        Perfil perfil = perfilRepository.findOne(id);
 //        if (perfil != null) {
@@ -90,7 +81,7 @@ public class PerfilRestController {
 //     * @param perfil Perfil a Insertar
 //     * @return Perfil Insertado
 //     */
-//    @RequestMapping(method = {RequestMethod.POST}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
+//    @RequestMapping(method = {RequestMethod.POST}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
 //    public Perfil nuevo(@RequestBody @Valid Perfil perfil) {
 //        return perfilRepository.save(perfil);
 //    }
@@ -102,7 +93,7 @@ public class PerfilRestController {
 //     * @param perfil Perfil a Actualizar
 //     * @return Perfil Actualizado
 //     */
-//    @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
+//    @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
 //    @Transactional
 //    public Perfil editar(@PathVariable(ID) long id, @RequestBody @Valid Perfil perfil) {
 //        return perfilRepository.save(perfil);
@@ -114,7 +105,7 @@ public class PerfilRestController {
 //     * @param id ID del Perfil
 //     * @return True si el Perfil fue borrado
 //     */
-//    @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MEDIA_TYPE_JSON})
+//    @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MediaType.APPLICATION_JSON_VALUE})
 //    public ResponseEntity<Boolean> borrar(@PathVariable(ID) long id) {
 //        perfilRepository.delete(id);
 //        return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);

@@ -33,17 +33,34 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
  * @author Herman Barrantes
  * @since 24-nov-2014
- * @see https://docs.jboss.org/hibernate/validator/4.0.1/reference/en/html/validator-usingvalidator.html
+ * @see
+ * https://docs.jboss.org/hibernate/validator/4.0.1/reference/en/html/validator-usingvalidator.html
  * @see https://jersey.java.net/documentation/latest/bean-validation.html
  * @see http://spring.io/guides/gs/validating-form-input/
  */
 @Entity
 @Table(name = "proveedor")
+@XmlRootElement(name = "proveedor")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "proveedor", propOrder = {
+    "id",
+    "nombre",
+    "direccion",
+    "sitioWeb",
+    "telefonos",
+    "correos"
+})
 public class Proveedor implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -66,12 +83,16 @@ public class Proveedor implements Serializable {
         @JoinColumn(name = "id_proveedor", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_telefono", referencedColumnName = "id")})
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @XmlElementWrapper(name = "telefonos")
+    @XmlElement(name = "telefono")
     private List<Telefono> telefonos;
     @Valid
     @JoinTable(name = "proveedor_correo", joinColumns = {
         @JoinColumn(name = "id_proveedor", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "id_correo", referencedColumnName = "id")})
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @XmlElementWrapper(name = "correos")
+    @XmlElement(name = "correo")
     private List<Correo> correos;
 
     public Proveedor() {

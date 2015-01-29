@@ -22,6 +22,7 @@ import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindingResult;
@@ -64,11 +65,22 @@ public class RestErrorHandler {
         return new ErrorRestDTO(mensaje, ex.getMensajeError());
     }
 
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorRestDTO errorRestGenerico(DataIntegrityViolationException ex) {
+        Locale currentLocale = LocaleContextHolder.getLocale();
+        String mensaje = messageSource.getMessage("error.data_integrity_violation", null, currentLocale);
+        return new ErrorRestDTO(mensaje, ex);
+    }
+
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ResponseBody
     public ErrorRestDTO errorRestEspecifico(AccessDeniedException ex) {
-        return new ErrorRestDTO("error.access_denied", ex);
+        Locale currentLocale = LocaleContextHolder.getLocale();
+        String mensaje = messageSource.getMessage("error.access_denied", null, currentLocale);
+        return new ErrorRestDTO(mensaje, ex);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
