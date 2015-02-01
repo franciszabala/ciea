@@ -16,7 +16,7 @@
  * http://www.sitepoint.com/creating-crud-app-minutes-angulars-resource/
  * http://draptik.github.io/blog/2013/07/28/restful-crud-with-angularjs/
  */
-var app = angular.module("usuarioApp", ["ui.router", "ngResource", "ui.bootstrap", "alerta.controller", "usuario.service", "telefono.service", "correo.service", "sitio.service", "perfil.service", "usuario.controller"]);
+var app = angular.module("usuarioApp", ["ui.router", "ngResource", "ui.bootstrap", "alerta.controller", "modal.directiva", "usuario.service", "telefono.service", "correo.service", "sitio.service", "perfil.service", "usuario.controller"]);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("lista");
@@ -24,17 +24,17 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
             .state('lista', {
                 url: '/lista',
-                templateUrl: "/usuarios/lista",
+                templateUrl: "/admin/usuarios/lista",
                 controller: 'UsuarioListaCtrl'
             })
             .state('editar', {
                 url: '/editar/:usuarioId',
-                templateUrl: "/usuarios/editar",
+                templateUrl: "/admin/usuarios/editar",
                 controller: 'UsuarioEditarCtrl'
             })
             .state('nuevo', {
                 url: '/nuevo',
-                templateUrl: "/usuarios/nuevo",
+                templateUrl: "/admin/usuarios/nuevo",
                 controller: 'UsuarioNuevoCtrl'
             });
 });

@@ -22,18 +22,29 @@ ctrl.controller("ActivoListaCtrl", function ($scope, Activo) {
         $scope.getActivos();
     };
 
+    $scope.showModal = function (id) {
+        $scope.borrarId = id;
+        $scope.alertaBorrado = false;
+        $scope.modalBorrado = true;
+    };
+
+    $scope.hideModal = function () {
+        $scope.modalBorrado = false;
+    };
+
     $scope.getActivos = function () {
-        Activo.page({'page': $scope.pagina}, function (data) {
+        Activo.page({page: $scope.pagina}, function (data) {
             $scope.activos = data;
         }, function (error) {
             $scope.alertaError(error);
         });
     };
 
-    $scope.deleteActivo = function (activo) {
-        return Activo.delete({id: activo.id}, function () {
+    $scope.deleteActivo = function () {
+        $scope.modalBorrado = false;
+        return Activo.delete({id: $scope.borrarId}, function () {
+            $scope.alertaBorrado = true;
             $scope.getActivos();
-            $scope.alertaExito('Se borro correctamente');
         }, function (error) {
             $scope.alertaError(error);
         });
@@ -46,10 +57,13 @@ ctrl.controller("ActivoListaCtrl", function ($scope, Activo) {
     $scope.init();
 });
 
-ctrl.controller("ActivoNuevoCtrl", function ($scope, Activo, Sitio, Articulo, TipoEstados, $state) {
-    $scope.sitios = Sitio.query();
-    $scope.articulos = Articulo.query();
-    $scope.estados = TipoEstados;
+ctrl.controller("ActivoNuevoCtrl", function ($scope, Activo, Sitio, Articulo, ActivoEstado, $state) {
+    $scope.init = function () {
+        $scope.sitios = Sitio.query();
+        $scope.articulos = Articulo.query();
+        $scope.estados = ActivoEstado;
+    };
+    
     $scope.createActivo = function () {
         var activo = new Activo($scope.activo);
         activo.$save({}, function () {
@@ -62,19 +76,21 @@ ctrl.controller("ActivoNuevoCtrl", function ($scope, Activo, Sitio, Articulo, Ti
     $scope.cancelar = function () {
         $state.transitionTo("lista");
     };
+
+    $scope.init();
 });
 
-ctrl.controller("ActivoEditarCtrl", function ($scope, Activo, Sitio, Articulo, TipoEstados, $state, $stateParams) {
+ctrl.controller("ActivoEditarCtrl", function ($scope, Activo, Sitio, Articulo, ActivoEstado, $state, $stateParams) {
     $scope.init = function () {
         $scope.activo = Activo.get({id: $stateParams.activoId});
         $scope.sitios = Sitio.query();
-        $scope.estados = TipoEstados;
+        $scope.estados = ActivoEstado;
         $scope.articulos = Articulo.query();
     };
 
     $scope.updateActivo = function () {
         var activo = new Activo($scope.activo);
-        activo.$update().then(function () {
+        activo.$update({}, function () {
             $state.transitionTo("lista");
         }, function (error) {
             $scope.alertaError(error);
@@ -83,7 +99,7 @@ ctrl.controller("ActivoEditarCtrl", function ($scope, Activo, Sitio, Articulo, T
 
     $scope.cancelar = function () {
         $state.transitionTo("lista");
-    }
+    };
 
     $scope.init();
 });

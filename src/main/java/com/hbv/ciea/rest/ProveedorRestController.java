@@ -15,10 +15,13 @@
  */
 package com.hbv.ciea.rest;
 
-import static com.hbv.ciea.rest.ApiConstantes.*;
 import com.hbv.ciea.dto.ErrorRestDTO;
 import com.hbv.ciea.dto.ProveedorDTO;
 import com.hbv.ciea.model.Proveedor;
+import static com.hbv.ciea.rest.ApiConstantes.API_PROVEEDOR;
+import static com.hbv.ciea.rest.ApiConstantes.ID;
+import static com.hbv.ciea.rest.ApiConstantes.ID_URL;
+import static com.hbv.ciea.rest.ApiConstantes.PAGE_URL;
 import com.hbv.ciea.service.ProveedorService;
 import java.util.List;
 import javax.validation.Valid;
@@ -26,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,7 +62,7 @@ public class ProveedorRestController {
      *
      * @return Lista completa de Proveedores.
      */
-    @RequestMapping(method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
+    @RequestMapping(method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public List<ProveedorDTO> listar() {
         return proveedorService.findAll();
     }
@@ -69,7 +73,7 @@ public class ProveedorRestController {
      * @param pageable Paginación
      * @return Lista paginada de Proveedores.
      */
-    @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
+    @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public Page<ProveedorDTO> listar(Pageable pageable) {
         return proveedorService.findAll(pageable);
     }
@@ -80,7 +84,7 @@ public class ProveedorRestController {
      * @param id ID del Proveedor
      * @return Proveedor correspondiente al ID
      */
-    @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
+    @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public Proveedor buscar(@PathVariable(ID) long id) {
         Proveedor proveedor = proveedorService.findOne(id);
         if (proveedor != null) {
@@ -96,7 +100,7 @@ public class ProveedorRestController {
      * @param proveedor Proveedor a Insertar
      * @return Proveedor Insertado
      */
-    @RequestMapping(method = {RequestMethod.POST}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
+    @RequestMapping(method = {RequestMethod.POST}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public Proveedor nuevo(@RequestBody @Valid Proveedor proveedor) {
         return proveedorService.save(proveedor);
     }
@@ -108,7 +112,7 @@ public class ProveedorRestController {
      * @param proveedor Proveedor a Actualizar
      * @return Proveedor Actualizado
      */
-    @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
+    @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public Proveedor editar(@PathVariable(ID) long id, @RequestBody @Valid Proveedor proveedor) {
         return proveedorService.update(proveedor);
     }
@@ -119,7 +123,7 @@ public class ProveedorRestController {
      * @param id ID del Proveedor
      * @return True si el Proveedor fue borrado
      */
-    @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MEDIA_TYPE_JSON})
+    @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Boolean> borrar(@PathVariable(ID) long id) {
         proveedorService.delete(id);
         return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);

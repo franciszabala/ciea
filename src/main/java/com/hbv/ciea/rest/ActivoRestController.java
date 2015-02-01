@@ -18,12 +18,18 @@ package com.hbv.ciea.rest;
 import com.hbv.ciea.dto.ErrorRestDTO;
 import com.hbv.ciea.model.Activo;
 import com.hbv.ciea.repository.ActivoRepository;
-import static com.hbv.ciea.rest.ApiConstantes.*;
+import static com.hbv.ciea.rest.ApiConstantes.API_ACTIVO;
+import static com.hbv.ciea.rest.ApiConstantes.ID;
+import static com.hbv.ciea.rest.ApiConstantes.ID_URL;
+import static com.hbv.ciea.rest.ApiConstantes.PAGE_URL;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,39 +47,40 @@ public class ActivoRestController {
     @Autowired
     private ActivoRepository activoRepository;
 
-    @RequestMapping(method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
+    @RequestMapping(method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
     private List<Activo> listar() {
         return activoRepository.findAll();
     }
 
-    @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
+    @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
     private Page<Activo> listar(Pageable pageable) {
         return activoRepository.findAll(pageable);
     }
-    
-    @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
-    private Activo buscar (@PathVariable(ID) long id){
+
+    @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    private Activo buscar(@PathVariable(ID) long id) {
         Activo activo = activoRepository.findOne(id);
-        if(activo != null){
+        if (activo != null) {
             return activo;
-        }else{
-              throw new ErrorRestDTO("error.not_found");
+        } else {
+            throw new ErrorRestDTO("error.not_found");
         }
     }
-    
-    @RequestMapping(method = {RequestMethod.POST}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
-    private void nuevo(@RequestBody @Valid Activo activo){
-        activoRepository.save(activo);
-    }
-    
-    @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
-    private Activo editar(@PathVariable(ID) long id, @RequestBody @Valid Activo activo){
+
+    @RequestMapping(method = {RequestMethod.POST}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    private Activo nuevo(@RequestBody @Valid Activo activo) {
         return activoRepository.save(activo);
     }
-    
-    @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MEDIA_TYPE_JSON})
-    private void borrar(@PathVariable(ID) long id){
+
+    @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    private Activo editar(@PathVariable(ID) long id, @RequestBody @Valid Activo activo) {
+        return activoRepository.save(activo);
+    }
+
+    @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    private ResponseEntity<Boolean> borrar(@PathVariable(ID) long id) {
         activoRepository.delete(id);
+        return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
     }
 
 }

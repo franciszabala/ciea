@@ -16,14 +16,4 @@
 
 var srvc = angular.module("perfil.service", []);
 
-srvc.factory("Perfil", function ($resource) {
-    return $resource("/api/perfil/:id:ruta", {id: "@id", ruta: "@ruta"}, {
-        update: {
-            method: 'PUT'
-        },
-        page: {
-            method: 'GET',
-            params: {ruta: 'page'}
-        }
-    });
-});
+srvc.value("TiposPerfil", [{id: "ADMIN", nombre: "Administrador"}, {id: "DIRECTOR", nombre: "Director"}, {id: "PROFESOR", nombre: "Profesor"}]);

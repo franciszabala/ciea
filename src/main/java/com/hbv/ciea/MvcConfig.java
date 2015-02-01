@@ -29,7 +29,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 /**
@@ -47,8 +46,13 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/403").setViewName("403");
         //Directivas https://github.com/angular-ui/bootstrap/tree/master/template
         registry.addViewController("/template/alert/alert.html").setViewName("directivas/alert/alert");
-        registry.addViewController("/template/pagination/pager.html").setViewName("directivas/pagination/pager :: content");
-        registry.addViewController("/template/pagination/pagination.html").setViewName("directivas/pagination/pagination :: content");
+        registry.addViewController("/template/modal/modal.html").setViewName("directivas/modal/modal");
+        registry.addViewController("/template/pagination/pager.html").setViewName("directivas/pagination/pager");
+        registry.addViewController("/template/pagination/pagination.html").setViewName("directivas/pagination/pagination");
+        registry.addRedirectViewController("/admin/template/alert/alert.html", "/template/alert/alert.html");
+        registry.addRedirectViewController("/admin/template/modal/modal.html", "/template/modal/modal.html");
+        registry.addRedirectViewController("/admin/template/pagination/pager.html", "/template/pagination/pager.html");
+        registry.addRedirectViewController("/admin/template/pagination/pagination.html", "/template/pagination/pagination.html");
         //Sitios
         registry.addViewController("/sitios").setViewName("sitio/inicio");
         registry.addViewController("/sitios/nuevo").setViewName("sitio/nuevo :: content");
@@ -67,10 +71,10 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/proveedores/editar").setViewName("proveedor/editar :: content");
         registry.addViewController("/proveedores/lista").setViewName("proveedor/lista :: content");
         //Usuarios
-        registry.addViewController("/usuarios").setViewName("usuario/inicio");
-        registry.addViewController("/usuarios/nuevo").setViewName("usuario/nuevo :: content");
-        registry.addViewController("/usuarios/editar").setViewName("usuario/editar :: content");
-        registry.addViewController("/usuarios/lista").setViewName("usuario/lista :: content");
+        registry.addViewController("/admin/usuarios").setViewName("usuario/inicio");
+        registry.addViewController("/admin/usuarios/nuevo").setViewName("usuario/nuevo :: content");
+        registry.addViewController("/admin/usuarios/editar").setViewName("usuario/editar :: content");
+        registry.addViewController("/admin/usuarios/lista").setViewName("usuario/lista :: content");
 
         //Articulo
         registry.addViewController("/articulos").setViewName("articulo/inicio");

@@ -16,7 +16,9 @@
 package com.hbv.ciea.service;
 
 import com.hbv.ciea.dto.UsuarioDTO;
+import com.hbv.ciea.model.Sitio;
 import com.hbv.ciea.model.Usuario;
+import com.hbv.ciea.repository.SitioRepository;
 import com.hbv.ciea.repository.UsuarioRepository;
 import com.hbv.ciea.util.CopyConstructorUtil;
 import java.util.List;
@@ -37,6 +39,9 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private SitioRepository sitioRepository;
 
     @Autowired
     private CopyConstructorUtil util;
@@ -78,7 +83,12 @@ public class UsuarioService {
      * @param usuario Usuario a Insertar
      * @return Usuario Insertado
      */
+//    @Transactional(propagation = Propagation.REQUIRED)
     public Usuario save(Usuario usuario) {
+        if (usuario.getSitio() != null) {
+            Sitio sitio = sitioRepository.findOne(usuario.getSitio().getId());
+            usuario.setSitio(sitio);
+        }
         return usuarioRepository.save(usuario);
     }
 

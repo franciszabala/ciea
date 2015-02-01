@@ -22,18 +22,29 @@ ctrl.controller("ArticuloListaCtrl", function ($scope, Articulo) {
         $scope.getArticulos();
     };
 
+    $scope.showModal = function (id) {
+        $scope.borrarId = id;
+        $scope.alertaBorrado = false;
+        $scope.modalBorrado = true;
+    };
+
+    $scope.hideModal = function () {
+        $scope.modalBorrado = false;
+    };
+
     $scope.getArticulos = function () {
-        Articulo.page({'page': $scope.pagina}, function (data) {
+        Articulo.page({page: $scope.pagina}, function (data) {
             $scope.articulos = data;
         }, function (error) {
             $scope.alertaError(error);
         });
     };
 
-    $scope.deleteArticulo = function (articulo) {
-        return Articulo.delete({id: articulo.id}, function () {
+    $scope.deleteArticulo = function () {
+        $scope.modalBorrado = false;
+        return Articulo.delete({id: $scope.borrarId}, function () {
+            $scope.alertaBorrado = true;
             $scope.getArticulos();
-            $scope.alertaExito('Se borro correctamente');
         }, function (error) {
             $scope.alertaError(error);
         });
@@ -47,7 +58,10 @@ ctrl.controller("ArticuloListaCtrl", function ($scope, Articulo) {
 });
 
 ctrl.controller("ArticuloNuevoCtrl", function ($scope, Articulo, Categoria, $state) {
-    $scope.categorias = Categoria.query();    
+    $scope.init = function () {
+        $scope.categorias = Categoria.query();
+    };
+
     $scope.createArticulo = function () {
         var articulo = new Articulo($scope.articulo);
         articulo.$save({}, function () {
@@ -60,6 +74,8 @@ ctrl.controller("ArticuloNuevoCtrl", function ($scope, Articulo, Categoria, $sta
     $scope.cancelar = function () {
         $state.transitionTo("lista");
     };
+
+    $scope.init();
 });
 
 ctrl.controller("ArticuloEditarCtrl", function ($scope, Articulo, Categoria, $state, $stateParams) {
@@ -70,7 +86,7 @@ ctrl.controller("ArticuloEditarCtrl", function ($scope, Articulo, Categoria, $st
 
     $scope.updateArticulo = function () {
         var articulo = new Articulo($scope.articulo);
-        articulo.$update().then(function () {
+        articulo.$update({}, function () {
             $state.transitionTo("lista");
         }, function (error) {
             $scope.alertaError(error);
@@ -79,7 +95,7 @@ ctrl.controller("ArticuloEditarCtrl", function ($scope, Articulo, Categoria, $st
 
     $scope.cancelar = function () {
         $state.transitionTo("lista");
-    }
+    };
 
     $scope.init();
 });

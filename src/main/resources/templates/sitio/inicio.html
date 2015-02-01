@@ -10,8 +10,6 @@
 
                     <div ng-controller="AlertaCtrl">
                         <alert ng-repeat="alerta in alertas" type="{{alerta.type}}" close="cerrarAlerta($index)">{{alerta.msg}}</alert>
-                        <button class='btn btn-default' ng-click="alertaAdvertencia('Prueba')">Add Alert</button>
-
                         <div class="row">
                             <div class="col-xs-12">
                                 <div>
@@ -28,6 +26,7 @@
             <script th:src="@{/js/sitio/service.js}" src="../../resources/js/sitio/service.js"></script>
             <script th:src="@{/js/sitio/controller.js}" src="../../resources/js/sitio/controller.js"></script>
             <script th:src="@{/js/alerta.js}" src="../../resources/js/alerta.js"></script>
+            <script th:src="@{/js/modal.js}" src="../../resources/js/modal.js"></script>
         </div>
     </body>
 </html>

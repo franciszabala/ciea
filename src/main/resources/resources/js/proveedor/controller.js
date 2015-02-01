@@ -22,6 +22,16 @@ ctrl.controller("ProveedorListaCtrl", function ($scope, Proveedor) {
         $scope.getProveedores();
     };
 
+    $scope.showModal = function (id) {
+        $scope.borrarId = id;
+        $scope.alertaBorrado = false;
+        $scope.modalBorrado = true;
+    };
+
+    $scope.hideModal = function () {
+        $scope.modalBorrado = false;
+    };
+
     $scope.getProveedores = function () {
         Proveedor.page({page: $scope.pagina}, function (data) {
             $scope.proveedores = data;
@@ -30,9 +40,10 @@ ctrl.controller("ProveedorListaCtrl", function ($scope, Proveedor) {
         });
     };
 
-    $scope.deleteProveedor = function (proveedor) {
-        return Proveedor.delete({id: proveedor.id}, function () {
-            $scope.alertaExito('Se borro correctamente');
+    $scope.deleteProveedor = function () {
+        $scope.modalBorrado = false;
+        return Proveedor.delete({id: $scope.borrarId}, function () {
+            $scope.alertaBorrado = true;
             $scope.getProveedores();
         }, function (error) {
             $scope.alertaError(error);

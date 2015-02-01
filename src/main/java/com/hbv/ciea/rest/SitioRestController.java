@@ -16,18 +16,20 @@
 package com.hbv.ciea.rest;
 
 import com.hbv.ciea.dto.ErrorRestDTO;
-import static com.hbv.ciea.rest.ApiConstantes.*;
-
 import com.hbv.ciea.model.Sitio;
 import com.hbv.ciea.repository.SitioRepository;
+import static com.hbv.ciea.rest.ApiConstantes.API_SITIO;
+import static com.hbv.ciea.rest.ApiConstantes.ID;
+import static com.hbv.ciea.rest.ApiConstantes.ID_URL;
+import static com.hbv.ciea.rest.ApiConstantes.PAGE_URL;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,7 +58,7 @@ public class SitioRestController {
      *
      * @return Lista completa de Sitios.
      */
-    @RequestMapping(method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
+    @RequestMapping(method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<Sitio> listar() {
         return sitioRepository.findAll();
     }
@@ -67,7 +69,7 @@ public class SitioRestController {
      * @param pageable Paginación
      * @return Lista paginada de Sitios.
      */
-    @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
+    @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public Page<Sitio> listar(Pageable pageable) {
         return sitioRepository.findAll(pageable);
     }
@@ -78,7 +80,7 @@ public class SitioRestController {
      * @param id ID del Sitio
      * @return Sitio correspondiente al ID
      */
-    @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MEDIA_TYPE_JSON})
+    @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public Sitio buscar(@PathVariable(ID) long id) {
         Sitio sitio = sitioRepository.findOne(id);
         if (sitio != null) {
@@ -94,7 +96,7 @@ public class SitioRestController {
      * @param sitio Sitio a Insertar
      * @return Sitio Insertado
      */
-    @RequestMapping(method = {RequestMethod.POST}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
+    @RequestMapping(method = {RequestMethod.POST}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public Sitio nuevo(@RequestBody @Valid Sitio sitio) {
         return sitioRepository.save(sitio);
     }
@@ -106,8 +108,7 @@ public class SitioRestController {
      * @param sitio Sitio a Actualizar
      * @return Sitio Actualizado
      */
-    @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MEDIA_TYPE_JSON}, consumes = {MEDIA_TYPE_JSON})
-    @Transactional
+    @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public Sitio editar(@PathVariable(ID) long id, @RequestBody @Valid Sitio sitio) {
         int actualizados = sitioRepository.updateNombreById(sitio.getNombre(), id);
         return sitio;
@@ -119,7 +120,7 @@ public class SitioRestController {
      * @param id ID del Sitio
      * @return True si el Sitio fue borrado
      */
-    @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MEDIA_TYPE_JSON})
+    @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Boolean> borrar(@PathVariable(ID) long id) {
         sitioRepository.delete(id);
         return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);

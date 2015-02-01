@@ -29,6 +29,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  *
@@ -37,6 +40,13 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "telefono")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "telefono", propOrder = {
+    "id",
+    "telefono",
+    "extension",
+    "tipo"
+})
 public class Telefono implements Serializable {
 
     private static final long serialVersionUID = 1L;

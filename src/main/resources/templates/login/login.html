@@ -11,12 +11,12 @@
                         <div th:if="${param.logout}" class="alert alert-info" role="alert">
                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                             <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <strong th:text="#{alerta.info}">Información</strong> You have been logged out.
+                            <strong th:text="#{alerta.info}">Información</strong> <span th:text="#{login.logout}">Se ha cerrado su sesión</span>
                         </div>
                         <div th:if="${param.error}" class="alert alert-danger" role="alert">
                             <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
                             <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <strong th:text="#{alerta.error}">Error</strong> There was an error, please try again.
+                            <strong th:text="#{alerta.error}">Error</strong> <span th:text="#{login.error}">Hubo un error, inténtalo de nuevo</span>
                         </div>
                         <h1 th:text="#{login.titulo}">Acceder</h1>
                         <form name="form"

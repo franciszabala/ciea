@@ -20,9 +20,14 @@ package com.hbv.ciea.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -95,15 +100,14 @@ public class Usuario implements Serializable {
     private List<Correo> correos;
     @Valid
     @JoinColumn(name = "id_sitio", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Sitio sitio;
-    @Valid
-    @JoinTable(name = "usuario_perfil", joinColumns = {
-        @JoinColumn(name = "id_usuario", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "id_perfil", referencedColumnName = "id")})
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Perfil> perfiles;
+    @Column(name = "perfil", length = 8)
+    @ElementCollection(targetClass = Perfil.class, fetch = FetchType.LAZY)
+    @CollectionTable(name = "usuario_perfil", joinColumns = @JoinColumn(name = "id_usuario"))
+    @Enumerated(EnumType.STRING)
+    private Set<Perfil> perfiles;
 
     public Usuario() {
     }
@@ -204,11 +208,11 @@ public class Usuario implements Serializable {
         this.correos = correos;
     }
 
-    public List<Perfil> getPerfiles() {
+    public Set<Perfil> getPerfiles() {
         return perfiles;
     }
 
-    public void setPerfiles(List<Perfil> perfiles) {
+    public void setPerfiles(Set<Perfil> perfiles) {
         this.perfiles = perfiles;
     }
 
