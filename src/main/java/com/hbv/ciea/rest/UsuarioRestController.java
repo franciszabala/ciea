@@ -31,6 +31,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,9 +43,12 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Herman
  * @since 2015-01-22
+ * @see http://www.future-processing.pl/blog/exploring-spring-boot-and-spring-security-custom-token-based-authentication-of-rest-services-with-spring-security-and-pinch-of-spring-java-configuration-and-spring-integration-testing/
+ * @see http://callistaenterprise.se/blogg/teknik/2014/04/15/a-first-look-at-spring-boot/
  */
 @RestController
 @RequestMapping(API_USUARIO)
+@PreAuthorize("hasAnyAuthority('ADMIN','DIRECTOR')")
 public class UsuarioRestController {
 
     @Autowired
