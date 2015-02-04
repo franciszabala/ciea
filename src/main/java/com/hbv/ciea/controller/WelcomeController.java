@@ -20,6 +20,7 @@ package com.hbv.ciea.controller;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -55,9 +56,12 @@ public class WelcomeController {
 
     @RequestMapping(value = "/pdf", method = RequestMethod.GET)
     public ModelAndView getPdf() {
+        Properties headers = new Properties();
+        headers.put("Content-Disposition", "attachment; filename=report.pdf");
         JasperReportsPdfView view = new JasperReportsPdfView();
         view.setJdbcDataSource(dataSource);
         view.setUrl("classpath:report.jrxml");
+        view.setHeaders(headers);
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("param1", "param1 value");
         view.setApplicationContext(appContext);
