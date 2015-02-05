@@ -16,6 +16,7 @@
 package com.hbv.ciea.service;
 
 import com.hbv.ciea.dto.UsuarioDTO;
+import com.hbv.ciea.dto.UsuarioPerfilDTO;
 import com.hbv.ciea.model.Sitio;
 import com.hbv.ciea.model.Usuario;
 import com.hbv.ciea.repository.SitioRepository;
@@ -26,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -109,6 +111,52 @@ public class UsuarioService {
      */
     public void delete(long id) {
         usuarioRepository.delete(id);
+    }
+
+    /**
+     * Obtiene el usuario actual.
+     *
+     * @return Usuario actual
+     */
+    public Usuario getCurrentUser() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof Usuario) {
+            return (Usuario) principal;
+        } else {
+            return new Usuario();
+        }
+    }
+
+    /**
+     * Obtiene el usuario actual para el perfil.
+     *
+     * @return Usuario actual
+     */
+    public UsuarioPerfilDTO getUsuarioPerfil() {
+        Usuario usuario = usuarioRepository.findOne(getCurrentUser().getId());
+        return util.copiarObjeto(usuario, UsuarioPerfilDTO.class);
+    }
+
+    /**
+     * Edita el Usuario actual.
+     *
+     * @param up Datos de usuario a actualizar
+     * @return Usuario actualizado
+     */
+    public UsuarioPerfilDTO updateUsuarioPerfil(UsuarioPerfilDTO up) {
+        Usuario usuario = usuarioRepository.findOne(getCurrentUser().getId());
+
+        usuario.setIdentificacion(up.getIdentificacion());
+        usuario.setNombre(up.getNombre());
+        usuario.setPrimerApellido(up.getPrimerApellido());
+        usuario.setSegundoApellido(up.getSegundoApellido());
+        usuario.setPuesto(up.getPuesto());
+        usuario.setTelefonos(up.getTelefonos());
+        usuario.setCorreos(up.getCorreos());
+
+        usuarioRepository.save(usuario);
+
+        return util.copiarObjeto(usuario, UsuarioPerfilDTO.class);
     }
 
 }
