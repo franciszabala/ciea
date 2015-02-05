@@ -15,6 +15,7 @@
  */
 package com.hbv.ciea.rest;
 
+import com.hbv.ciea.dto.ActivoDTO;
 import com.hbv.ciea.dto.ErrorRestDTO;
 import com.hbv.ciea.model.Activo;
 import com.hbv.ciea.repository.ActivoRepository;
@@ -22,6 +23,7 @@ import static com.hbv.ciea.rest.ApiConstantes.API_ACTIVO;
 import static com.hbv.ciea.rest.ApiConstantes.ID;
 import static com.hbv.ciea.rest.ApiConstantes.ID_URL;
 import static com.hbv.ciea.rest.ApiConstantes.PAGE_URL;
+import com.hbv.ciea.service.ActivoService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,21 +47,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class ActivoRestController {
 
     @Autowired
-    private ActivoRepository activoRepository;
+    private ActivoService activoService;
 
     @RequestMapping(method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    private List<Activo> listar() {
-        return activoRepository.findAll();
+    private List<ActivoDTO> listar() {
+        return activoService.findAll();
     }
 
     @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    private Page<Activo> listar(Pageable pageable) {
-        return activoRepository.findAll(pageable);
+    private Page<ActivoDTO> listar(Pageable pageable) {
+        return activoService.findAll(pageable);
     }
 
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
     private Activo buscar(@PathVariable(ID) long id) {
-        Activo activo = activoRepository.findOne(id);
+        Activo activo = activoService.findOne(id);
         if (activo != null) {
             return activo;
         } else {
@@ -69,17 +71,17 @@ public class ActivoRestController {
 
     @RequestMapping(method = {RequestMethod.POST}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     private Activo nuevo(@RequestBody @Valid Activo activo) {
-        return activoRepository.save(activo);
+        return activoService.save(activo);
     }
 
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     private Activo editar(@PathVariable(ID) long id, @RequestBody @Valid Activo activo) {
-        return activoRepository.save(activo);
+        return activoService.save(activo);
     }
 
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     private ResponseEntity<Boolean> borrar(@PathVariable(ID) long id) {
-        activoRepository.delete(id);
+        activoService.delete(id);
         return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
     }
 
