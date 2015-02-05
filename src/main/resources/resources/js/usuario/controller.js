@@ -15,8 +15,8 @@
  */
 var ctrl = angular.module("usuario.controller", []);
 
-ctrl.controller("UsuarioListaCtrl", function($scope, Usuario) {
-    $scope.init = function() {
+ctrl.controller("UsuarioListaCtrl", function ($scope, Usuario) {
+    $scope.init = function () {
         $scope.limpiarAlertas();
         $scope.pagina = 1;
         $scope.getUsuarios();
@@ -32,133 +32,131 @@ ctrl.controller("UsuarioListaCtrl", function($scope, Usuario) {
         $scope.modalBorrado = false;
     };
 
-    $scope.getUsuarios = function() {
-        Usuario.page({page: $scope.pagina}, function(data) {
+    $scope.getUsuarios = function () {
+        Usuario.page({page: $scope.pagina}, function (data) {
             $scope.usuarios = data;
-        }, function(error) {
+        }, function (error) {
             $scope.alertaError(error);
         });
     };
 
-    $scope.deleteUsuario = function() {
+    $scope.deleteUsuario = function () {
         $scope.modalBorrado = false;
-        return Usuario.delete({id: $scope.borrarId}, function() {
+        return Usuario.delete({id: $scope.borrarId}, function () {
             $scope.alertaBorrado = true;
             $scope.getUsuarios();
-        }, function(error) {
+        }, function (error) {
             $scope.alertaError(error);
         });
     };
 
-    $scope.pageChanged = function() {
+    $scope.pageChanged = function () {
         $scope.getUsuarios();
     };
 
     $scope.init();
 });
 
-ctrl.controller("UsuarioNuevoCtrl", function($scope, Usuario, Sitio, TiposPerfil, TiposTelefono, TiposCorreo, Encriptar, $state) {
-    $scope.init = function() {
+ctrl.controller("UsuarioNuevoCtrl", function ($scope, Usuario, Sitio, TiposPerfil, TiposTelefono, TiposCorreo, Encriptar, $state) {
+    $scope.init = function () {
         $scope.tiposTelefono = TiposTelefono;
         $scope.tiposCorreo = TiposCorreo;
         $scope.perfiles = TiposPerfil;
         $scope.usuario = {telefonos: [], correos: [], perfiles: []};
 
-        $scope.sitios = Sitio.query({}, function() {
-        }, function(error) {
+        $scope.sitios = Sitio.query({}, function () {
+        }, function (error) {
             $scope.alertaError(error);
         });
     };
 
-    $scope.createUsuario = function() {
+    $scope.createUsuario = function () {
         if ($scope.usuario.clave) {
             var hash = Encriptar($scope.usuario.clave);
             $scope.usuario.clave = hash.toString();
         }
         var usuario = new Usuario($scope.usuario);
-        usuario.$save({}, function() {
+        usuario.$save({}, function () {
             $state.transitionTo("lista");
-        }, function(error) {
+        }, function (error) {
             $scope.alertaError(error);
         });
     };
 
-    $scope.createTelefono = function() {
+    $scope.createTelefono = function () {
         $scope.usuario.telefonos.push({id: 0});
     };
 
-    $scope.deleteTelefono = function(telefono) {
+    $scope.deleteTelefono = function (telefono) {
         $scope.usuario.telefonos.splice($scope.usuario.telefonos.indexOf(telefono), 1);
     };
 
-    $scope.createCorreo = function() {
+    $scope.createCorreo = function () {
         $scope.usuario.correos.push({id: 0});
     };
 
-    $scope.deleteCorreo = function(correo) {
+    $scope.deleteCorreo = function (correo) {
         $scope.usuario.correos.splice($scope.usuario.correos.indexOf(correo), 1);
     };
 
-    $scope.cancelar = function() {
+    $scope.cancelar = function () {
         $state.transitionTo("lista");
     };
 
     $scope.init();
 });
 
-ctrl.controller("UsuarioEditarCtrl", function($scope, Usuario, Sitio, TiposPerfil, TiposTelefono, TiposCorreo, Encriptar, $state, $stateParams) {
-    $scope.init = function() {
+ctrl.controller("UsuarioEditarCtrl", function ($scope, Usuario, Sitio, TiposPerfil, TiposTelefono, TiposCorreo, Encriptar, $state, $stateParams) {
+    $scope.init = function () {
         $scope.tiposTelefono = TiposTelefono;
         $scope.tiposCorreo = TiposCorreo;
         $scope.perfiles = TiposPerfil;
         $scope.cambio = false;
-        $scope.usuario = Usuario.get({id: $stateParams.usuarioId}, function() {
-        }, function(error) {
+        $scope.usuario = Usuario.get({id: $stateParams.usuarioId}, function () {
+        }, function (error) {
             $scope.alertaError(error);
         });
-        $scope.sitios = Sitio.query({}, function() {
-        }, function(error) {
+        $scope.sitios = Sitio.query({}, function () {
+        }, function (error) {
             $scope.alertaError(error);
         });
     };
 
-    $scope.cambioClave = function() {
-        if (!$scope.cambio) {
-            $scope.cambio = true;
-            $scope.usuario.clave = "";
-        }
+    $scope.cambioClave = function () {
+        $scope.cambio = true;
+        $scope.usuario.clave = "";
     };
 
-    $scope.updateUsuario = function() {
+    $scope.updateUsuario = function () {
         if ($scope.usuario.clave && $scope.cambio) {
             var hash = Encriptar($scope.usuario.clave);
             $scope.usuario.clave = hash.toString();
         }
         var usuario = new Usuario($scope.usuario);
-        usuario.$update({}, function() {
+        usuario.$update({}, function () {
             $state.transitionTo("lista");
-        }, function(error) {
+        }, function (error) {
             $scope.alertaError(error);
         });
     };
 
-    $scope.createTelefono = function() {
+    $scope.createTelefono = function () {
         $scope.usuario.telefonos.push({id: 0});
     };
 
-    $scope.deleteTelefono = function(telefono) {
+    $scope.deleteTelefono = function (telefono) {
         $scope.usuario.telefonos.splice($scope.usuario.telefonos.indexOf(telefono), 1);
     };
 
-    $scope.createCorreo = function() {
+    $scope.createCorreo = function () {
         $scope.usuario.correos.push({id: 0});
     };
 
-    $scope.deleteCorreo = function(correo) {
+    $scope.deleteCorreo = function (correo) {
         $scope.usuario.correos.splice($scope.usuario.correos.indexOf(correo), 1);
     };
 
-    $scope.cancelar = function() {
+    $scope.cancelar = function () {
         $state.transitionTo("lista");
     };
 
