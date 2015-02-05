@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -44,6 +45,13 @@ public class UsuarioPerfilDTO {
     private final String segundoApellido;
     @Size(max = 50)
     private final String puesto;
+    @NotNull
+    @Size(min = 3, max = 15)
+    @Pattern(regexp = "[a-zA-Z0-9]+")
+    private final String usuario;
+    @NotNull
+    @Size(min = 1, max = 64)
+    private final String clave;
     @Valid
     private final List<Telefono> telefonos;
     @Valid
@@ -55,6 +63,8 @@ public class UsuarioPerfilDTO {
         this.primerApellido = "";
         this.segundoApellido = "";
         this.puesto = "";
+        this.usuario = "";
+        this.clave = "";
         this.telefonos = new ArrayList<Telefono>();
         this.correos = new ArrayList<Correo>();
     }
@@ -65,6 +75,8 @@ public class UsuarioPerfilDTO {
         this.primerApellido = usuario.getPrimerApellido();
         this.segundoApellido = usuario.getSegundoApellido();
         this.puesto = usuario.getPuesto();
+        this.usuario = usuario.getUsuario();
+        this.clave = usuario.getClave();
         this.telefonos = usuario.getTelefonos();
         this.correos = usuario.getCorreos();
     }
@@ -87,6 +99,14 @@ public class UsuarioPerfilDTO {
 
     public String getPuesto() {
         return puesto;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public String getClave() {
+        return clave;
     }
 
     public List<Telefono> getTelefonos() {
