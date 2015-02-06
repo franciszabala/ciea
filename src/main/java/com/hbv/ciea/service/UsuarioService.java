@@ -151,7 +151,7 @@ public class UsuarioService {
         usuario.setPrimerApellido(up.getPrimerApellido());
         usuario.setSegundoApellido(up.getSegundoApellido());
         usuario.setPuesto(up.getPuesto());
-//        usuario.setUsuario(up.getUsuario());
+        usuario.setUsuario(up.getUsuario());
         usuario.setClave(up.getClave());
         usuario.setTelefonos(up.getTelefonos());
         usuario.setCorreos(up.getCorreos());
