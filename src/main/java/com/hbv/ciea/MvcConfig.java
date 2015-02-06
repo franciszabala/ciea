@@ -44,7 +44,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         //Login
         registry.addViewController("/login").setViewName("login/login");
         registry.addViewController("/403").setViewName("403");
-
+        
         //Directivas https://github.com/angular-ui/bootstrap/tree/master/template
         registry.addViewController("/template/alert/alert.html").setViewName("directivas/alert/alert");
         registry.addViewController("/template/modal/modal.html").setViewName("directivas/modal/modal");
@@ -72,7 +72,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/proveedores/nuevo").setViewName("proveedor/nuevo :: content");
         registry.addViewController("/proveedores/editar").setViewName("proveedor/editar :: content");
         registry.addViewController("/proveedores/lista").setViewName("proveedor/lista :: content");
-
+        
         //Usuarios
         registry.addViewController("/admin/usuarios").setViewName("usuario/inicio");
         registry.addViewController("/admin/usuarios/nuevo").setViewName("usuario/nuevo :: content");
@@ -91,6 +91,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/activos/editar").setViewName("activo/editar :: content");
         registry.addViewController("/activos/lista").setViewName("activo/lista :: content");
 
+        //Perfil
+        registry.addViewController("/perfil").setViewName("perfil/inicio");
     }
 
     /*

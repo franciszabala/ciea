@@ -53,8 +53,6 @@
                 </div>
                 <pagination class="hidden-xs" total-items="proveedores.totalElements" ng-model="pagina" ng-change="pageChanged()" th:attr="previous-text=#{boton.anterior},next-text=#{boton.siguiente},first-text=#{boton.primera},last-text=#{boton.ultima}"/>
                 <pager class="visible-xs-block" total-items="proveedores.totalElements" ng-model="pagina" ng-change="pageChanged()" th:attr="previous-text=#{boton.anterior},next-text=#{boton.siguiente}"/>
-                <br/>
-                <pre>proveedores = {{ proveedores | json}}</pre>
             </div>
         </div>
     </body>
