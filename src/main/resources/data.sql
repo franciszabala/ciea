@@ -72,3 +72,8 @@ insert into articulo(id,descripcion,modelo,marca,id_categoria)values(3,'Licuador
 insert into activo(id,placa,serie,estado,id_sitio, id_articulo)values(1,'EAC-01','123', 'BUENO',12,3);
 insert into activo(id,placa,serie,estado,id_sitio, id_articulo)values(2,'EAD-01','456', 'BUENO',1,2);
 insert into activo(id,placa,serie,estado,id_sitio, id_articulo)values(3,'EA-01','789', 'BUENO',2, 3);
+
+--Ordenes de Compra
+insert into orden_compra(id,factura,fecha,estado,id_proveedor)values(1,'Factura 1','2015-01-01', 'COMPRADO',1);
+insert into orden_compra(id,factura,fecha,estado,id_proveedor)values(2,'Factura 2','2015-01-02', 'RECIBIDO',1);
+insert into orden_compra(id,factura,fecha,estado,id_proveedor)values(3,'Factura 3','2015-01-03', 'APLICADO',2);

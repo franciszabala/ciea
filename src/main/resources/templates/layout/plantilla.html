@@ -55,7 +55,7 @@
                             </ul>
                         </li>
                         <li><a href="#" th:href="@{/proveedores}" th:text="#{menu.proveedores}">Proveedores</a></li>
-                        <li><a href="#" th:text="#{menu.ordenes_compra}">Ordenes de Compra</a></li>                    
+                        <li><a href="#" th:href="@{/ordenes_compra}" th:text="#{menu.ordenes_compra}">Ordenes de Compra</a></li>                    
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li sec:authorize="!isAuthenticated()"><a href="#" th:href="@{/login}" th:text="#{menu.acceder}">Acceder</a></li>

@@ -88,6 +88,12 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/activos/editar").setViewName("activo/editar :: content");
         registry.addViewController("/activos/lista").setViewName("activo/lista :: content");
 
+        //Ordenes de Compra
+        registry.addViewController("/ordenes_compra").setViewName("ordenes_compra/inicio");
+        registry.addViewController("/ordenes_compra/nuevo").setViewName("ordenes_compra/nuevo :: content");
+        registry.addViewController("/ordenes_compra/editar").setViewName("ordenes_compra/editar :: content");
+        registry.addViewController("/ordenes_compra/lista").setViewName("ordenes_compra/lista :: content");
+
         registry.addViewController("/hello").setViewName("hello");
     }
 
