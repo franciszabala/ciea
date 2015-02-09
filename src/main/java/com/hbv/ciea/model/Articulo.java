@@ -48,12 +48,6 @@ public class Articulo implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "descripcion")
     private String descripcion;
-    @Size(max = 15)
-    @Column(name = "marca")
-    private String marca;
-    @Size(max = 15)
-    @Column(name = "modelo")
-    private String modelo;
     @JoinColumn(name = "id_categoria", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Categoria categoria;
@@ -75,22 +69,6 @@ public class Articulo implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
     }
 
     public Categoria getCategoria() {
