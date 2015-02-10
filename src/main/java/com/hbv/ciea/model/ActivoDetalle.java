@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
  * @since 09-feb-2015
  */
 @Entity
-@Table(name = "articulo")
+@Table(name = "activo_detalle")
 public class ActivoDetalle implements Serializable {
 
     private static final long serialVersionUID = 1L;

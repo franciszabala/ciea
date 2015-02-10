@@ -57,10 +57,10 @@ public class Activo implements Serializable {
     @Column(name = "estado")
     private ActivoEstado estado;
     @JoinColumn(name = "id_sitio", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Sitio sitio;
     @JoinColumn(name = "id_articulo", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Articulo articulo;
     @JoinColumn(name = "id_detalle", referencedColumnName = "id")
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
