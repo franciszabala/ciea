@@ -24,6 +24,8 @@ package com.hbv.ciea.model;
  */
 public enum ActivoEstado {
 
+    EXCELENTE,
+    MUY_BUENO,
     BUENO,
     REGULAR,
     MALO;
