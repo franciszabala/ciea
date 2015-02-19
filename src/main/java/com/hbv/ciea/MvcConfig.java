@@ -44,6 +44,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         //Login
         registry.addViewController("/login").setViewName("login/login");
         registry.addViewController("/403").setViewName("403");
+        
         //Directivas https://github.com/angular-ui/bootstrap/tree/master/template
         registry.addViewController("/template/alert/alert.html").setViewName("directivas/alert/alert");
         registry.addViewController("/template/modal/modal.html").setViewName("directivas/modal/modal");
@@ -53,13 +54,14 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addRedirectViewController("/admin/template/modal/modal.html", "/template/modal/modal.html");
         registry.addRedirectViewController("/admin/template/pagination/pager.html", "/template/pagination/pager.html");
         registry.addRedirectViewController("/admin/template/pagination/pagination.html", "/template/pagination/pagination.html");
+        
         //Sitios
         registry.addViewController("/sitios").setViewName("sitio/inicio");
         registry.addViewController("/sitios/nuevo").setViewName("sitio/nuevo :: content");
         registry.addViewController("/sitios/editar").setViewName("sitio/editar :: content");
         registry.addViewController("/sitios/lista").setViewName("sitio/lista :: content");
 
-        //categorias
+        //Categorias
         registry.addViewController("/categorias").setViewName("categoria/inicio");
         registry.addViewController("/categorias/nuevo").setViewName("categoria/nuevo :: content");
         registry.addViewController("/categorias/editar").setViewName("categoria/editar :: content");
@@ -70,6 +72,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/proveedores/nuevo").setViewName("proveedor/nuevo :: content");
         registry.addViewController("/proveedores/editar").setViewName("proveedor/editar :: content");
         registry.addViewController("/proveedores/lista").setViewName("proveedor/lista :: content");
+        
         //Usuarios
         registry.addViewController("/admin/usuarios").setViewName("usuario/inicio");
         registry.addViewController("/admin/usuarios/nuevo").setViewName("usuario/nuevo :: content");
@@ -88,6 +91,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/activos/editar").setViewName("activo/editar :: content");
         registry.addViewController("/activos/lista").setViewName("activo/lista :: content");
 
+        //Perfil
+        registry.addViewController("/perfil").setViewName("perfil/inicio");
         //Ordenes de Compra
         registry.addViewController("/ordenes_compra").setViewName("ordenes_compra/inicio");
         registry.addViewController("/ordenes_compra/nuevo").setViewName("ordenes_compra/nuevo :: content");

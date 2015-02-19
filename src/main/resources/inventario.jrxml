@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Inventario" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="744b2945-f149-4821-bd7e-171e1f6c5917">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     activo.`placa` AS activo_placa,
+     activo.`serie` AS activo_serie,
+     activo.`estado` AS activo_estado,
+     articulo.`descripcion` AS articulo_descripcion,
+     articulo.`marca` AS articulo_marca,
+     articulo.`modelo` AS articulo_modelo,
+     sitio.`nombre` AS sitio_nombre
+FROM
+     `articulo` articulo INNER JOIN `activo` activo ON articulo.`id` = activo.`id_articulo`
+     INNER JOIN `sitio` sitio ON activo.`id_sitio` = sitio.`id`]]>
+	</queryString>
+	<field name="activo_placa" class="java.lang.String"/>
+	<field name="activo_serie" class="java.lang.String"/>
+	<field name="activo_estado" class="java.lang.String"/>
+	<field name="articulo_descripcion" class="java.lang.String"/>
+	<field name="articulo_marca" class="java.lang.String"/>
+	<field name="articulo_modelo" class="java.lang.String"/>
+	<field name="sitio_nombre" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+	<noData>
+		<band height="50"/>
+	</noData>
+</jasperReport>

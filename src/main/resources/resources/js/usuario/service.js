@@ -31,6 +31,14 @@ srvc.factory("Usuario", function($resource) {
     });
 });
 
+srvc.factory("Perfil", function($resource) {
+    return $resource("/api/perfil", {}, {
+        update: {
+            method: 'PUT'
+        }
+    });
+});
+
 srvc.factory("Encriptar", function() {
     return function(mensaje) {
         return CryptoJS.SHA256(mensaje).toString();

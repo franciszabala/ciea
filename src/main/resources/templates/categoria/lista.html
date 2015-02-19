@@ -48,9 +48,6 @@
                 </div>
                 <pagination class="hidden-xs" total-items="categorias.totalElements" ng-model="pagina" ng-change="pageChanged()" th:attr="previous-text=#{boton.anterior},next-text=#{boton.siguiente},first-text=#{boton.primera},last-text=#{boton.ultima}"/>
                 <pager class="visible-xs-block" total-items="categorias.totalElements" ng-model="pagina" ng-change="pageChanged()" th:attr="previous-text=#{boton.anterior},next-text=#{boton.siguiente}"/>
-                <br/>            
-                <br/>
-                <pre>categorias = {{ categorias | json}}</pre>
             </div>
         </div>
     </body>

@@ -13,17 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-var srvc = angular.module("orden_compra.service", []);
-
-srvc.factory("OrdenCompra", function($resource) {
-    return $resource("/api/orden_compra/:id:ruta", {id: "@id", ruta: "@ruta"}, {
-        update: {
-            method: 'PUT'
-        },
-        page: {
-            method: 'GET',
-            params: {ruta: 'page'}
-        }
-    });
-});
+var app = angular.module("perfilApp", ["ngResource", "ui.bootstrap", "alerta.controller", "usuario.service", "telefono.service", "correo.service", "perfil.controller"]);
