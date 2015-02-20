@@ -19,6 +19,10 @@ insert into sitio(id,nombre)values(16,'Pasillos');
 insert into usuario(id,identificacion,nombre,primer_apellido,segundo_apellido,usuario,clave,puesto,activo,id_sitio)values(1,'206340152','Herman','Barrantes','Viquez','herman','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','Desarrollador',true,1);
 insert into usuario(id,identificacion,nombre,primer_apellido,segundo_apellido,usuario,clave,puesto,activo,id_sitio)values(2,'106340152','Eilyn','Salazar','Miranda','eilyn','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','Desarrollador',true,1);
 insert into usuario(id,identificacion,nombre,primer_apellido,segundo_apellido,usuario,clave,puesto,activo,id_sitio)values(3,'306340152','Prueba','Prueba','Prueba','prueba','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','Prueba',true,1);
+--Perfiles
+--insert into perfil(id,nombre)values(1,'ADMIN');
+--insert into perfil(id,nombre)values(2,'DIRECTOR');
+--insert into perfil(id,nombre)values(3,'PROFESOR');
 --UsuarioPerfil
 insert into usuario_perfil(id_usuario,perfil)values(1,'ADMIN');
 insert into usuario_perfil(id_usuario,perfil)values(1,'DIRECTOR');
@@ -59,21 +63,17 @@ insert into proveedor_telefono(id_proveedor,id_telefono)values(1,11);
 insert into proveedor_telefono(id_proveedor,id_telefono)values(2,12);
 
 --Articulo
-insert into articulo(id,descripcion,id_categoria)values(1,'Pupitre',2);
-insert into articulo(id,descripcion,id_categoria)values(2,'Server', 1);
-insert into articulo(id,descripcion,id_categoria)values(3,'Licuadora', 3);
+insert into articulo(id,descripcion,modelo,marca,id_categoria)values(1,'Pupitre','NA', 'Patito',2);
+insert into articulo(id,descripcion,modelo,marca,id_categoria)values(2,'Server', 'DL 380', 'HP', 1);
+insert into articulo(id,descripcion,modelo,marca,id_categoria)values(3,'Licuadora','AXZW', 'Cuisinar', 3);
 
---Activo Detalle
-insert into activo_detalle(id,descripcion,modelo,marca)values(1,'Grande, color verde',null,null);
-insert into activo_detalle(id,descripcion,modelo,marca)values(2,null,'123','HP');
-insert into activo_detalle(id,descripcion,modelo,marca)values(3,'Licuadora Industrial','XPS300','Oster');
 
-insert into activo(id,placa,serie,estado,id_sitio,id_articulo,id_detalle)values(1,'EAC-01','123', 'BUENO',12,3,1);
-insert into activo(id,placa,serie,estado,id_sitio,id_articulo,id_detalle)values(2,'EAD-01','456', 'BUENO',1,2,2);
-insert into activo(id,placa,serie,estado,id_sitio,id_articulo,id_detalle)values(3,'EA-01','789', 'BUENO',2,3,3);
+--Activos
+insert into activo(id,placa,serie,estado,id_sitio, id_articulo)values(1,'EAC-01','123', 'BUENO',12,3);
+insert into activo(id,placa,serie,estado,id_sitio, id_articulo)values(2,'EAD-01','456', 'BUENO',1,2);
+insert into activo(id,placa,serie,estado,id_sitio, id_articulo)values(3,'EA-01','789', 'BUENO',2, 3);
 
 --Ordenes de Compra
 insert into orden_compra(id,factura,fecha,estado,id_proveedor)values(1,'Factura 1','2015-01-01', 'COMPRADO',1);
 insert into orden_compra(id,factura,fecha,estado,id_proveedor)values(2,'Factura 2','2015-01-02', 'RECIBIDO',1);
 insert into orden_compra(id,factura,fecha,estado,id_proveedor)values(3,'Factura 3','2015-01-03', 'APLICADO',2);
-
