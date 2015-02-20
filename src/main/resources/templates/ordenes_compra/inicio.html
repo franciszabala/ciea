@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/plantilla">
+    <head>
+        <title th:text="#{orden_compra.titulo}">Orden Compra</title>
+    </head>
+    <body>
+        <div class="container">
+            <div layout:fragment="content">
+                <div id="orden_compra" ng-app="ordenCompraApp">
+
+                    <div ng-controller="AlertaCtrl">
+                        <alert ng-repeat="alerta in alertas" type="{{alerta.type}}" close="cerrarAlerta($index)">{{alerta.msg}}</alert>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div>
+                                    <div class="ui-view"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div layout:fragment="script" >
+            <script th:src="@{/js/orden_compra/app.js}" src="../../resources/js/orden_compra/app.js"></script>
+            <script th:src="@{/js/orden_compra/service.js}" src="../../resources/js/orden_compra/service.js"></script>        
+            <script th:src="@{/js/orden_compra/controller.js}" src="../../resources/js/orden_compra/controller.js"></script>
+            <script th:src="@{/js/alerta.js}" src="../../resources/js/alerta.js"></script>
+            <script th:src="@{/js/modal.js}" src="../../resources/js/modal.js"></script>
+        </div>
+    </body>
+</html>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Codigo Fantasma.
+ * Copyright 2014 Codigo Fantasma.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,15 +15,13 @@
  */
 package com.hbv.ciea.rest;
 
-import com.hbv.ciea.dto.ActivoDTO;
 import com.hbv.ciea.dto.ErrorRestDTO;
-import com.hbv.ciea.model.Activo;
-import com.hbv.ciea.repository.ActivoRepository;
-import static com.hbv.ciea.rest.ApiConstantes.API_ACTIVO;
-import static com.hbv.ciea.rest.ApiConstantes.ID;
-import static com.hbv.ciea.rest.ApiConstantes.ID_URL;
-import static com.hbv.ciea.rest.ApiConstantes.PAGE_URL;
-import com.hbv.ciea.service.ActivoService;
+import com.hbv.ciea.dto.OrdenCompraDTO;
+import com.hbv.ciea.dto.ProveedorDTO;
+import com.hbv.ciea.model.OrdenCompra;
+import com.hbv.ciea.model.Proveedor;
+import static com.hbv.ciea.rest.ApiConstantes.*;
+import com.hbv.ciea.service.OrdenCompraService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,45 +41,51 @@ import org.springframework.web.bind.annotation.RestController;
  * @author salazaei
  */
 @RestController
-@RequestMapping(API_ACTIVO)
-public class ActivoRestController {
+@RequestMapping(API_ORDEN_COMPRA)
+public class OrdenCompraRestController {
 
     @Autowired
-    private ActivoService activoService;
+    private OrdenCompraService ordenCompraService;
 
+ 
     @RequestMapping(method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    private List<ActivoDTO> listar() {
-        return activoService.findAll();
+    public List<OrdenCompraDTO> listar() {
+        return ordenCompraService.findAll();
     }
+
 
     @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    private Page<ActivoDTO> listar(Pageable pageable) {
-        return activoService.findAll(pageable);
+    public Page<OrdenCompraDTO> listar(Pageable pageable) {
+        return ordenCompraService.findAll(pageable);
     }
 
+   
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    private Activo buscar(@PathVariable(ID) long id) {
-        Activo activo = activoService.findOne(id);
-        if (activo != null) {
-            return activo;
+    public OrdenCompra buscar(@PathVariable(ID) long id) {
+        OrdenCompra ordenCompra = ordenCompraService.findOne(id);
+        if (ordenCompra != null) {
+            return ordenCompra;
         } else {
             throw new ErrorRestDTO("error.not_found");
         }
     }
 
-    @RequestMapping(method = {RequestMethod.POST}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    private Activo nuevo(@RequestBody @Valid Activo activo) {
-        return activoService.save(activo);
+ 
+    @RequestMapping(method = {RequestMethod.POST}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public OrdenCompra nuevo(@RequestBody @Valid OrdenCompra ordenCompra) {
+        return ordenCompraService.save(ordenCompra);
     }
 
-    @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    private Activo editar(@PathVariable(ID) long id, @RequestBody @Valid Activo activo) {
-        return activoService.save(activo);
+
+    @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public OrdenCompra editar(@PathVariable(ID) long id, @RequestBody @Valid OrdenCompra ordenCompra) {
+        return ordenCompraService.update(ordenCompra);
     }
 
-    @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    private ResponseEntity<Boolean> borrar(@PathVariable(ID) long id) {
-        activoService.delete(id);
+
+    @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<Boolean> borrar(@PathVariable(ID) long id) {
+        ordenCompraService.delete(id);
         return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
     }
 

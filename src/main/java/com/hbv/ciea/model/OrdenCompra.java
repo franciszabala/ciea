@@ -64,7 +64,7 @@ public class OrdenCompra implements Serializable {
     @Column(name = "estado")
     private OrdenCompraEstado estado;
     @JoinColumn(name = "id_proveedor", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Proveedor proveedor;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenCompra", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<OrdenCompraDetalle> detalles;
