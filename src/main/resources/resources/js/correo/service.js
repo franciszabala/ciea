@@ -16,16 +16,4 @@
 
 var srvc = angular.module("correo.service", []);
 
-srvc.factory("Correo", function($resource) {
-    return $resource("/api/correo/:id:ruta", {id: "@id", ruta: "@ruta"}, {
-        update: {
-            method: 'PUT'
-        },
-        page: {
-            method: 'GET',
-            params: {ruta: 'page'}
-        }
-    });
-});
-
 srvc.value("TiposCorreo", ["PERSONAL", "TRABAJO", "OTRO"]);

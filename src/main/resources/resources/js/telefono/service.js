@@ -16,16 +16,4 @@
 
 var srvc = angular.module("telefono.service", []);
 
-srvc.factory("Telefono", function ($resource) {
-    return $resource("/api/telefono/:id:ruta", {id: "@id", ruta: "@ruta"}, {
-        update: {
-            method: 'PUT'
-        },
-        page: {
-            method: 'GET',
-            params: {ruta: 'page'}
-        }
-    });
-});
-
 srvc.value("TiposTelefono", ["CELULAR", "TRABAJO", "CASA", "FAX", "BEEPER", "OTRO"]);

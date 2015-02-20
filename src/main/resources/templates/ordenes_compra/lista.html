@@ -36,7 +36,7 @@
                             <tr ng-repeat="orden_compra in ordenes_compra.content">
                                 <td>{{ orden_compra.id}}</td>
                                 <td>{{ orden_compra.factura}}</td>
-                                <td>{{ orden_compra.fecha}}</td>
+                                <td>{{ orden_compra.fecha | date:'yyyy-MM-dd'}}</td>
                                 <td>{{ orden_compra.estado}}</td>
                                 <td>{{ orden_compra.proveedor}}</td>
                                 <td>

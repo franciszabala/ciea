@@ -17,6 +17,7 @@ package com.hbv.ciea.service;
 
 import com.hbv.ciea.dto.OrdenCompraDTO;
 import com.hbv.ciea.model.OrdenCompra;
+import com.hbv.ciea.model.OrdenCompraDetalle;
 import com.hbv.ciea.model.Proveedor;
 import com.hbv.ciea.repository.OrdenCompraRepository;
 import com.hbv.ciea.repository.ProveedorRepository;
@@ -37,7 +38,7 @@ public class OrdenCompraService {
 
     @Autowired
     private OrdenCompraRepository ordenCompraRepository;
-    
+
     @Autowired
     private ProveedorRepository proveedorRepository;
 
@@ -59,14 +60,18 @@ public class OrdenCompraService {
     }
 
     public OrdenCompra save(OrdenCompra ordenCompra) {
-          if (ordenCompra.getProveedor() != null) {
+        if (ordenCompra.getProveedor() != null) {
             Proveedor proveedor = proveedorRepository.findOne(ordenCompra.getProveedor().getId());
             ordenCompra.setProveedor(proveedor);
         }
+//        for (OrdenCompraDetalle detalle : ordenCompra.getDetalles()) {
+//            detalle.setOrdenCompra(ordenCompra);
+//            
+//        }
         return ordenCompraRepository.save(ordenCompra);
     }
 
-    public OrdenCompra update(OrdenCompra ordenCompra) { 
+    public OrdenCompra update(OrdenCompra ordenCompra) {
         return ordenCompraRepository.save(ordenCompra);
     }
 
