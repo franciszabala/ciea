@@ -17,6 +17,7 @@
  */
 package com.hbv.ciea.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -56,14 +57,18 @@ public class Activo implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "estado")
     private ActivoEstado estado;
+    @NotNull
     @JoinColumn(name = "id_sitio", referencedColumnName = "id")
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Sitio sitio;
     @JoinColumn(name = "id_articulo", referencedColumnName = "id")
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Articulo articulo;
     @JoinColumn(name = "id_detalle", referencedColumnName = "id")
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private ActivoDetalle detalle;
 
     public Activo() {
