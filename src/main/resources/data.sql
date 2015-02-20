@@ -63,9 +63,9 @@ insert into proveedor_telefono(id_proveedor,id_telefono)values(1,11);
 insert into proveedor_telefono(id_proveedor,id_telefono)values(2,12);
 
 --Articulo
-insert into articulo(id,descripcion,modelo,marca,id_categoria)values(1,'Pupitre','NA', 'Patito',2);
-insert into articulo(id,descripcion,modelo,marca,id_categoria)values(2,'Server', 'DL 380', 'HP', 1);
-insert into articulo(id,descripcion,modelo,marca,id_categoria)values(3,'Licuadora','AXZW', 'Cuisinar', 3);
+insert into articulo(id,descripcion,id_categoria)values(1,'Pupitre',2);
+insert into articulo(id,descripcion,id_categoria)values(2,'Server', 1);
+insert into articulo(id,descripcion,id_categoria)values(3,'Licuadora', 3);
 
 --Activo Detalle
 insert into activo_detalle(id,descripcion,modelo,marca)values(1,'Grande, color verde',null,null);
