@@ -58,7 +58,7 @@ public class Usuario implements Serializable {
     private long id;
     @NotNull
     @Size(min = 9, max = 20)
-    @Column(name = "identificacion")
+    @Column(name = "identificacion", unique = true)
     private String identificacion;
     @NotNull
     @Size(min = 3, max = 15)
@@ -74,7 +74,7 @@ public class Usuario implements Serializable {
     @NotNull
     @Size(min = 3, max = 15)
     @Pattern(regexp = "[a-zA-Z0-9]+")
-    @Column(name = "usuario")
+    @Column(name = "usuario", unique = true, nullable = false)
     private String usuario;
     @NotNull
     @Size(min = 1, max = 64)

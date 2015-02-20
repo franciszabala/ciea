@@ -67,11 +67,15 @@ insert into articulo(id,descripcion,modelo,marca,id_categoria)values(1,'Pupitre'
 insert into articulo(id,descripcion,modelo,marca,id_categoria)values(2,'Server', 'DL 380', 'HP', 1);
 insert into articulo(id,descripcion,modelo,marca,id_categoria)values(3,'Licuadora','AXZW', 'Cuisinar', 3);
 
+--Activo Detalle
+insert into activo_detalle(id,descripcion,modelo,marca)values(1,'Grande, color verde',null,null);
+insert into activo_detalle(id,descripcion,modelo,marca)values(2,null,'123','HP');
+insert into activo_detalle(id,descripcion,modelo,marca)values(3,'Licuadora Industrial','XPS300','Oster');
 
 --Activos
-insert into activo(id,placa,serie,estado,id_sitio, id_articulo)values(1,'EAC-01','123', 'BUENO',12,3);
-insert into activo(id,placa,serie,estado,id_sitio, id_articulo)values(2,'EAD-01','456', 'BUENO',1,2);
-insert into activo(id,placa,serie,estado,id_sitio, id_articulo)values(3,'EA-01','789', 'BUENO',2, 3);
+insert into activo(id,placa,serie,estado,id_sitio,id_articulo,id_detalle)values(1,'EAC-01','123', 'BUENO',12,3,1);
+insert into activo(id,placa,serie,estado,id_sitio,id_articulo,id_detalle)values(2,'EAD-01','456', 'BUENO',1,2,2);
+insert into activo(id,placa,serie,estado,id_sitio,id_articulo,id_detalle)values(3,'EA-01','789', 'BUENO',2,3,3);
 
 --Ordenes de Compra
 insert into orden_compra(id,factura,fecha,estado,id_proveedor)values(1,'Factura 1','2015-01-01', 'COMPRADO',1);
