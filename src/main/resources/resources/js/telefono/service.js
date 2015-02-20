@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-var srvc = angular.module("orden_compra.service", []);
+var srvc = angular.module("telefono.service", []);
 
-srvc.factory("OrdenCompra", function($resource) {
-    return $resource("/api/orden_compra/:id:ruta", {id: "@id", ruta: "@ruta"}, {
+srvc.factory("Telefono", function ($resource) {
+    return $resource("/api/telefono/:id:ruta", {id: "@id", ruta: "@ruta"}, {
         update: {
             method: 'PUT'
         },
@@ -27,3 +27,5 @@ srvc.factory("OrdenCompra", function($resource) {
         }
     });
 });
+
+srvc.value("TiposTelefono", ["CELULAR", "TRABAJO", "CASA", "FAX", "BEEPER", "OTRO"]);
