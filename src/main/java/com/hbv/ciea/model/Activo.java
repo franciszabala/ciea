@@ -18,13 +18,16 @@
 package com.hbv.ciea.model;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -54,11 +57,14 @@ public class Activo implements Serializable {
     @Column(name = "estado")
     private ActivoEstado estado;
     @JoinColumn(name = "id_sitio", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Sitio sitio;
     @JoinColumn(name = "id_articulo", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Articulo articulo;
+    @JoinColumn(name = "id_detalle", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private ActivoDetalle detalle;
 
     public Activo() {
     }
@@ -99,7 +105,7 @@ public class Activo implements Serializable {
         return sitio;
     }
 
-    public void setIdSitio(Sitio sitio) {
+    public void setSitio(Sitio sitio) {
         this.sitio = sitio;
     }
 
@@ -107,8 +113,16 @@ public class Activo implements Serializable {
         return articulo;
     }
 
-    public void setIdArticulo(Articulo articulo) {
+    public void setArticulo(Articulo articulo) {
         this.articulo = articulo;
+    }
+
+    public ActivoDetalle getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(ActivoDetalle detalle) {
+        this.detalle = detalle;
     }
 
     @Override
