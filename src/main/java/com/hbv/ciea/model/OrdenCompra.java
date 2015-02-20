@@ -17,6 +17,7 @@
  */
 package com.hbv.ciea.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -65,6 +66,7 @@ public class OrdenCompra implements Serializable {
     private OrdenCompraEstado estado;
     @JoinColumn(name = "id_proveedor", referencedColumnName = "id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Proveedor proveedor;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenCompra", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<OrdenCompraDetalle> detalles;

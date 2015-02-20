@@ -57,9 +57,12 @@ ctrl.controller("OrdenCompraListaCtrl", function ($scope, OrdenCompra) {
     $scope.init();
 });
 
-ctrl.controller("OrdenCompraNuevoCtrl", function ($scope, OrdenCompra, $state) {
+ctrl.controller("OrdenCompraNuevoCtrl", function ($scope, OrdenCompra, OrdenCompraEstado, Proveedor, $state) {
     $scope.init = function () {
+        $scope.estados = OrdenCompraEstado;
+        $scope.proveedores = Proveedor.query();
     };
+
 
     $scope.createOrdenCompra = function () {
         var orden_compra = new OrdenCompra($scope.orden_compra);
@@ -74,15 +77,26 @@ ctrl.controller("OrdenCompraNuevoCtrl", function ($scope, OrdenCompra, $state) {
         $state.transitionTo("lista");
     };
 
+    $scope.open = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened = true;
+    };
+
+
+
     $scope.init();
 });
 
-ctrl.controller("OrdenCompraEditarCtrl", function ($scope, OrdenCompra, $state, $stateParams) {
+ctrl.controller("OrdenCompraEditarCtrl", function ($scope, OrdenCompra, OrdenCompraEstado, Proveedor, $state, $stateParams) {
     $scope.init = function () {
+        $scope.estados = OrdenCompraEstado;
         $scope.orden_compra = OrdenCompra.get({id: $stateParams.ordenCompraId}, function () {
         }, function (error) {
             $scope.alertaError(error);
         });
+        $scope.proveedores = Proveedor.query();
     };
 
     $scope.updateOrdenCompra = function () {

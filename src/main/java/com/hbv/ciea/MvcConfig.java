@@ -49,7 +49,14 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/template/alert/alert.html").setViewName("directivas/alert/alert");
         registry.addViewController("/template/modal/modal.html").setViewName("directivas/modal/modal");
         registry.addViewController("/template/pagination/pager.html").setViewName("directivas/pagination/pager");
-        registry.addViewController("/template/pagination/pagination.html").setViewName("directivas/pagination/pagination");
+        registry.addViewController("/template/pagination/pagination.html").setViewName("directivas/pagination/pagination"); 
+        
+        registry.addViewController("/template/datepicker/datepicker.html").setViewName("directivas/datepicker/datepicker");
+        registry.addViewController("/template/datepicker/day.html").setViewName("directivas/datepicker/day");
+        registry.addViewController("/template/datepicker/month.html").setViewName("directivas/datepicker/month");
+        registry.addViewController("/template/datepicker/popup.html").setViewName("directivas/datepicker/popup");
+        registry.addViewController("/template/datepicker/year.html").setViewName("directivas/datepicker/year");
+        
         registry.addRedirectViewController("/admin/template/alert/alert.html", "/template/alert/alert.html");
         registry.addRedirectViewController("/admin/template/modal/modal.html", "/template/modal/modal.html");
         registry.addRedirectViewController("/admin/template/pagination/pager.html", "/template/pagination/pager.html");

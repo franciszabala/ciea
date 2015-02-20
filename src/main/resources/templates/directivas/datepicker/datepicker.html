@@ -1,11 +1,6 @@
-<div class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">{{ title }}</h4>
-            </div>
-            <div class="modal-body" ng-transclude=""></div>
-        </div>
-    </div>
+
+<div ng-switch="datepickerMode" role="application" ng-keydown="keydown($event)">
+  <daypicker ng-switch-when="day" tabindex="0"></daypicker>
+  <monthpicker ng-switch-when="month" tabindex="0"></monthpicker>
+  <yearpicker ng-switch-when="year" tabindex="0"></yearpicker>
 </div>

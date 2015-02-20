@@ -27,3 +27,5 @@ srvc.factory("OrdenCompra", function($resource) {
         }
     });
 });
+
+srvc.value("OrdenCompraEstado", ["COMPRADO", "RECIBIDO", "APLICADO"]);

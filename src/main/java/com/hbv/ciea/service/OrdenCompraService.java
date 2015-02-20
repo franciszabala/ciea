@@ -17,7 +17,9 @@ package com.hbv.ciea.service;
 
 import com.hbv.ciea.dto.OrdenCompraDTO;
 import com.hbv.ciea.model.OrdenCompra;
+import com.hbv.ciea.model.Proveedor;
 import com.hbv.ciea.repository.OrdenCompraRepository;
+import com.hbv.ciea.repository.ProveedorRepository;
 import com.hbv.ciea.util.CopyConstructorUtil;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,9 @@ public class OrdenCompraService {
 
     @Autowired
     private OrdenCompraRepository ordenCompraRepository;
+    
+    @Autowired
+    private ProveedorRepository proveedorRepository;
 
     @Autowired
     private CopyConstructorUtil util;
@@ -54,10 +59,14 @@ public class OrdenCompraService {
     }
 
     public OrdenCompra save(OrdenCompra ordenCompra) {
+          if (ordenCompra.getProveedor() != null) {
+            Proveedor proveedor = proveedorRepository.findOne(ordenCompra.getProveedor().getId());
+            ordenCompra.setProveedor(proveedor);
+        }
         return ordenCompraRepository.save(ordenCompra);
     }
 
-    public OrdenCompra update(OrdenCompra ordenCompra) {
+    public OrdenCompra update(OrdenCompra ordenCompra) { 
         return ordenCompraRepository.save(ordenCompra);
     }
 
