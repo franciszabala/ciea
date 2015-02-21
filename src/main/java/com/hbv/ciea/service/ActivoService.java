@@ -17,7 +17,11 @@ package com.hbv.ciea.service;
 
 import com.hbv.ciea.dto.ActivoDTO;
 import com.hbv.ciea.model.Activo;
+import com.hbv.ciea.model.Articulo;
+import com.hbv.ciea.model.Sitio;
 import com.hbv.ciea.repository.ActivoRepository;
+import com.hbv.ciea.repository.ArticuloRepository;
+import com.hbv.ciea.repository.SitioRepository;
 import com.hbv.ciea.util.CopyConstructorUtil;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +41,12 @@ public class ActivoService {
     private ActivoRepository activoRepository;
 
     @Autowired
+    private SitioRepository sitioRepository;
+
+    @Autowired
+    private ArticuloRepository articuloRepository;
+
+    @Autowired
     private CopyConstructorUtil util;
 
     public List<ActivoDTO> findAll() {
@@ -54,6 +64,14 @@ public class ActivoService {
     }
 
     public Activo save(Activo activo) {
+        if (activo.getSitio() != null) {
+            Sitio sitio = sitioRepository.findOne(activo.getSitio().getId());
+            activo.setSitio(sitio);
+        }
+        if (activo.getArticulo() != null) {
+            Articulo articulo = articuloRepository.findOne(activo.getArticulo().getId());
+            activo.setArticulo(articulo);
+        }
         return activoRepository.save(activo);
     }
 

@@ -35,4 +35,10 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
     @Transactional
     @Query("UPDATE Categoria c SET c.descripcion = ?1 WHERE c.id = ?2")
     int updateDescripcionById(String descripcion, long id);
+    
+    @Override
+    @Modifying
+    @Transactional
+    @Query("DELETE Categoria c WHERE c.id = ?1")
+    public void delete(Long id);
 }
