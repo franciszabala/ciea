@@ -16,7 +16,7 @@
  * http://www.sitepoint.com/creating-crud-app-minutes-angulars-resource/
  * http://draptik.github.io/blog/2013/07/28/restful-crud-with-angularjs/
  */
-var app = angular.module("ordenCompraApp", ["ui.router", "ngResource", "ui.bootstrap", "alerta.controller", "modal.directiva", "orden_compra.service", "proveedor.service", "orden_compra.controller"]);
+var app = angular.module("ordenCompraApp", ["ui.router", "ngResource", "ui.bootstrap", "alerta.controller", "modal.directiva", "articulo.service", "orden_compra.service", "proveedor.service","orden_compra.controller"]);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("lista");

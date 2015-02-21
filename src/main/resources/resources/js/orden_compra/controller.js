@@ -57,10 +57,12 @@ ctrl.controller("OrdenCompraListaCtrl", function ($scope, OrdenCompra) {
     $scope.init();
 });
 
-ctrl.controller("OrdenCompraNuevoCtrl", function ($scope, OrdenCompra, OrdenCompraEstado, Proveedor, $state) {
+ctrl.controller("OrdenCompraNuevoCtrl", function ($scope, OrdenCompra, OrdenCompraEstado, Proveedor, Articulo, $state) {
     $scope.init = function () {
         $scope.estados = OrdenCompraEstado;
         $scope.proveedores = Proveedor.query();
+        $scope.articulos = Articulo.query();
+        $scope.orden_compra = {detalles: []};
     };
 
 
@@ -84,14 +86,34 @@ ctrl.controller("OrdenCompraNuevoCtrl", function ($scope, OrdenCompra, OrdenComp
         $scope.opened = true;
     };
 
+    $scope.createDetalle = function () {
+        $scope.orden_compra.detalles.push({id: 0});
+    };
 
+    $scope.deleteDetalle = function (orden_compra_detalle) {
+        $scope.orden_compra.detalles.splice($scope.orden_compra.detalles.indexOf(orden_compra_detalle), 1);
+    };
+
+    $scope.getTotal = function () {
+        var cantidad_total = 0;
+        var precio_total = 0;
+        var total = 0;
+        for (var i = 0; i < $scope.orden_compra.detalles.length; i++) {
+            var detalle = $scope.orden_compra.detalles[i];
+            cantidad_total += detalle.cantidad;
+            precio_total += detalle.precio;
+            total += (detalle.cantidad * detalle.precio)
+        }
+        return total;
+    }
 
     $scope.init();
 });
 
-ctrl.controller("OrdenCompraEditarCtrl", function ($scope, OrdenCompra, OrdenCompraEstado, Proveedor, $state, $stateParams) {
+ctrl.controller("OrdenCompraEditarCtrl", function ($scope, OrdenCompra, OrdenCompraEstado, Proveedor, Articulo, $state, $stateParams) {
     $scope.init = function () {
         $scope.estados = OrdenCompraEstado;
+        $scope.articulos = Articulo.query();
         $scope.orden_compra = OrdenCompra.get({id: $stateParams.ordenCompraId}, function () {
         }, function (error) {
             $scope.alertaError(error);
@@ -108,9 +130,33 @@ ctrl.controller("OrdenCompraEditarCtrl", function ($scope, OrdenCompra, OrdenCom
         });
     };
 
+    $scope.createDetalle = function () {
+        $scope.orden_compra.detalles.push({id: 0});
+    };
+
+    $scope.deleteDetalle = function (orden_compra_detalle) {
+        $scope.orden_compra.detalles.splice($scope.orden_compra.detalles.indexOf(orden_compra_detalle), 1);
+    };
+
+    $scope.getTotal = function () {
+        var cantidad_total = 0;
+        var precio_total = 0;
+        var total = 0;
+        for (var i = 0; i < $scope.orden_compra.detalles.length; i++) {
+            var detalle = $scope.orden_compra.detalles[i];
+            cantidad_total += detalle.cantidad;
+            precio_total += detalle.precio;
+            total += (detalle.cantidad * detalle.precio)
+        }
+        return total;
+    }
+
     $scope.cancelar = function () {
         $state.transitionTo("lista");
     };
+
+
+
 
     $scope.init();
 });

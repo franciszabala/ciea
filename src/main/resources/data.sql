@@ -81,3 +81,8 @@ insert into activo(id,placa,serie,estado,id_sitio,id_articulo,id_detalle)values(
 insert into orden_compra(id,factura,fecha,estado,id_proveedor)values(1,'Factura 1','2015-01-01', 'COMPRADO',1);
 insert into orden_compra(id,factura,fecha,estado,id_proveedor)values(2,'Factura 2','2015-01-02', 'RECIBIDO',1);
 insert into orden_compra(id,factura,fecha,estado,id_proveedor)values(3,'Factura 3','2015-01-03', 'APLICADO',2);
+
+--Orden de Compra Detalle
+insert into orden_compra_detalle(id,id_orden_compra,precio,cantidad,id_articulo)values(1,1,2000, 2,1);
+insert into orden_compra_detalle(id,id_orden_compra,precio,cantidad,id_articulo)values(2,1,3000, 1,2);
+insert into orden_compra_detalle(id,id_orden_compra,precio,cantidad,id_articulo)values(3,2,1000, 2,1);
