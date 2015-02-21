@@ -17,11 +17,11 @@ package com.hbv.ciea.rest;
 
 import com.hbv.ciea.dto.ErrorRestDTO;
 import com.hbv.ciea.model.Articulo;
-import com.hbv.ciea.repository.ArticuloRepository;
 import static com.hbv.ciea.rest.ApiConstantes.API_ARTICULO;
 import static com.hbv.ciea.rest.ApiConstantes.ID;
 import static com.hbv.ciea.rest.ApiConstantes.ID_URL;
 import static com.hbv.ciea.rest.ApiConstantes.PAGE_URL;
+import com.hbv.ciea.service.ArticuloService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,21 +45,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticuloRestController {
 
     @Autowired
-    private ArticuloRepository articuloRepository;
+    private ArticuloService articuloService;
 
     @RequestMapping(method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
     private List<Articulo> listar() {
-        return articuloRepository.findAll();
+        return articuloService.findAll();
     }
 
     @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
     private Page<Articulo> listar(Pageable pageable) {
-        return articuloRepository.findAll(pageable);
+        return articuloService.findAll(pageable);
     }
 
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
     private Articulo buscar(@PathVariable(ID) long id) {
-        Articulo articulo = articuloRepository.findOne(id);
+        Articulo articulo = articuloService.findOne(id);
         if (articulo != null) {
             return articulo;
         } else {
@@ -69,17 +69,17 @@ public class ArticuloRestController {
 
     @RequestMapping(method = {RequestMethod.POST}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     private Articulo nuevo(@RequestBody @Valid Articulo articulo) {
-        return articuloRepository.save(articulo);
+        return articuloService.save(articulo);
     }
 
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     private Articulo editar(@PathVariable(ID) long id, @RequestBody @Valid Articulo articulo) {
-        return articuloRepository.save(articulo);
+        return articuloService.save(articulo);
     }
 
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     private ResponseEntity<Boolean> borrar(@PathVariable(ID) long id) {
-        articuloRepository.delete(id);
+        articuloService.delete(id);
         return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
     }
 

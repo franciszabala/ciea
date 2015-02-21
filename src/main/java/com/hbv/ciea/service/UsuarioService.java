@@ -85,7 +85,6 @@ public class UsuarioService {
      * @param usuario Usuario a Insertar
      * @return Usuario Insertado
      */
-//    @Transactional(propagation = Propagation.REQUIRED)
     public Usuario save(Usuario usuario) {
         if (usuario.getSitio() != null) {
             Sitio sitio = sitioRepository.findOne(usuario.getSitio().getId());

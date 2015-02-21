@@ -44,4 +44,10 @@ public interface SitioRepository extends JpaRepository<Sitio, Long> {
     @Query("UPDATE Sitio s SET s.nombre = ?1 WHERE s.id = ?2")
     int updateNombreById(String nombre, long id);
 
+    @Override
+    @Modifying
+    @Transactional
+    @Query("DELETE Sitio s WHERE s.id = ?1")
+    public void delete(Long id);
+    
 }

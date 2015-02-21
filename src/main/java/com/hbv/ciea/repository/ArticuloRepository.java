@@ -22,7 +22,10 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Repositorio de Artículos.
@@ -30,13 +33,22 @@ import org.springframework.data.jpa.repository.Query;
  * @author Herman Barrantes
  * @since 26-nov-2014
  */
+@Transactional(readOnly = true)
 public interface ArticuloRepository extends JpaRepository<Articulo, Long> {
 
     @Override
-    @Query(value="SELECT a FROM Articulo a JOIN FETCH a.categoria", countQuery = "SELECT COUNT(a.id) FROM Articulo a")
+    @Transactional(readOnly = true)
+    @Query(value = "SELECT a FROM Articulo a JOIN FETCH a.categoria", countQuery = "SELECT COUNT(a.id) FROM Articulo a")
     Page findAll(Pageable pageable);
 
     @Override
+    @Transactional(readOnly = true)
     @Query("SELECT a FROM Articulo a JOIN FETCH a.categoria")
     List<Articulo> findAll();
+    
+    @Override
+    @Modifying
+    @Transactional
+    @Query("DELETE Articulo a WHERE a.id = ?1")
+    public void delete(Long id);
 }
