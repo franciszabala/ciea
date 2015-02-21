@@ -64,6 +64,12 @@ public class ActivoService {
     }
 
     public Activo save(Activo activo) {
+        if (activo.getDetalle() != null
+                && isNullOrEmpty(activo.getDetalle().getDescripcion())
+                && isNullOrEmpty(activo.getDetalle().getMarca())
+                && isNullOrEmpty(activo.getDetalle().getModelo())) {
+            activo.setDetalle(null);
+        }
         if (activo.getSitio() != null) {
             Sitio sitio = sitioRepository.findOne(activo.getSitio().getId());
             activo.setSitio(sitio);
@@ -76,12 +82,25 @@ public class ActivoService {
     }
 
     public Activo update(Activo activo) {
+        if (activo.getDetalle() != null
+                && isNullOrEmpty(activo.getDetalle().getDescripcion())
+                && isNullOrEmpty(activo.getDetalle().getMarca())
+                && isNullOrEmpty(activo.getDetalle().getModelo())) {
+            activo.setDetalle(null);
+        }
         return activoRepository.save(activo);
     }
 
-   
     public void delete(long id) {
         activoRepository.delete(id);
+    }
+
+    private boolean isNullOrEmpty(String string) {
+        return string == null || string.isEmpty();
+    }
+
+    private boolean isNotNullOrEmpty(String string) {
+        return string != null && !string.trim().isEmpty();
     }
 
 }

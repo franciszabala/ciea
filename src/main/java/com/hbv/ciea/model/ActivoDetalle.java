@@ -38,7 +38,7 @@ public class ActivoDetalle implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "descripcion")
     private String descripcion;
     @Size(max = 15)
