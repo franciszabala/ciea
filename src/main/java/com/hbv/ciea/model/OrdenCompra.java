@@ -67,7 +67,7 @@ public class OrdenCompra implements Serializable {
     @Column(name = "estado")
     private OrdenCompraEstado estado;
     @JoinColumn(name = "id_proveedor", referencedColumnName = "id")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Proveedor proveedor;
     @Valid
