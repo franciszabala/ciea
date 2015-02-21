@@ -17,26 +17,15 @@
  */
 package com.hbv.ciea.repository;
 
-import com.hbv.ciea.model.OrdenCompra;
+import com.hbv.ciea.model.OrdenCompraDetalle;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Repositorio de Ordenes de Compra.
  *
- * @author Herman Barrantes
+ * @author Eilyn Salazar
  * @since 26-nov-2014
  */
-//@Transactional(readOnly = true)
-public interface OrdenCompraRepository extends JpaRepository<OrdenCompra, Long> {
-
-//    @Override
-//    @Modifying
-//    @Transactional
-//    @Query("Delete OrdenCompra o WHERE o.id = ?1")
-//    void delete(Long id);
-
+public interface OrdenCompraDetalleRepository extends JpaRepository<OrdenCompraDetalle, Long> {
 
 }

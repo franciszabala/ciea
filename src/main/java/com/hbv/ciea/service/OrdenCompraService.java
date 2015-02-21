@@ -19,6 +19,7 @@ import com.hbv.ciea.dto.OrdenCompraDTO;
 import com.hbv.ciea.model.OrdenCompra;
 import com.hbv.ciea.model.OrdenCompraDetalle;
 import com.hbv.ciea.model.Proveedor;
+import com.hbv.ciea.repository.OrdenCompraDetalleRepository;
 import com.hbv.ciea.repository.OrdenCompraRepository;
 import com.hbv.ciea.repository.ProveedorRepository;
 import com.hbv.ciea.util.CopyConstructorUtil;
@@ -28,6 +29,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -41,6 +43,10 @@ public class OrdenCompraService {
 
     @Autowired
     private ProveedorRepository proveedorRepository;
+    
+    
+    @Autowired
+    private OrdenCompraDetalleRepository ordenCompraDetalleRepository;
 
     @Autowired
     private CopyConstructorUtil util;
@@ -75,7 +81,10 @@ public class OrdenCompraService {
         return ordenCompraRepository.save(ordenCompra);
     }
 
+//    @Transactional
     public void delete(long id) {
-        ordenCompraRepository.delete(id);
+//        List<OrdenCompraDetalle> detalles = ordenCompraRepository.findOne(id).getDetalles();
+//        ordenCompraDetalleRepository.delete(detalles);
+        ordenCompraRepository.delete(id);        
     }
 }

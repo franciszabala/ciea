@@ -45,22 +45,22 @@ public class OrdenCompraDetalle implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @Min(value = 0)
+    @Min(value = 1)
     @Max(value = 9999)
     @NotNull
     @Column(name = "cantidad")
-    private int cantidad;
-    @Min(value = 0)
+    private Integer cantidad;
+    @Min(value = 1)
     @Max(value = 9999999)
     @NotNull
     @Column(name = "precio", precision = 9, scale = 2)
-    private double precio;
+    private Double precio;
     @JoinColumn(name = "id_articulo", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Articulo articulo;
-    @JoinColumn(name = "id_orden_compra", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private OrdenCompra ordenCompra;
+//    @JoinColumn(name = "id_orden_compra", referencedColumnName = "id")
+//    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+//    private OrdenCompra ordenCompra;
 
     public OrdenCompraDetalle() {
     }
@@ -73,22 +73,22 @@ public class OrdenCompraDetalle implements Serializable {
         this.id = id;
     }
 
-    public int getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public double getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 
+    public void setPrecio(Double precio) {
+        this.precio = precio;
+    }
+   
     public Articulo getArticulo() {
         return articulo;
     }
@@ -97,13 +97,13 @@ public class OrdenCompraDetalle implements Serializable {
         this.articulo = articulo;
     }
 
-    public OrdenCompra getOrdenCompra() {
-        return ordenCompra;
-    }
-
-    public void setOrdenCompra(OrdenCompra ordenCompra) {
-        this.ordenCompra = ordenCompra;
-    }
+//    public OrdenCompra getOrdenCompra() {
+//        return ordenCompra;
+//    }
+//
+//    public void setOrdenCompra(OrdenCompra ordenCompra) {
+//        this.ordenCompra = ordenCompra;
+//    }
 
     @Override
     public int hashCode() {
