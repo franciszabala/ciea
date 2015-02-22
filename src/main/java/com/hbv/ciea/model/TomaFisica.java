@@ -31,7 +31,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -57,15 +56,9 @@ public class TomaFisica implements Serializable {
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id")
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Usuario usuario;
-    @Valid
-    @Size(min=1)
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "id_toma_fisica")
-    private List<Activo> detalles;
+    private List<TomaFisicaDetalle> detalles;
 
     public TomaFisica() {
     }
@@ -86,19 +79,11 @@ public class TomaFisica implements Serializable {
         this.fecha = fecha;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public List<Activo> getDetalles() {
+    public List<TomaFisicaDetalle> getDetalles() {
         return detalles;
     }
 
-    public void setDetalles(List<Activo> detalles) {
+    public void setDetalles(List<TomaFisicaDetalle> detalles) {
         this.detalles = detalles;
     }
 

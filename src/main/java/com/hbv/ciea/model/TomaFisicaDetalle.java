@@ -19,6 +19,8 @@ package com.hbv.ciea.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,53 +34,45 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
- * @author Herman Barrantes
- * @since 24-nov-2014
+ * @author Eilyn Salazar
  */
 @Entity
-@Table(name = "activo")
-public class Activo implements Serializable {
+@Table(name = "toma_fisica_detalle")
+public class TomaFisicaDetalle implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @Size(max = 50)
-    @Column(name = "placa")
-    private String placa;
-    @Size(max = 50)
-    @Column(name = "serie")
-    private String serie;
+    @NotNull
+    @Column(name = "fecha")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecha;
+    @NotNull
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_toma_fisica", referencedColumnName = "id")
+    private TomaFisica tomaFisica;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_articulo")
+    private Activo activo;
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "estado")
     private ActivoEstado estado;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "estado_toma_fisica")
-    private ActivoEstadoTomaFisica estadoTomaFisica;
     @NotNull
     @JoinColumn(name = "id_sitio", referencedColumnName = "id")
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Sitio sitio;
-    @JoinColumn(name = "id_articulo", referencedColumnName = "id")
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Articulo articulo;
-    @JoinColumn(name = "id_detalle", referencedColumnName = "id")
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private ActivoDetalle detalle;
-    @Column(name = "habilitado")
-    private boolean habilitado;
 
-    public Activo() {
+    public TomaFisicaDetalle() {
     }
 
     public long getId() {
@@ -89,20 +83,28 @@ public class Activo implements Serializable {
         this.id = id;
     }
 
-    public String getPlaca() {
-        return placa;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setPlaca(String placa) {
-        this.placa = placa;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
-    public String getSerie() {
-        return serie;
+    public TomaFisica getTomaFisica() {
+        return tomaFisica;
     }
 
-    public void setSerie(String serie) {
-        this.serie = serie;
+    public void setTomaFisica(TomaFisica tomaFisica) {
+        this.tomaFisica = tomaFisica;
+    }
+
+    public Activo getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Activo activo) {
+        this.activo = activo;
     }
 
     public ActivoEstado getEstado() {
@@ -121,44 +123,11 @@ public class Activo implements Serializable {
         this.sitio = sitio;
     }
 
-    public Articulo getArticulo() {
-        return articulo;
-    }
-
-    public void setArticulo(Articulo articulo) {
-        this.articulo = articulo;
-    }
-
-    public ActivoDetalle getDetalle() {
-        return detalle;
-    }
-
-    public void setDetalle(ActivoDetalle detalle) {
-        this.detalle = detalle;
-    }
-
-    public ActivoEstadoTomaFisica getEstadoTomaFisica() {
-        return estadoTomaFisica;
-    }
-
-    public void setEstadoTomaFisica(ActivoEstadoTomaFisica estadoTomaFisica) {
-        this.estadoTomaFisica = estadoTomaFisica;
-    }
-
-    public boolean isHabilitado() {
-        return habilitado;
-    }
-
-    public void setHabilitado(boolean habilitado) {
-        this.habilitado = habilitado;
-    }
     
-    
-
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
+        int hash = 5;
+        hash = 89 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
     }
 
@@ -170,7 +139,7 @@ public class Activo implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Activo other = (Activo) obj;
+        final TomaFisicaDetalle other = (TomaFisicaDetalle) obj;
         if (this.id != other.id) {
             return false;
         }
@@ -179,7 +148,7 @@ public class Activo implements Serializable {
 
     @Override
     public String toString() {
-        return "Activo[ id=" + id + " ]";
+        return "OrdenCompra[ id=" + id + " ]";
     }
 
 }
