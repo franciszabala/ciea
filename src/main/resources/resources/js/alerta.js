@@ -50,6 +50,8 @@ actrl.controller("AlertaCtrl", function ($scope, $log) {
             error.data.errores.forEach(function (item) {
                 $log.debug(item.mensaje);
                 $scope.agregarAlerta('danger', item.mensaje);
+                $("#" + item.campo).parent("div").parent(".form-group").addClass("has-error");
+                $("#" + item.campo).parent("td").addClass("danger");
             });
         } else {//error de sistema
             $log.error(error.data.mensaje);
@@ -61,6 +63,8 @@ actrl.controller("AlertaCtrl", function ($scope, $log) {
         while ($scope.alertas.length > 0) {
             $scope.alertas.pop();
         }
+        $("div.has-error").removeClass("has-error");
+        $("td.danger").removeClass("danger");
     };
 
     $scope.cerrarAlerta = function (index) {
