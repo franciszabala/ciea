@@ -191,10 +191,4 @@ public class TomaFisicaDetalle implements Serializable {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "OrdenCompra[ id=" + id + " ]";
-    }
-
 }

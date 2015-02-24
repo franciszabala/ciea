@@ -167,10 +167,4 @@ public class Proveedor implements Serializable {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Proveedor[ id=" + id + " ]";
-    }
-
 }

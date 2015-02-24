@@ -106,10 +106,4 @@ public class Sitio implements Serializable {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Sitio[ id=" + id + " ]";
-    }
-
 }
