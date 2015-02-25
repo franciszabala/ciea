@@ -27,15 +27,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="primer_apellido" class="col-sm-2 control-label" th:text="#{usuario.primer_apellido}">Primer Apellido</label>
+                                    <label for="primerApellido" class="col-sm-2 control-label" th:text="#{usuario.primer_apellido}">Primer Apellido</label>
                                     <div class="col-sm-10 col-xs-12">
-                                        <input type="text" class="form-control" id="primer_apellido" th:placeholder="#{usuario.primer_apellido}" placeholder="Primer Apellido" ng-model="usuario.primerApellido"/>
+                                        <input type="text" class="form-control" id="primerApellido" th:placeholder="#{usuario.primer_apellido}" placeholder="Primer Apellido" ng-model="usuario.primerApellido"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="segundo_apellido" class="col-sm-2 control-label" th:text="#{usuario.segundo_apellido}">Segundo Apellido</label>
+                                    <label for="segundoApellido" class="col-sm-2 control-label" th:text="#{usuario.segundo_apellido}">Segundo Apellido</label>
                                     <div class="col-sm-10 col-xs-12">
-                                        <input type="text" class="form-control" id="segundo_apellido" th:placeholder="#{usuario.segundo_apellido}" placeholder="Segundo Apellido" ng-model="usuario.segundoApellido"/>
+                                        <input type="text" class="form-control" id="segundoApellido" th:placeholder="#{usuario.segundo_apellido}" placeholder="Segundo Apellido" ng-model="usuario.segundoApellido"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -74,8 +74,8 @@
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat="correo in usuario.correos">
-                                                    <td><input type="email" class="form-control" id="correo_correo" th:placeholder="#{usuario.correo}" placeholder="Correo" ng-model="correo.correo"/></td>
-                                                    <td><select id="correo_tipo" class="form-control" ng-model="correo.tipo" ng-options="tipo for tipo in tiposCorreo"></select></td>
+                                                    <td><input type="email" class="form-control" id="correos{{$index}}_correo" th:placeholder="#{usuario.correo}" placeholder="Correo" ng-model="correo.correo"/></td>
+                                                    <td><select id="correos{{$index}}_tipo" class="form-control" ng-model="correo.tipo" ng-options="tipo for tipo in tiposCorreo"></select></td>
                                                     <td>
                                                         <button class="btn btn-danger btn-sm" ng-click="deleteCorreo(correo)">
                                                             <span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;<span th:text="#{boton.borrar}">Borrar</span>
@@ -104,9 +104,9 @@
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat="telefono in usuario.telefonos">
-                                                    <td><input type="number" class="form-control" id="telefono_telefono" th:placeholder="#{usuario.telefono}" placeholder="Teléfono" ng-model="telefono.telefono"/></td>
-                                                    <td><input type="number" class="form-control" id="telefono_extension" th:placeholder="#{usuario.extension}" placeholder="Extensión" ng-model="telefono.extension"/></td>
-                                                    <td><select id="telefono_tipo" class="form-control" ng-model="telefono.tipo" ng-options="tipo for tipo in tiposTelefono"></select></td>
+                                                    <td><input type="number" class="form-control" id="telefonos{{$index}}_telefono" th:placeholder="#{usuario.telefono}" placeholder="Teléfono" ng-model="telefono.telefono"/></td>
+                                                    <td><input type="number" class="form-control" id="telefonos{{$index}}_extension" th:placeholder="#{usuario.extension}" placeholder="Extensión" ng-model="telefono.extension"/></td>
+                                                    <td><select id="telefonos{{$index}}_tipo" class="form-control" ng-model="telefono.tipo" ng-options="tipo for tipo in tiposTelefono"></select></td>
                                                     <td>
                                                         <button class="btn btn-danger btn-sm" ng-click="deleteTelefono(telefono)">
                                                             <span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;<span th:text="#{boton.borrar}">Borrar</span>

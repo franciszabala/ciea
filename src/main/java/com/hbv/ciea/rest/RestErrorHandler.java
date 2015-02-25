@@ -98,7 +98,7 @@ public class RestErrorHandler {
 
         for (FieldError errorCampo : erroresCampo) {
             String localizedErrorMessage = resolverMensajeError(errorCampo);
-            dto.addErrorCampo(errorCampo.getField(), localizedErrorMessage);
+            dto.addErrorCampo(errorCampo.getField().replaceAll("[\\[\\]]", "").replaceAll("\\.", "_"), localizedErrorMessage);
         }
 
         return dto;
