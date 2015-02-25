@@ -8,7 +8,7 @@
             <div layout:fragment="content">
                 <div id="categoria" ng-app="categoriaApp">
                     <div ng-controller="AlertaCtrl">
-                        <alert ng-repeat="alerta in alertas" type="{{alerta.type}}" close="cerrarAlerta($index)">{{alerta.msg}}</alert>
+                        <alert ng-repeat="alerta in alertas" type="{{alerta.type}}" close="cerrarAlerta($index)"><div ng-bind-html="alerta.msg"></div></alert>
                         <div class="row">
                             <div class="col-xs-12">
                                 <div>

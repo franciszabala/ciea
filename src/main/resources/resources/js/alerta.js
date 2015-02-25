@@ -12,9 +12,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * @see https://code.angularjs.org/1.3.10/docs/api/ng/directive/ngBindHtml
  */
 
-var actrl = angular.module("alerta.controller", []);
+var actrl = angular.module("alerta.controller", ["ngSanitize"]);
 
 actrl.controller("AlertaCtrl", function ($scope, $log) {
 
@@ -47,12 +48,15 @@ actrl.controller("AlertaCtrl", function ($scope, $log) {
     $scope.alertaError = function (error) {
         $scope.limpiarAlertas();
         if (error.status === 422) {//error de validacion
+            var mensajes = "<ul>";
             error.data.errores.forEach(function (item) {
                 $log.debug(item.mensaje);
-                $scope.agregarAlerta('danger', item.mensaje);
+                mensajes += "<li>" + item.mensaje + "</li>";
+//                $scope.agregarAlerta('danger', item.mensaje);
                 $("#" + item.campo).parent("div").parent(".form-group").addClass("has-error");
                 $("#" + item.campo).parent("td").addClass("danger");
             });
+            $scope.agregarAlerta('danger', mensajes + "</ul>");
         } else {//error de sistema
             $log.error(error.data.mensaje);
             $scope.agregarAlerta('danger', error.data.mensaje);
