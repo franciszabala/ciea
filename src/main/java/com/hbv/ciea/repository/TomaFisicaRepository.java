@@ -18,6 +18,7 @@
 package com.hbv.ciea.repository;
 
 import com.hbv.ciea.model.Activo;
+import com.hbv.ciea.model.TomaFisica;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,21 +27,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 /**
- * Repositorio de Activos.
+ * Repositorio de Toma Fisica.
  *
- * @author Herman Barrantes
- * @since 26-nov-2014
+ * @author Eilyn Salazar
  */
-public interface ActivoRepository extends JpaRepository<Activo, Long> {
+public interface TomaFisicaRepository extends JpaRepository<TomaFisica, Long> {
 
-    @Override
-    @Query(value = "SELECT a FROM Activo a JOIN FETCH a.sitio JOIN FETCH a.articulo", countQuery = "select count(a.id) from Activo a")
-    Page findAll(Pageable pageable);
 
-    @Override
-    @Query("SELECT a FROM Activo a JOIN FETCH a.sitio JOIN FETCH a.articulo")
-    List<Activo> findAll();
-
-    @Query("SELECT a FROM Activo a JOIN FETCH a.sitio JOIN FETCH a.articulo where a.placa = :placa")
-    List<Activo> findActivos(@Param("placa") String placa);
 }

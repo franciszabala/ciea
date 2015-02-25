@@ -86,3 +86,8 @@ insert into orden_compra(id,factura,fecha,estado,id_proveedor)values(3,'Factura 
 insert into orden_compra_detalle(id,id_orden_compra,precio,cantidad,id_articulo)values(1,1,2000, 2,1);
 insert into orden_compra_detalle(id,id_orden_compra,precio,cantidad,id_articulo)values(2,1,3000, 1,2);
 insert into orden_compra_detalle(id,id_orden_compra,precio,cantidad,id_articulo)values(3,2,1000, 2,1);
+
+--Toma Fisica
+
+insert into toma_fisica(id,fecha)values(1,'2014-01-01');
+insert into toma_fisica(id,fecha)values(2,'2015-01-02');

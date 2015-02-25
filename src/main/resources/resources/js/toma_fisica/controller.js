@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var ctrl = angular.module("activo.controller", []);
+var ctrl = angular.module("toma_fisica.controller", []);
 
-ctrl.controller("ActivoListaCtrl", function ($scope, Activo) {
+ctrl.controller("TomaFisicaListaCtrl", function ($scope, TomaFisica) {
     $scope.init = function () {
         $scope.limpiarAlertas();
         $scope.pagina = 1;
-        $scope.getActivos();
+        $scope.getTomaFisicas();
     };
 
     $scope.showModal = function (id) {
@@ -32,41 +32,51 @@ ctrl.controller("ActivoListaCtrl", function ($scope, Activo) {
         $scope.modalBorrado = false;
     };
 
-    $scope.getActivos = function () {
-        Activo.page({page: $scope.pagina}, function (data) {
-            $scope.activos = data;
+    $scope.getTomaFisicas = function () {
+        TomaFisica.page({page: $scope.pagina}, function (data) {
+            $scope.toma_fisicas = data;
         }, function (error) {
             $scope.alertaError(error);
         });
     };
 
-    $scope.deleteActivo = function () {
+    $scope.deleteTomaFisica = function () {
         $scope.modalBorrado = false;
-        return Activo.delete({id: $scope.borrarId}, function () {
+        return TomaFisica.delete({id: $scope.borrarId}, function () {
             $scope.alertaBorrado = true;
-            $scope.getActivos();
+            $scope.getTomaFisicas();
+        }, function (error) {
+            $scope.alertaError(error);
+        });
+    };
+
+    $scope.terminarTomaFisica = function () {
+        $scope.modalBorrado = false;
+        return TomaFisica.update({id: $scope.borrarId}, function () {
+            $scope.alertaBorrado = true;
+            $scope.getTomaFisicas();
         }, function (error) {
             $scope.alertaError(error);
         });
     };
 
     $scope.pageChanged = function () {
-        $scope.getActivos();
+        $scope.getTomaFisicas();
     };
 
     $scope.init();
 });
 
-ctrl.controller("ActivoNuevoCtrl", function ($scope, Activo, Sitio, Articulo, ActivoEstado, $state) {
+ctrl.controller("TomaFisicaNuevoCtrl", function ($scope, TomaFisica, Sitio, Activo, TomaFisicaEstado, $state) {
     $scope.init = function () {
         $scope.sitios = Sitio.query();
-        $scope.articulos = Articulo.query();
-        $scope.estados = ActivoEstado;
+        $scope.activos = Activo.query();
+        $scope.estados = TomaFisicaEstado;
     };
-    
-    $scope.createActivo = function () {
-        var activo = new Activo($scope.activo);
-        activo.$save({}, function () {
+
+    $scope.createTomaFisica = function () {
+        var toma_fisica = new TomaFisica($scope.toma_fisica);
+        toma_fisica.$save({}, function () {
             $state.transitionTo("lista");
         }, function (error) {
             $scope.alertaError(error);
@@ -80,16 +90,16 @@ ctrl.controller("ActivoNuevoCtrl", function ($scope, Activo, Sitio, Articulo, Ac
     $scope.init();
 });
 
-ctrl.controller("ActivoEditarCtrl", function ($scope, Activo, Sitio, Articulo, ActivoEstado, $state, $stateParams) {
+ctrl.controller("TomaFisicaEditarCtrl", function ($scope, TomaFisica, Sitio, Activo, TomaFisicaEstado, $state, $stateParams) {
     $scope.init = function () {
-        $scope.activo = Activo.get({id: $stateParams.activoId});
+        $scope.toma_fisica = TomaFisica.get({id: $stateParams.tomaFisicaId});
         $scope.sitios = Sitio.query();
-        $scope.estados = ActivoEstado;
-        $scope.articulos = Articulo.query();
+        $scope.estados = TomaFisicaEstado;
+        $scope.activos = Activo.query();
     };
 
-    $scope.updateActivo = function () {
-        var activo = new Activo($scope.activo);
+    $scope.updateTomaFisica = function () {
+        var activo = new TomaFisica($scope.activo);
         activo.$update({}, function () {
             $state.transitionTo("lista");
         }, function (error) {
