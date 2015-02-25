@@ -41,6 +41,6 @@ public interface ActivoRepository extends JpaRepository<Activo, Long> {
     @Query("SELECT a FROM Activo a JOIN FETCH a.sitio JOIN FETCH a.articulo")
     List<Activo> findAll();
 
-    @Query("SELECT a FROM Activo a JOIN FETCH a.sitio JOIN FETCH a.articulo where a.Placa = :placa")
+    @Query("SELECT a FROM Activo a JOIN FETCH a.sitio JOIN FETCH a.articulo where a.placa = :placa")
     List<Activo> findActivos(@Param("placa") String placa);
 }

@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var srvc = angular.module("activo.service", []);
+var srvc = angular.module("toma_fisica.service", []);
 
-srvc.factory("Activo", function ($resource) {
-    return $resource("/api/activo/:id:ruta", {id: "@id"}, {
+srvc.factory("TomaFisica", function ($resource) {
+    return $resource("/api/toma_fisica/:id:ruta", {id: "@id"}, {
         update: {
             method: 'PUT'
         },
@@ -27,4 +27,4 @@ srvc.factory("Activo", function ($resource) {
     });
 });
 
-srvc.value("ActivoEstado", ["EXCELENTE", "MUY_BUENO", "BUENO", "REGULAR", "MALO"]);
+srvc.value("tomaFisicaEstado", ["EN_PROCESO", "TERMINADO"]);

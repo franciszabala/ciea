@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-var app = angular.module("tomaFisicaApp", ["ui.router", "ngResource", "ui.bootstrap", "alerta.controller", "modal.directiva", "articulo.service" , "sitio.service", "activo.service", "activo.controller"]);
+var app = angular.module("tomaFisicaApp", ["ui.router", "ngResource", "ui.bootstrap", "alerta.controller", "modal.directiva", "articulo.service", "sitio.service", "activo.service","toma_fisica.service", "toma_fisica.controller"]);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("lista");
@@ -22,17 +22,27 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
             .state('lista', {
                 url: '/lista',
-                templateUrl: "/tomas_fisica/lista",
+                templateUrl: "/toma_fisica/lista",
                 controller: 'TomaFisicaListaCtrl'
+            })
+            .state('iniciar', {
+                url: '/editar/:tomaFisicaId',
+                templateUrl: "/toma_fisica/editar",
+                controller: 'TomaFisicaEditarCtrl'
+            })
+            .state('ejecutar', {
+                url: '/editar/:tomaFisicaId',
+                templateUrl: "/toma_fisica/editar",
+                controller: 'TomaFisicaEditarCtrl'
             })
             .state('editar', {
                 url: '/editar/:tomaFisicaId',
-                templateUrl: "/tomas_fisica/editar",
+                templateUrl: "/toma_fisica/editar",
                 controller: 'TomaFisicaEditarCtrl'
             })
             .state('nuevo', {
                 url: '/nuevo',
-                templateUrl: "/tomas_fisica/nuevo",
+                templateUrl: "/toma_fisica/nuevo",
                 controller: 'TomaFisicaNuevoCtrl'
             });
 });
