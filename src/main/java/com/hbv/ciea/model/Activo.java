@@ -66,13 +66,13 @@ public class Activo implements Serializable {
     @Valid
     @NotNull
     @JoinColumn(name = "id_sitio", referencedColumnName = "id")
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Sitio sitio;
     @Valid
     @NotNull
     @JoinColumn(name = "id_articulo", referencedColumnName = "id")
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Articulo articulo;
     @Valid
@@ -157,8 +157,6 @@ public class Activo implements Serializable {
     public void setHabilitado(boolean habilitado) {
         this.habilitado = habilitado;
     }
-    
-    
 
     @Override
     public int hashCode() {

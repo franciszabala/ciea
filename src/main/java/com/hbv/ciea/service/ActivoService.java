@@ -95,7 +95,7 @@ public class ActivoService {
     }
 
     public void delete(long id) {
-        activoRepository.delete(id);
+        activoRepository.deleteLogico(id);
     }
 
     /**
