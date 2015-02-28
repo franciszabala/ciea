@@ -34,7 +34,7 @@ import org.springframework.data.repository.query.Param;
 public interface ActivoRepository extends JpaRepository<Activo, Long> {
 
     @Override
-    @Query(value = "SELECT a FROM Activo a JOIN FETCH a.sitio JOIN FETCH a.articulo", countQuery = "select count(a.id) from Activo a")
+    @Query(value = "SELECT a FROM Activo a JOIN FETCH a.sitio JOIN FETCH a.articulo", countQuery = "SELECT COUNT(a.id) FROM Activo a")
     Page findAll(Pageable pageable);
 
     @Override

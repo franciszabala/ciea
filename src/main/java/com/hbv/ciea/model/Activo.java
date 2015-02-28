@@ -32,6 +32,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -62,15 +63,19 @@ public class Activo implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "estado_toma_fisica")
     private ActivoEstadoTomaFisica estadoTomaFisica;
+    @Valid
     @NotNull
     @JoinColumn(name = "id_sitio", referencedColumnName = "id")
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Sitio sitio;
+    @Valid
+    @NotNull
     @JoinColumn(name = "id_articulo", referencedColumnName = "id")
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Articulo articulo;
+    @Valid
     @JoinColumn(name = "id_detalle", referencedColumnName = "id")
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

@@ -79,6 +79,7 @@ public class ActivoService {
             Articulo articulo = articuloRepository.findOne(activo.getArticulo().getId());
             activo.setArticulo(articulo);
         }
+        activo.setHabilitado(true);
         return activoRepository.save(activo);
     }
 

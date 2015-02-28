@@ -26,10 +26,10 @@
                             <tr>
                                 <th th:text="#{activo.id}">ID</th>
                                 <th th:text="#{activo.placa}">Placa</th>
-                                <th th:text="#{activo.serie}">Serie</th>
+                                <th th:text="#{activo.articulo}">Articulo</th>
+                                <th th:text="#{activo.descripcion}">Descripción</th>
                                 <th th:text="#{activo.estado}">Estado</th>
                                 <th th:text="#{activo.sitio}">Sitio</th>
-                                <th th:text="#{activo.articulo}">Articulo</th>
                                 <th th:text="#{etiqueta.accion}">Acciones</th>
                             </tr>
                         </thead>
@@ -37,10 +37,10 @@
                             <tr ng-repeat="activo in activos.content">
                                 <td>{{ activo.id}}</td>
                                 <td>{{ activo.placa}}</td>
-                                <td>{{ activo.serie}}</td>
+                                <td>{{ activo.articulo}}</td>
+                                <td>{{ activo.descripcion}}</td>
                                 <td>{{ activo.estado}}</td>
                                 <td>{{ activo.sitio}}</td>
-                                <td>{{ activo.articulo}}</td>
                                 <td>
                                     <div class="btn-group btn-group-ms pull-right" role="group">
                                         <button class="btn btn-primary btn-sm" ui-sref="editar({activoId: activo.id })">
