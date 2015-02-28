@@ -89,5 +89,5 @@ insert into orden_compra_detalle(id,id_orden_compra,precio,cantidad,id_articulo)
 
 --Toma Fisica
 
-insert into toma_fisica(id,fecha)values(1,'2014-01-01');
-insert into toma_fisica(id,fecha)values(2,'2015-01-02');
+insert into toma_fisica(id,fecha, estado_toma_fisica)values(1,'2014-01-01', 'TERMINADO');
+insert into toma_fisica(id,fecha, estado_toma_fisica)values(2,'2015-01-02', 'EN_PROCESO');

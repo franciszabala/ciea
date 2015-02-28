@@ -27,4 +27,4 @@ srvc.factory("TomaFisica", function ($resource) {
     });
 });
 
-srvc.value("tomaFisicaEstado", ["EN_PROCESO", "TERMINADO"]);
+srvc.value("EstadoTomaFisica", ["EN_PROCESO", "TERMINADO"]);

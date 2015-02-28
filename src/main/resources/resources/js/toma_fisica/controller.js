@@ -50,6 +50,17 @@ ctrl.controller("TomaFisicaListaCtrl", function ($scope, TomaFisica) {
         });
     };
 
+
+    $scope.iniciarTomaFisica = function () {
+        var toma_fisica = new TomaFisica($scope.toma_fisica);
+        toma_fisica.Save({}, function () {
+            $state.transitionTo("lista");
+        }, function (error) {
+            $scope.alertaError(error);
+        });
+    };
+
+    
     $scope.terminarTomaFisica = function () {
         $scope.modalBorrado = false;
         return TomaFisica.update({id: $scope.borrarId}, function () {
@@ -67,11 +78,9 @@ ctrl.controller("TomaFisicaListaCtrl", function ($scope, TomaFisica) {
     $scope.init();
 });
 
-ctrl.controller("TomaFisicaNuevoCtrl", function ($scope, TomaFisica, Sitio, Activo, TomaFisicaEstado, $state) {
+ctrl.controller("TomaFisicaNuevoCtrl", function ($scope, TomaFisica, EstadoTomaFisica, $state) {
     $scope.init = function () {
-        $scope.sitios = Sitio.query();
-        $scope.activos = Activo.query();
-        $scope.estados = TomaFisicaEstado;
+        $scope.estados = EstadoTomaFisica;
     };
 
     $scope.createTomaFisica = function () {
@@ -86,16 +95,22 @@ ctrl.controller("TomaFisicaNuevoCtrl", function ($scope, TomaFisica, Sitio, Acti
     $scope.cancelar = function () {
         $state.transitionTo("lista");
     };
+    
+    
+    $scope.open = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened = true;
+    };
 
     $scope.init();
 });
 
-ctrl.controller("TomaFisicaEditarCtrl", function ($scope, TomaFisica, Sitio, Activo, TomaFisicaEstado, $state, $stateParams) {
+ctrl.controller("TomaFisicaEditarCtrl", function ($scope, TomaFisica, TomaFisicaEstado, $state, $stateParams) {
     $scope.init = function () {
         $scope.toma_fisica = TomaFisica.get({id: $stateParams.tomaFisicaId});
-        $scope.sitios = Sitio.query();
         $scope.estados = TomaFisicaEstado;
-        $scope.activos = Activo.query();
     };
 
     $scope.updateTomaFisica = function () {
@@ -113,3 +128,5 @@ ctrl.controller("TomaFisicaEditarCtrl", function ($scope, TomaFisica, Sitio, Act
 
     $scope.init();
 });
+
+

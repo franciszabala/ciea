@@ -17,7 +17,9 @@ package com.hbv.ciea.rest;
 
 import com.hbv.ciea.dto.ErrorRestDTO;
 import com.hbv.ciea.model.Articulo;
+import com.hbv.ciea.model.EstadoTomaFisica;
 import com.hbv.ciea.model.TomaFisica;
+import com.hbv.ciea.repository.ActivoRepository;
 import com.hbv.ciea.repository.TomaFisicaRepository;
 import static com.hbv.ciea.rest.ApiConstantes.*;
 import com.hbv.ciea.service.ArticuloService;
@@ -46,6 +48,9 @@ public class TomaFisicaRestController {
     @Autowired
     private TomaFisicaRepository tomaFisicaRepository;
 
+    @Autowired
+    private ActivoRepository activoRepository;
+
     @RequestMapping(method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
     private List<TomaFisica> listar() {
         return tomaFisicaRepository.findAll();
@@ -68,6 +73,7 @@ public class TomaFisicaRestController {
 
     @RequestMapping(method = {RequestMethod.POST}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     private TomaFisica nuevo(@RequestBody @Valid TomaFisica tomaFisica) {
+        tomaFisica.setEstado(EstadoTomaFisica.EN_PROCESO);
         return tomaFisicaRepository.save(tomaFisica);
     }
 
@@ -80,6 +86,13 @@ public class TomaFisicaRestController {
     private ResponseEntity<Boolean> borrar(@PathVariable(ID) long id) {
         tomaFisicaRepository.delete(id);
         return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = {RequestMethod.POST}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    private TomaFisica iniciar(@RequestBody @Valid TomaFisica tomaFisica) {
+        tomaFisica.setEstado(EstadoTomaFisica.EN_PROCESO);
+        activoRepository.changeStatusStockTaking(EstadoTomaFisica.EN_PROCESO.name());
+        return tomaFisicaRepository.save(tomaFisica);
     }
 
 }

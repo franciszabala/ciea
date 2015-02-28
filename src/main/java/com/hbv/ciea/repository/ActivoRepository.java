@@ -22,8 +22,10 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Repositorio de Activos.
@@ -43,4 +45,9 @@ public interface ActivoRepository extends JpaRepository<Activo, Long> {
 
     @Query("SELECT a FROM Activo a JOIN FETCH a.sitio JOIN FETCH a.articulo where a.placa = :placa")
     List<Activo> findActivos(@Param("placa") String placa);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE a FROM Activo a set a.estado_toma_fisica:=estado ")
+    int changeStatusStockTaking(@Param("estado") String estado);
 }

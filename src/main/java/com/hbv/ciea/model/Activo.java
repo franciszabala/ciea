@@ -61,7 +61,7 @@ public class Activo implements Serializable {
     private ActivoEstado estado;
     @Enumerated(EnumType.STRING)
     @Column(name = "estado_toma_fisica")
-    private ActivoEstadoTomaFisica estadoTomaFisica;
+    private EstadoTomaFisica estadoTomaFisica;
     @NotNull
     @JoinColumn(name = "id_sitio", referencedColumnName = "id")
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -137,11 +137,11 @@ public class Activo implements Serializable {
         this.detalle = detalle;
     }
 
-    public ActivoEstadoTomaFisica getEstadoTomaFisica() {
+    public EstadoTomaFisica getEstadoTomaFisica() {
         return estadoTomaFisica;
     }
 
-    public void setEstadoTomaFisica(ActivoEstadoTomaFisica estadoTomaFisica) {
+    public void setEstadoTomaFisica(EstadoTomaFisica estadoTomaFisica) {
         this.estadoTomaFisica = estadoTomaFisica;
     }
 

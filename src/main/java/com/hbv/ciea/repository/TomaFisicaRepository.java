@@ -17,14 +17,8 @@
  */
 package com.hbv.ciea.repository;
 
-import com.hbv.ciea.model.Activo;
 import com.hbv.ciea.model.TomaFisica;
-import java.util.List;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 /**
  * Repositorio de Toma Fisica.

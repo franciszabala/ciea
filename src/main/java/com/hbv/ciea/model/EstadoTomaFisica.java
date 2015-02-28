@@ -22,9 +22,9 @@ package com.hbv.ciea.model;
  * @author Herman Barrantes
  * @since 25-nov-2014
  */
-public enum ActivoEstadoTomaFisica {
+public enum EstadoTomaFisica {
 
-    
+
     TERMINADO,
     EN_PROCESO;
 }
