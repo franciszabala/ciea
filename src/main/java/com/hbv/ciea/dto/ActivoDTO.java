@@ -22,11 +22,11 @@ import java.io.Serializable;
  *
  * @author salazaei
  */
-public class ActivoDTO implements Serializable{
-    
+public class ActivoDTO implements Serializable {
+
     private final long id;
     private final String placa;
-    private final String serie;
+    private final String descripcion;
     private final String articulo;
     private final String estado;
     private final String sitio;
@@ -34,7 +34,7 @@ public class ActivoDTO implements Serializable{
     public ActivoDTO(Activo activo) {
         this.id = activo.getId();
         this.placa = activo.getPlaca();
-        this.serie = activo.getSerie();
+        this.descripcion = activo.getDescripcion();
         this.articulo = activo.getArticulo().getDescripcion();
         this.estado = activo.getEstado().name();
         this.sitio = activo.getSitio().getNombre();
@@ -48,13 +48,13 @@ public class ActivoDTO implements Serializable{
         return placa;
     }
 
-    public String getSerie() {
-        return serie;
+    public String getDescripcion() {
+        return descripcion;
     }
 
     public String getArticulo() {
         return articulo;
-    }  
+    }
 
     public String getEstado() {
         return estado;
@@ -63,7 +63,5 @@ public class ActivoDTO implements Serializable{
     public String getSitio() {
         return sitio;
     }
-    
-    
-    
+
 }
