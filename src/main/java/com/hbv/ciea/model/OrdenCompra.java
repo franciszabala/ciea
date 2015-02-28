@@ -71,7 +71,7 @@ public class OrdenCompra implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Proveedor proveedor;
     @Valid
-    @Size(min=1)
+    @Size(min = 1)
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "id_orden_compra")
     private List<OrdenCompraDetalle> detalles;
@@ -148,10 +148,4 @@ public class OrdenCompra implements Serializable {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "OrdenCompra[ id=" + id + " ]";
-    }
-
 }

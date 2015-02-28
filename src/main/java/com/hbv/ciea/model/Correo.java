@@ -115,10 +115,4 @@ public class Correo implements Serializable {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Correo[ id=" + id + " ]";
-    }
-
 }

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/plantilla">
+    <head>
+        <title th:text="#{toma_fisica.titulo}">Toma Física</title>
+    </head>
+    <body>
+        <div class="container">
+            <div th:fragment="content">
+                <alert ng-show="alertaBorrado" type="success" close="alertaBorrado = false" th:text="#{toma_fisica.alerta.borrado}">Se borró correctamente la toma fisica</alert>
+                <modal th:attr="title=#{modal.confirmacion.titulo}" title="Borrar" visible="modalBorrado">
+                    <p th:text="#{toma_fisica.confirmacion.borrar}">¿Realmente desea terminar la toma fisica?</p>
+                    <button class="btn btn-primary btn-sm" ng-click="terminarTomaFisica()">
+                        <span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;<span th:text="#{boton.aceptar}">Aceptar</span>
+                    </button>
+                    <button class="btn btn-default btn-sm" ng-click="hideModal()">
+                        <span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp;<span th:text="#{boton.cancelar}">Cancelar</span>
+                    </button>
+                </modal>
+                <h1 th:text="#{toma_fisica.lista}">Lista de Tomas Fisicas</h1>
+                <button class="btn btn-success btn-sm" ui-sref="nuevo">
+                    <span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;<span th:text="#{boton.nuevo}">Nuevo</span>
+                </button>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th th:text="#{toma_fisica.id}">ID</th>
+                                <th th:text="#{toma_fisica.fecha}">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="toma_fisica in toma_fisicas.content">
+                                <td>{{ toma_fisica.id}}</td>
+                                <td>{{ toma_fisica.fecha}}</td>
+                                <td>
+                                    <div class="btn-group btn-group-ms pull-right" role="group">
+                                        <button class="btn btn-primary btn-sm" ui-sref="iniciar({ toma_fisicaId: toma_fisica.id })">
+                                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;<span th:text="#{boton.iniciar}">Iniciar</span>
+                                        </button>
+                                        <button class="btn btn-primary btn-sm" ui-sref="ejecutar({ toma_fisicaId: toma_fisica.id })">
+                                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;<span th:text="#{boton.ejecutar}">Iniciar</span>
+                                        </button>
+                                        <button class="btn btn-danger btn-sm" ng-click="showModal(toma_fisica.id)">
+                                            <span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;<span th:text="#{boton.terminar}">Terminar</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <pagination class="hidden-xs" total-items="toma_fisicas.totalElements" ng-model="pagina" ng-change="pageChanged()" th:attr="previous-text=#{boton.anterior},next-text=#{boton.siguiente},first-text=#{boton.primera},last-text=#{boton.ultima}"/>
+                <pager class="visible-xs-block" total-items="toma_fisicas.totalElements" ng-model="pagina" ng-change="pageChanged()" th:attr="previous-text=#{boton.anterior},next-text=#{boton.siguiente}"/>
+            </div>
+        </div>
+    </body>
+</html>

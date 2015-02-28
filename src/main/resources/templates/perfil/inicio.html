@@ -9,7 +9,7 @@
                 <div id="perfil" ng-app="perfilApp">
 
                     <div ng-controller="AlertaCtrl">
-                        <alert ng-repeat="alerta in alertas" type="{{alerta.type}}" close="cerrarAlerta($index)">{{alerta.msg}}</alert>
+                        <alert ng-repeat="alerta in alertas" type="{{alerta.type}}" close="cerrarAlerta($index)"><div ng-bind-html="alerta.msg"></div></alert>
                         <div class="row" ng-controller="PerfilCtrl">
                             <alert ng-show="alertaGuardado" type="success" close="alertaGuardado = false" th:text="#{usuario.alerta.guardado}">Se guardó correctamente el usuario</alert>
                             <h1 th:text="#{perfil.titulo}">Perfil</h1>

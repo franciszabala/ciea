@@ -7,6 +7,9 @@
         <div class="container" >
             <div layout:fragment="content">
                 <h1 th:text="#{inicio.titulo}">Bienvenido</h1>
+                <img class="img-responsive center-block" 
+                     th:src="@{/images/logo.jpg}"
+                     src="../resources/images/logo.jpg"/>
                 <p th:text="'Hello, ' + ${nombre} + '!'" >Hello, Herman</p>
                 <br/>
                 <label th:text="'Fecha: ' + ${#dates.format(fecha, 'dd/MMM/yyyy HH:mm')}" >Fecha: 25/nov/2014 10:25</label>

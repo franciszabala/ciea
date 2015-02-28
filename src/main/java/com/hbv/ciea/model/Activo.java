@@ -176,10 +176,4 @@ public class Activo implements Serializable {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Activo[ id=" + id + " ]";
-    }
-
 }
