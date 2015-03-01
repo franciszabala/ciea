@@ -22,6 +22,8 @@
                                 <select id="estado" class="form-control" th:placeholder="#{toma_fisica.estado}"  ng-model="toma_fisica.estado" ng-options="estado for estado in estados"></select>
                             </div>
                         </div>
+                        
+                        
 
                         <fieldset>
                             <legend th:text="#{activo.lista}">Activos </legend>
@@ -40,7 +42,7 @@
                                     <tbody>
                                         <tr ng-repeat="activo in activos">
                                             <td><label class="control-label">{{activo.placa}}</label></td>
-                                            <td><label class="control-label">{{activo.detalle}}</label></td>
+                                            <td><label class="control-label">{{activo.descripcion}}</label></td>
                                             <td><label class="control-label">{{activo.estadoTomaFisica}}</label></td>
                                             <td><select class="form-control" id="sitio" ng-model="activo.sitio" ng-options="sitio.nombre for sitio in sitios track by sitio.id"></select></td>
                                             <td><select id="estado_activo" class="form-control" ng-model="activo.estado" ng-options="estado for estado in activo_estados"></select></td>
