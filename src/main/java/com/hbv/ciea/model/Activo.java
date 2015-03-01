@@ -49,12 +49,12 @@ public class Activo implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @Size(max = 50)
+    @Size(max = 15)
     @Column(name = "placa")
     private String placa;
     @Size(max = 50)
-    @Column(name = "serie")
-    private String serie;
+    @Column(name = "descripcion")
+    private String descripcion;
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "estado")
@@ -97,12 +97,12 @@ public class Activo implements Serializable {
         this.placa = placa;
     }
 
-    public String getSerie() {
-        return serie;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setSerie(String serie) {
-        this.serie = serie;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public ActivoEstado getEstado() {

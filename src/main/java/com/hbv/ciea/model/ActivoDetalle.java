@@ -38,15 +38,18 @@ public class ActivoDetalle implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @Size(max = 50)
-    @Column(name = "descripcion")
-    private String descripcion;
-    @Size(max = 15)
+    @Size(max = 30)
     @Column(name = "marca")
     private String marca;
-    @Size(max = 15)
+    @Size(max = 30)
     @Column(name = "modelo")
     private String modelo;
+    @Size(max = 30)
+    @Column(name = "serie")
+    private String serie;
+    @Size(max = 15)
+    @Column(name = "codigo_barras")
+    private String codigoBarras;
 
     public ActivoDetalle() {
     }
@@ -57,14 +60,6 @@ public class ActivoDetalle implements Serializable {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     public String getMarca() {
@@ -81,6 +76,22 @@ public class ActivoDetalle implements Serializable {
 
     public void setModelo(String modelo) {
         this.modelo = modelo;
+    }
+
+    public String getSerie() {
+        return serie;
+    }
+
+    public void setSerie(String serie) {
+        this.serie = serie;
+    }
+
+    public String getCodigoBarras() {
+        return codigoBarras;
+    }
+
+    public void setCodigoBarras(String codigoBarras) {
+        this.codigoBarras = codigoBarras;
     }
 
 }

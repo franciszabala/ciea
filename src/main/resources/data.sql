@@ -63,19 +63,19 @@ insert into proveedor_telefono(id_proveedor,id_telefono)values(1,11);
 insert into proveedor_telefono(id_proveedor,id_telefono)values(2,12);
 
 --Articulo
-insert into articulo(id,descripcion,id_categoria)values(1,'Pupitre',2);
-insert into articulo(id,descripcion,id_categoria)values(2,'Server', 1);
-insert into articulo(id,descripcion,id_categoria)values(3,'Licuadora', 3);
+insert into articulo(id,descripcion,id_categoria)values(1,'LICUADORA',3);
+insert into articulo(id,descripcion,id_categoria)values(2,'SERVIDOR',1);
+insert into articulo(id,descripcion,id_categoria)values(3,'MOUSE',1);
 
 --Activo Detalle
-insert into activo_detalle(id,descripcion,modelo,marca)values(1,'Grande, color verde',null,null);
-insert into activo_detalle(id,descripcion,modelo,marca)values(2,null,'123','HP');
-insert into activo_detalle(id,descripcion,modelo,marca)values(3,'Licuadora Industrial','XPS300','Oster');
+insert into activo_detalle(id,marca,modelo,serie,codigo_barras)values(1,'OSTER','XP02','200','700500300');
+insert into activo_detalle(id,marca,modelo,serie,codigo_barras)values(2,'HP','XP03','200','700500301');
+insert into activo_detalle(id,marca,modelo,serie,codigo_barras)values(3,'Geniuos','XP04','200','700500302');
 
 --Activos
-insert into activo(id,placa,serie,estado,id_sitio,id_articulo,id_detalle)values(1,'EAC-01','123', 'BUENO',12,3,1);
-insert into activo(id,placa,serie,estado,id_sitio,id_articulo,id_detalle)values(2,'EAD-01','456', 'BUENO',1,2,2);
-insert into activo(id,placa,serie,estado,id_sitio,id_articulo,id_detalle)values(3,'EA-01','789', 'BUENO',2,3,3);
+insert into activo(id,placa,descripcion,estado,id_sitio,id_articulo,id_detalle,habilitado)values(1,'EAC-01','DE ALUMINIO','BUENO',1,1,1,1);
+insert into activo(id,placa,descripcion,estado,id_sitio,id_articulo,id_detalle,habilitado)values(2,'EAC-02',null,'BUENO',2,2,2,1);
+insert into activo(id,placa,descripcion,estado,id_sitio,id_articulo,id_detalle,habilitado)values(3,'EAC-03','COLOR NEGRO','BUENO',3,3,3,1);
 
 --Ordenes de Compra
 insert into orden_compra(id,factura,fecha,estado,id_proveedor)values(1,'Factura 1','2015-01-01', 'COMPRADO',1);

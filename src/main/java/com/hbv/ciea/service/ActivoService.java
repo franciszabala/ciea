@@ -65,9 +65,10 @@ public class ActivoService {
 
     public Activo save(Activo activo) {
         if (activo.getDetalle() != null
-                && isNullOrEmpty(activo.getDetalle().getDescripcion())
+                && isNullOrEmpty(activo.getDetalle().getSerie())
                 && isNullOrEmpty(activo.getDetalle().getMarca())
-                && isNullOrEmpty(activo.getDetalle().getModelo())) {
+                && isNullOrEmpty(activo.getDetalle().getModelo())
+                && isNullOrEmpty(activo.getDetalle().getCodigoBarras())) {
             activo.setDetalle(null);
         }
         if (activo.getSitio() != null) {
@@ -83,9 +84,10 @@ public class ActivoService {
 
     public Activo update(Activo activo) {
         if (activo.getDetalle() != null
-                && isNullOrEmpty(activo.getDetalle().getDescripcion())
+                && isNullOrEmpty(activo.getDetalle().getSerie())
                 && isNullOrEmpty(activo.getDetalle().getMarca())
-                && isNullOrEmpty(activo.getDetalle().getModelo())) {
+                && isNullOrEmpty(activo.getDetalle().getModelo())
+                && isNullOrEmpty(activo.getDetalle().getCodigoBarras())) {
             activo.setDetalle(null);
         }
         return activoRepository.save(activo);
@@ -95,10 +97,24 @@ public class ActivoService {
         activoRepository.delete(id);
     }
 
+    /**
+     * Retorna TRUE si el String es NULL o un String vacío.
+     *
+     * @param string String a validar
+     * @return TRUE si el String es NULL o un String vacío o FALSE en caso
+     * contrario
+     */
     private boolean isNullOrEmpty(String string) {
         return string == null || string.isEmpty();
     }
 
+    /**
+     * Retorna FALSE si el String es NULL o un String vacío.
+     *
+     * @param string String a validar
+     * @return FALSE si el String es NULL o un String vacío o TRUE en caso
+     * contrario
+     */
     private boolean isNotNullOrEmpty(String string) {
         return string != null && !string.trim().isEmpty();
     }
