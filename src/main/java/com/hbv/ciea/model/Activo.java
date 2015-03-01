@@ -63,6 +63,7 @@ public class Activo implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "estado_toma_fisica")
     private EstadoTomaFisica estadoTomaFisica;
+    @Valid
     @NotNull
     @JoinColumn(name = "id_sitio", referencedColumnName = "id")
     @ManyToOne(optional = false, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
