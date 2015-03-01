@@ -1,53 +1,356 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Inventario" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="744b2945-f149-4821-bd7e-171e1f6c5917">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Inventario" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="744b2945-f149-4821-bd7e-171e1f6c5917">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<style name="tabla" mode="Opaque" forecolor="#000000" backcolor="#FFFFFF" fill="Solid" hAlign="Left" vAlign="Middle" isBlankWhenNull="true" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="columna" mode="Opaque" forecolor="#000000" backcolor="#FFFFFF" fill="Solid" hAlign="Left" vAlign="Middle" isBlankWhenNull="true" fontSize="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="encabezado" mode="Opaque" forecolor="#000000" backcolor="#FFFFFF" fill="Solid" hAlign="Left" vAlign="Middle" isBlankWhenNull="true" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+	</style>
+	<style name="pie" mode="Opaque" forecolor="#000000" backcolor="#FFFFFF" fill="Solid" hAlign="Justified" vAlign="Top" isBlankWhenNull="true" fontSize="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3"/>
+	</style>
 	<queryString>
 		<![CDATA[SELECT
-     activo.`placa` AS activo_placa,
-     activo.`serie` AS activo_serie,
-     activo.`estado` AS activo_estado,
-     articulo.`descripcion` AS articulo_descripcion,
-     articulo.`marca` AS articulo_marca,
-     articulo.`modelo` AS articulo_modelo,
-     sitio.`nombre` AS sitio_nombre
+     activo.placa AS activo_placa,
+     activo.descripcion AS activo_descripcion,
+     activo.estado AS activo_estado,
+     activo_detalle.marca AS activo_detalle_marca,
+     activo_detalle.modelo AS activo_detalle_modelo,
+     activo_detalle.serie AS activo_detalle_serie,
+     activo_detalle.codigo_barras AS activo_detalle_codigo_barras,
+     articulo.descripcion AS articulo_descripcion,
+     sitio.id AS sitio_id,
+     sitio.nombre AS sitio_nombre
 FROM
-     `articulo` articulo INNER JOIN `activo` activo ON articulo.`id` = activo.`id_articulo`
-     INNER JOIN `sitio` sitio ON activo.`id_sitio` = sitio.`id`]]>
+     activo activo LEFT OUTER JOIN activo_detalle activo_detalle ON activo.id_detalle = activo_detalle.id
+     INNER JOIN sitio sitio ON activo.id_sitio = sitio.id
+     INNER JOIN articulo articulo ON activo.id_articulo = articulo.id
+ORDER BY
+     sitio.id ASC]]>
 	</queryString>
 	<field name="activo_placa" class="java.lang.String"/>
-	<field name="activo_serie" class="java.lang.String"/>
+	<field name="activo_descripcion" class="java.lang.String"/>
 	<field name="activo_estado" class="java.lang.String"/>
+	<field name="activo_detalle_marca" class="java.lang.String"/>
+	<field name="activo_detalle_modelo" class="java.lang.String"/>
+	<field name="activo_detalle_serie" class="java.lang.String"/>
+	<field name="activo_detalle_codigo_barras" class="java.lang.String"/>
 	<field name="articulo_descripcion" class="java.lang.String"/>
-	<field name="articulo_marca" class="java.lang.String"/>
-	<field name="articulo_modelo" class="java.lang.String"/>
+	<field name="sitio_id" class="java.lang.Integer"/>
 	<field name="sitio_nombre" class="java.lang.String"/>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
-	<title>
-		<band height="79" splitType="Stretch"/>
-	</title>
+	<group name="Sitio" isStartNewPage="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{sitio_id}]]></groupExpression>
+		<groupHeader>
+			<band height="140">
+				<textField>
+					<reportElement style="encabezado" x="300" y="45" width="200" height="15" uuid="1c7b38fb-f188-4172-b363-301a19debf0f"/>
+					<textFieldExpression><![CDATA[$F{sitio_nombre}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="columna" x="0" y="120" width="200" height="20" uuid="44768235-c4db-4bde-b7b5-67479c039b5e"/>
+					<text><![CDATA[DESCRIPCIÓN DEL BIEN]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="columna" x="200" y="120" width="100" height="20" uuid="05ecfb37-7a81-4f7b-bf31-22800cea4125"/>
+					<text><![CDATA[N° PATRIMONIO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="columna" x="300" y="120" width="100" height="20" uuid="afb12e89-3506-42f9-8cc3-6f93c375f63e"/>
+					<text><![CDATA[CÓDIGO DE BARRAS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="columna" x="400" y="120" width="100" height="20" uuid="b11f8343-e0ae-414f-8016-717d8d652277"/>
+					<text><![CDATA[SERIE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="columna" x="500" y="120" width="100" height="20" uuid="00b0fb38-c268-4eb8-88af-332aa0588baa"/>
+					<text><![CDATA[MODELO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="columna" x="600" y="120" width="100" height="20" uuid="9decf075-9a14-4157-a6d7-9ee6159f1162"/>
+					<text><![CDATA[MARCA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="columna" x="700" y="120" width="100" height="20" uuid="ff1103a6-749e-4748-baec-a51a5099618e"/>
+					<text><![CDATA[ESTADO DEL BIEN]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="encabezado" x="0" y="0" width="300" height="15" uuid="bafb5235-c3c7-4f5e-aa08-9a329354611a"/>
+					<text><![CDATA[FECHA:]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement style="encabezado" x="300" y="0" width="200" height="15" uuid="e92474d1-d38f-4340-b434-2203ac90fd1b"/>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement style="encabezado" x="0" y="15" width="300" height="15" uuid="bda3362c-6d30-40a4-9b27-f2a3d5d21aed"/>
+					<text><![CDATA[DEPENDENCIA QUE ENTREGA LOS BIENES:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="encabezado" x="300" y="15" width="200" height="15" uuid="47052252-8347-4e99-8c9e-ed3125d3f940"/>
+					<text><![CDATA[ESCUELA  AEROPUERTO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="encabezado" x="0" y="30" width="300" height="15" uuid="3dcf975f-ddf3-4eb7-b12b-d39eae4a7728"/>
+					<text><![CDATA[NOMBRE DEL JEFE DE LA DEPENDENCIA QUE ENTREGA:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="encabezado" x="300" y="30" width="200" height="15" uuid="7c96123f-e76b-4aab-9f02-3997c72da1e3"/>
+					<text><![CDATA[LICDA. CRISIA MATAMOROS HERRERA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="encabezado" x="0" y="45" width="300" height="15" uuid="33f0da2c-920c-4370-bc93-d8886235cf70"/>
+					<text><![CDATA[DEPENDENCIA QUE RECIBE LOS BIENES:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="encabezado" x="0" y="60" width="300" height="15" uuid="45ce677d-ab80-43cf-bacb-6fe06a43420d"/>
+					<text><![CDATA[NOMBRE DEL FUNCIONARIO RESPONSABLE DE LOS BIENES:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="encabezado" x="0" y="75" width="300" height="15" uuid="8ad9e76b-ffab-4fd3-ba8f-4f0c613d2df6"/>
+					<text><![CDATA[DIRECCION DEL FUNCIONARIO RESPONSABLE: ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="encabezado" x="0" y="90" width="300" height="15" uuid="c47ba4e6-a1bc-4289-bb26-0236b7f31a69"/>
+					<text><![CDATA[NÚMEROS DE TELÉFONO DEL FUNCIONARIO RESPONSABLE:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="encabezado" x="0" y="105" width="800" height="15" uuid="43f03002-0b3b-43b3-b7bb-f420b992144f"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[DETALLE DE LOS ACTIVOS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="encabezado" x="500" y="30" width="100" height="15" uuid="4e1110de-305b-48fe-a0ab-f7708500d27d"/>
+					<text><![CDATA[CEDULA:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="encabezado" x="500" y="60" width="100" height="15" uuid="54f644f3-6d6c-4c6e-93a3-980ba571b56c"/>
+					<text><![CDATA[CEDULA:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="120">
+				<staticText>
+					<reportElement style="pie" x="0" y="0" width="800" height="40" uuid="c883d598-42b4-40b3-be6e-c1a51fb29c37"/>
+					<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[La asignación  o traslado de  estos bienes  se realiza de conformidad  con lo dispuesto  en los  artículos  42 incisos h) e i)  del Reglamento  Interior de Trabajo del Ministerio de Educación Pública, artículo 6 incisos  a) y c), y artículo  7 del Reglamento para  el Registro y  Control de Bienes de la Administración Central, artículo 59, incisos j), n),  o), q), r),  s), t),  y x) del Decreto 36451-MEP, artículo 71 inciso c) del Código de Trabajo, artículo 110 incisos b), ñ), p) y q) de la Ley de Administración Financiera de la República y Presupuestos Públicos y artículo 8 inciso a) de la Ley General de Control Interno. ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="pie" x="0" y="60" width="250" height="20" uuid="cc92a326-3224-4a67-9b0f-5ca2c8312225"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[FIRMA DEL JEFE DE LA DEPENDENCIA QUE ENTREGÓ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="pie" x="400" y="60" width="250" height="20" uuid="7e723d4b-58ea-48a7-81aa-86610d755523"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[FIRMA DEL FUNCIONARIO RESPONSABLE DE LOS BIENES]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="pie" x="250" y="60" width="100" height="20" uuid="e3bf2c4b-ac57-4131-a9c6-a924237d725c"/>
+					<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+						<topPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[SELLO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="pie" x="650" y="60" width="100" height="20" uuid="56b3f02f-2369-4412-aeed-2af92cc39d41"/>
+					<box topPadding="3" leftPadding="3" bottomPadding="3" rightPadding="3">
+						<topPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[SELLO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="pie" x="0" y="80" width="802" height="20" uuid="5edbbbe2-5d58-4f58-be73-c18d954e2354"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[DISTRIBUCION DE LOS TANTOS ORIGINALES:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="pie" x="0" y="100" width="802" height="20" uuid="7040ac29-896b-4120-ab9d-303bd83c6594"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[DEPARTAMENTO DE ADMINISTRACION DE BIENES - JEFE DE LA DEPENDENCIA QUE ENTREGA - FUNCIONARIO RESPONSABLE DE LOS BIENES - OFICIAL DE SEGURIDAD (SOLO CUANDO APLIQUE)]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="130" splitType="Stretch">
+			<textField>
+				<reportElement style="encabezado" x="700" y="0" width="100" height="15" uuid="48235bbc-10b6-4fb3-a476-a293c1dba6ff"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="encabezado" x="300" y="0" width="300" height="15" uuid="674ade7d-eac1-4b08-a4ac-353986b433ee"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESCUELA  AEROPUERTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="encabezado" x="300" y="15" width="300" height="15" uuid="8f38a06a-7cf4-419e-9246-7c32f2fb9e2c"/>
+				<text><![CDATA[FUNDADA EN 1962]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="encabezado" x="300" y="30" width="300" height="15" uuid="fcfe6694-32ac-46a4-b546-df0d093a0824"/>
+				<text><![CDATA[CÉDULA JURÍDICA: 3-008-066255]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="encabezado" x="300" y="45" width="300" height="15" uuid="98982740-c3b2-449d-acbc-e68102baa213"/>
+				<text><![CDATA[B° EL CACIQUE, RÍO SENGUNDO, ALAJUELA, COSTA RICA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="encabezado" x="300" y="60" width="300" height="15" uuid="4a7bca20-bb16-47c0-bbbb-74b6d9f60a70"/>
+				<text><![CDATA[TELEFAX: 2443-0419]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="encabezado" x="300" y="75" width="300" height="15" uuid="2b16aeae-f97f-4fba-b6b0-916d3d363a1c"/>
+				<text><![CDATA[CORREO ELECTRÓNICO: ESCAEROPUERTO@GMAIL.COM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="encabezado" x="0" y="90" width="802" height="15" uuid="c66d9cc6-5f07-4eb3-a236-8df66fc6f01a"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[INVENTARIO GENERAL PARA EL CONTROL DE ACTIVOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="encabezado" x="0" y="110" width="100" height="20" uuid="0ef232d9-5e92-45a1-a20c-8dc1df755b4c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ASIGNACIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="encabezado" x="150" y="110" width="170" height="20" uuid="dba6af1e-e84f-4d2c-9313-7d77c1348572"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TRASLADO ENTRE DEPENDENCIAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="encabezado" x="350" y="110" width="120" height="20" uuid="3c352c89-a7c5-47ca-bad4-7b4d0fa2f372"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TRASLADO POR DESUSO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="encabezado" x="500" y="110" width="100" height="20" uuid="7946ac07-221e-4c42-9bb9-7679d197a7dd"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[INVENTARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="encabezado" x="650" y="110" width="100" height="20" uuid="85020a7a-0791-4aa0-850c-2f6cdf851729"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEVOLUCIÓN]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="80" y="110" width="20" height="15" uuid="3653f4a9-bd50-4134-8d9c-2c7c543e58bb"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="300" y="110" width="20" height="15" uuid="d0fef5c8-51f1-42a8-93f9-78d518e2d5b5"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="580" y="110" width="20" height="15" uuid="e023b9de-bcf7-40df-b805-071f9e0e9a8c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="730" y="110" width="20" height="15" uuid="c541c4a4-daea-474e-a430-ee05de2df133"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="450" y="110" width="20" height="15" uuid="218ec54d-8e8a-452e-a6ab-33f1eccaa0b0"/>
+			</rectangle>
+		</band>
 	</pageHeader>
-	<columnHeader>
-		<band height="61" splitType="Stretch"/>
-	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="18" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="tabla" stretchType="RelativeToBandHeight" x="0" y="0" width="200" height="18" uuid="5c61595f-0b15-440b-a59a-cd8d9c38b356"/>
+				<textFieldExpression><![CDATA[$F{articulo_descripcion} + ( $F{activo_descripcion} == null ? "" : " " + $F{activo_descripcion})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="tabla" stretchType="RelativeToBandHeight" x="200" y="0" width="100" height="18" uuid="a5015e9b-f2ca-48e6-b04e-47ecc629000a"/>
+				<textFieldExpression><![CDATA[$F{activo_placa}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="tabla" stretchType="RelativeToBandHeight" x="300" y="0" width="100" height="18" uuid="5668bb29-1029-4c17-923d-bc468dae5c9a"/>
+				<textFieldExpression><![CDATA[$F{activo_detalle_codigo_barras}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="tabla" stretchType="RelativeToBandHeight" x="400" y="0" width="100" height="18" uuid="1a32006a-5121-4421-b0ef-d725b3dded74"/>
+				<textFieldExpression><![CDATA[$F{activo_detalle_serie}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="tabla" stretchType="RelativeToBandHeight" x="500" y="0" width="100" height="18" uuid="5f8dcbbc-ae4f-4fc3-a2a4-1d650ce29525"/>
+				<textFieldExpression><![CDATA[$F{activo_detalle_modelo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="tabla" stretchType="RelativeToBandHeight" x="600" y="0" width="100" height="18" uuid="e94d8c08-4abd-4795-8110-bd9a1ea2292b"/>
+				<textFieldExpression><![CDATA[$F{activo_detalle_marca}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="tabla" stretchType="RelativeToBandHeight" x="700" y="0" width="100" height="18" uuid="08d61738-f630-4981-9953-7f14fde73af2"/>
+				<textFieldExpression><![CDATA[$F{activo_estado}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 	<noData>
-		<band height="50"/>
+		<band height="20">
+			<staticText>
+				<reportElement style="encabezado" x="0" y="0" width="800" height="20" uuid="2a596c6d-76ea-46c5-809c-3dd3a2d35d08"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[NO HAY DATOS PARA GENERAR EL REPORTE]]></text>
+			</staticText>
+		</band>
 	</noData>
 </jasperReport>
