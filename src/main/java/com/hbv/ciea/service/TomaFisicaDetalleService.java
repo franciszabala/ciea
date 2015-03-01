@@ -15,9 +15,17 @@
  */
 package com.hbv.ciea.service;
 
-import com.hbv.ciea.dto.ProveedorDTO;
-import com.hbv.ciea.model.Proveedor;
-import com.hbv.ciea.repository.ProveedorRepository;
+import com.hbv.ciea.dto.TomaFisicaDetalleDTO;
+import com.hbv.ciea.model.Activo;
+import com.hbv.ciea.model.ActivoEstado;
+import com.hbv.ciea.model.EstadoTomaFisica;
+import com.hbv.ciea.model.Sitio;
+import com.hbv.ciea.model.TomaFisica;
+import com.hbv.ciea.model.TomaFisicaDetalle;
+import com.hbv.ciea.repository.ActivoRepository;
+import com.hbv.ciea.repository.SitioRepository;
+import com.hbv.ciea.repository.TomaFisicaDetalleRepository;
+import com.hbv.ciea.repository.TomaFisicaRepository;
 import com.hbv.ciea.util.CopyConstructorUtil;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,72 +41,61 @@ import org.springframework.stereotype.Service;
  * @since 14-ene-2015
  */
 @Service
-public class ProveedorService {
+public class TomaFisicaDetalleService {
 
     @Autowired
-    private ProveedorRepository proveedorRepository;
+    private TomaFisicaDetalleRepository tomaFisicaDetalleRepository;
+
+    @Autowired
+    private ActivoRepository activoRepository;
+
+    @Autowired
+    private TomaFisicaRepository tomaFisicaRepository;
+
+    @Autowired
+    private SitioRepository sitioRepository;
 
     @Autowired
     private CopyConstructorUtil util;
 
-    /**
-     * Obtiene la lista completa de Proveedores.
-     *
-     * @return Lista completa de Proveedores.
-     */
-    public List<ProveedorDTO> findAll() {
-        return util.copiarLista(proveedorRepository.findAll(), ProveedorDTO.class);
+    public List<TomaFisicaDetalleDTO> findAll() {
+        return util.copiarLista(tomaFisicaDetalleRepository.findAll(), TomaFisicaDetalleDTO.class);
     }
 
-    /**
-     * Obtiene la lista paginada de Proveedores.
-     *
-     * @param pageable Paginación
-     * @return Lista paginada de Proveedores.
-     */
-    public Page<ProveedorDTO> findAll(Pageable pageable) {
-        Page<Proveedor> proveedores = proveedorRepository.findAll(pageable);
-        List<ProveedorDTO> proveedoresDTO = util.copiarLista(proveedores, ProveedorDTO.class);
-        return new PageImpl<ProveedorDTO>(proveedoresDTO, pageable, proveedores.getTotalElements());
+    public Page<TomaFisicaDetalleDTO> findAll(Pageable pageable) {
+        Page<TomaFisicaDetalle> tomaFisicaDetalle = tomaFisicaDetalleRepository.findAll(pageable);
+        List<TomaFisicaDetalleDTO> tomaFisicaDetalleDTO = util.copiarLista(tomaFisicaDetalle, TomaFisicaDetalleDTO.class);
+        return new PageImpl<TomaFisicaDetalleDTO>(tomaFisicaDetalleDTO, pageable, tomaFisicaDetalle.getTotalElements());
     }
 
-    /**
-     * Obtiene un Proveedor por su ID.
-     *
-     * @param id ID del Proveedor
-     * @return Proveedor correspondiente al ID
-     */
-    public Proveedor findOne(long id) {
-        return proveedorRepository.findOne(id);
+    public TomaFisicaDetalle findOne(long id) {
+        return tomaFisicaDetalleRepository.findOne(id);
     }
 
-    /**
-     * Inserta un Proveedor.
-     *
-     * @param proveedor Proveedor a Insertar
-     * @return Proveedor Insertado
-     */
-    public Proveedor save(Proveedor proveedor) {
-        return proveedorRepository.save(proveedor);
+    public TomaFisicaDetalle save(TomaFisicaDetalleDTO tomaFisicaDetalleDTO) {
+        TomaFisicaDetalle tomaFisicaDetalle = tomaFisicaDetalleRepository.findTomaFisicaDetalle(tomaFisicaDetalleDTO.getTomaFisica().getId(), tomaFisicaDetalleDTO.getActivo().getId());
+        if (tomaFisicaDetalle == null) {
+            tomaFisicaDetalle = new TomaFisicaDetalle();
+        }
+        Activo activo = activoRepository.findOne(tomaFisicaDetalleDTO.getActivo().getId());
+        tomaFisicaDetalle.setActivo(activo);
+        tomaFisicaDetalle.setEstado(activo.getEstado());
+        tomaFisicaDetalle.setSitio(activo.getSitio());
+        TomaFisica tomaFisica = tomaFisicaRepository.findOne(tomaFisicaDetalleDTO.getTomaFisica().getId());
+        tomaFisicaDetalle.setTomaFisica(tomaFisica);
+        Sitio sitio = sitioRepository.findOne(tomaFisicaDetalleDTO.getActivo().getSitio().getId());
+        activo.setSitio(sitio);
+        activo.setEstado(ActivoEstado.valueOf(tomaFisicaDetalleDTO.getActivo().getEstado()));
+        activo.setEstadoTomaFisica(EstadoTomaFisica.TERMINADO);
+        return tomaFisicaDetalleRepository.save(tomaFisicaDetalle);
     }
 
-    /**
-     * Edita un Proveedor.
-     *
-     * @param proveedor Proveedor a Actualizar
-     * @return Proveedor Actualizado
-     */
-    public Proveedor update(Proveedor proveedor) {
-        return proveedorRepository.save(proveedor);
+    public TomaFisicaDetalle update(TomaFisicaDetalle tomaFisicaDetalle) {
+        return tomaFisicaDetalleRepository.save(tomaFisicaDetalle);
     }
 
-    /**
-     * Borra un Proveedor por su ID.
-     *
-     * @param id ID del Proveedor
-     */
     public void delete(long id) {
-        proveedorRepository.delete(id);
+        tomaFisicaDetalleRepository.delete(id);
     }
 
 }

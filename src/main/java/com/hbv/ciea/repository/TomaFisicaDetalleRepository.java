@@ -17,15 +17,23 @@
  */
 package com.hbv.ciea.repository;
 
-import com.hbv.ciea.model.TomaFisica;
+import com.hbv.ciea.model.Articulo;
+import com.hbv.ciea.model.TomaFisicaDetalle;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Repositorio de Toma Fisica.
  *
  * @author Eilyn Salazar
  */
-public interface TomaFisicaRepository extends JpaRepository<TomaFisica, Long> {
+public interface TomaFisicaDetalleRepository extends JpaRepository<TomaFisicaDetalle, Long> {
 
+    @Transactional(readOnly = true)
+    @Query("SELECT t FROM TomaFisicaDetalle t where t.tomaFisica.id = :id_toma_fisica and t.activo.id = :id_activo")
+    TomaFisicaDetalle findTomaFisicaDetalle(@Param("id_toma_fisica")long id_toma_fisica,@Param("id_activo") long id_activo);
 
 }

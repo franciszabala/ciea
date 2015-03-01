@@ -16,52 +16,42 @@
 package com.hbv.ciea.dto;
 
 import com.hbv.ciea.model.Activo;
+import com.hbv.ciea.model.Sitio;
+import com.hbv.ciea.model.TomaFisica;
+import com.hbv.ciea.model.TomaFisicaDetalle;
 import java.io.Serializable;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author salazaei
  */
-public class ActivoDTO implements Serializable {
+public class TomaFisicaDetalleDTO implements Serializable {
 
-    private final long id;
-    private final String placa;
-    private final String descripcion;
-    private final String articulo;
-    private final String estado;
-    private final String sitio;
+//    private final long id;
+    @Valid
+    @NotNull
+    private final ActivoTomaFisicaDTO activo;
+    @Valid
+    @NotNull
+    private final TomaFisica tomaFisica;
 
-    public ActivoDTO(Activo activo) {
-        this.id = activo.getId();
-        this.placa = activo.getPlaca();
-        this.descripcion = activo.getDescripcion();
-        this.articulo = activo.getArticulo().getDescripcion();
-        this.estado = activo.getEstado().name();
-        this.sitio = activo.getSitio().getNombre();
+
+    public TomaFisicaDetalleDTO() {
+        this.activo = new ActivoTomaFisicaDTO();
+        this.tomaFisica = new TomaFisica();
     }
 
-    public long getId() {
-        return id;
+//    public long getId() {
+//        return id;
+//    }
+    public ActivoTomaFisicaDTO getActivo() {
+        return activo;
     }
 
-    public String getPlaca() {
-        return placa;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public String getArticulo() {
-        return articulo;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public String getSitio() {
-        return sitio;
+    public TomaFisica getTomaFisica() {
+        return tomaFisica;
     }
 
 }

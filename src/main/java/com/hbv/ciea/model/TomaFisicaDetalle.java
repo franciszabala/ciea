@@ -77,6 +77,7 @@ public class TomaFisicaDetalle implements Serializable {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
     @JoinColumn(name = "id_toma_fisica", referencedColumnName = "id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private TomaFisica tomaFisica;
     @NotNull
     @Valid

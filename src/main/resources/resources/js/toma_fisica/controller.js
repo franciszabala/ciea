@@ -53,14 +53,13 @@ ctrl.controller("TomaFisicaListaCtrl", function ($scope, TomaFisica) {
 
     $scope.iniciarTomaFisica = function () {
         var toma_fisica = new TomaFisica($scope.toma_fisica);
-        toma_fisica.Save({}, function () {
-            $state.transitionTo("lista");
+        toma_fisica.iniciar({}, function () {
         }, function (error) {
             $scope.alertaError(error);
         });
     };
 
-    
+
     $scope.terminarTomaFisica = function () {
         $scope.modalBorrado = false;
         return TomaFisica.update({id: $scope.borrarId}, function () {
@@ -95,8 +94,8 @@ ctrl.controller("TomaFisicaNuevoCtrl", function ($scope, TomaFisica, EstadoTomaF
     $scope.cancelar = function () {
         $state.transitionTo("lista");
     };
-    
-    
+
+
     $scope.open = function ($event) {
         $event.preventDefault();
         $event.stopPropagation();
@@ -107,20 +106,26 @@ ctrl.controller("TomaFisicaNuevoCtrl", function ($scope, TomaFisica, EstadoTomaF
     $scope.init();
 });
 
-ctrl.controller("TomaFisicaEditarCtrl", function ($scope, TomaFisica, TomaFisicaEstado, $state, $stateParams) {
+ctrl.controller("TomaFisicaEditarCtrl", function ($scope, TomaFisica, EstadoTomaFisica, Activo, Sitio, ActivoEstado, TomaFisicaDetalle, $state, $stateParams) {
     $scope.init = function () {
         $scope.toma_fisica = TomaFisica.get({id: $stateParams.tomaFisicaId});
-        $scope.estados = TomaFisicaEstado;
+        $scope.estados = EstadoTomaFisica;
+        $scope.activo_estados = ActivoEstado;
+        $scope.activos = Activo.listar_activo();
+        $scope.sitios = Sitio.query();
     };
 
-    $scope.updateTomaFisica = function () {
-        var activo = new TomaFisica($scope.activo);
-        activo.$update({}, function () {
-            $state.transitionTo("lista");
+    $scope.guardarTomaFisica = function (activo) {
+        var toma_fisica_detalle = new TomaFisicaDetalle();
+        toma_fisica_detalle.activo = activo;
+        toma_fisica_detalle.tomaFisica = $scope.toma_fisica;
+        toma_fisica_detalle.$update({}, function () {
+            $scope.activos = Activo.listar_activo();
         }, function (error) {
             $scope.alertaError(error);
         });
     };
+
 
     $scope.cancelar = function () {
         $state.transitionTo("lista");

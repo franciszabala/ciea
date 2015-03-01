@@ -40,6 +40,15 @@ public class ActivoDTO implements Serializable {
         this.sitio = activo.getSitio().getNombre();
     }
 
+    public ActivoDTO() {
+        this.id = 0;
+        this.placa = "";
+        this.descripcion = "";
+        this.articulo = "";
+        this.estado = "";
+        this.sitio = "";
+    }
+
     public long getId() {
         return id;
     }

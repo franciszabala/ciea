@@ -16,13 +16,11 @@
 package com.hbv.ciea.rest;
 
 import com.hbv.ciea.dto.ErrorRestDTO;
-import com.hbv.ciea.model.Articulo;
 import com.hbv.ciea.model.EstadoTomaFisica;
 import com.hbv.ciea.model.TomaFisica;
 import com.hbv.ciea.repository.ActivoRepository;
 import com.hbv.ciea.repository.TomaFisicaRepository;
 import static com.hbv.ciea.rest.ApiConstantes.*;
-import com.hbv.ciea.service.ArticuloService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +86,7 @@ public class TomaFisicaRestController {
         return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
     }
 
-    @RequestMapping(method = {RequestMethod.POST}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = {"iniciar"}, method = {RequestMethod.PUT}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
     private TomaFisica iniciar(@RequestBody @Valid TomaFisica tomaFisica) {
         tomaFisica.setEstado(EstadoTomaFisica.EN_PROCESO);
         activoRepository.changeStatusStockTaking(EstadoTomaFisica.EN_PROCESO.name());

@@ -48,6 +48,7 @@ public interface ActivoRepository extends JpaRepository<Activo, Long> {
 
     @Transactional
     @Modifying
-    @Query("UPDATE a FROM Activo a set a.estado_toma_fisica:=estado ")
+    @Query("UPDATE Activo a set a.estadoTomaFisica = :estado")
     int changeStatusStockTaking(@Param("estado") String estado);
 }
+

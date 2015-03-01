@@ -53,9 +53,6 @@ public class TomaFisica implements Serializable {
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "id_toma_fisica")
-    private List<TomaFisicaDetalle> detalles;
     @Enumerated(EnumType.STRING)
     @Column(name = "estado_toma_fisica")
     private EstadoTomaFisica estado;
@@ -77,14 +74,6 @@ public class TomaFisica implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
-    }
-
-    public List<TomaFisicaDetalle> getDetalles() {
-        return detalles;
-    }
-
-    public void setDetalles(List<TomaFisicaDetalle> detalles) {
-        this.detalles = detalles;
     }
 
     public EstadoTomaFisica getEstado() {

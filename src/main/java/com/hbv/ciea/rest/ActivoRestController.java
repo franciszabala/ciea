@@ -16,6 +16,7 @@
 package com.hbv.ciea.rest;
 
 import com.hbv.ciea.dto.ActivoDTO;
+import com.hbv.ciea.dto.ActivoTomaFisicaDTO;
 import com.hbv.ciea.dto.ErrorRestDTO;
 import com.hbv.ciea.model.Activo;
 import com.hbv.ciea.repository.ActivoRepository;
@@ -52,6 +53,12 @@ public class ActivoRestController {
     @RequestMapping(method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
     private List<ActivoDTO> listar() {
         return activoService.findAll();
+    }
+    
+    
+    @RequestMapping(value = {"listar_activo"}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    private List<ActivoTomaFisicaDTO> listarActivo() {
+        return activoService.findAllActivoTomaFisicaDTO();
     }
 
     @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
