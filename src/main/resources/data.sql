@@ -73,9 +73,9 @@ insert into activo_detalle(id,marca,modelo,serie,codigo_barras)values(2,'HP','XP
 insert into activo_detalle(id,marca,modelo,serie,codigo_barras)values(3,'Geniuos','XP04','200','700500302');
 
 --Activos
-insert into activo(id,placa,descripcion,estado,id_sitio,id_articulo,id_detalle,habilitado)values(1,'EAC-01','DE ALUMINIO','BUENO',1,1,1,1);
-insert into activo(id,placa,descripcion,estado,id_sitio,id_articulo,id_detalle,habilitado)values(2,'EAC-02',null,'BUENO',2,2,2,1);
-insert into activo(id,placa,descripcion,estado,id_sitio,id_articulo,id_detalle,habilitado)values(3,'EAC-03','COLOR NEGRO','BUENO',3,3,3,1);
+insert into activo(id,placa,descripcion,estado,estado_toma_fisica,id_sitio,id_articulo,id_detalle,habilitado)values(1,'EAC-01','DE ALUMINIO','BUENO','EN_PROCESO',1,1,1,1);
+insert into activo(id,placa,descripcion,estado,estado_toma_fisica,id_sitio,id_articulo,id_detalle,habilitado)values(2,'EAC-02',null,'BUENO','EN_PROCESO',2,2,2,1);
+insert into activo(id,placa,descripcion,estado,estado_toma_fisica,id_sitio,id_articulo,id_detalle,habilitado)values(3,'EAC-03','COLOR NEGRO','BUENO','EN_PROCESO',3,3,3,1);
 
 --Ordenes de Compra
 insert into orden_compra(id,factura,fecha,estado,id_proveedor)values(1,'Factura 1','2015-01-01', 'COMPRADO',1);
@@ -89,5 +89,5 @@ insert into orden_compra_detalle(id,id_orden_compra,precio,cantidad,id_articulo)
 
 --Toma Fisica
 
-insert into toma_fisica(id,fecha)values(1,'2014-01-01');
-insert into toma_fisica(id,fecha)values(2,'2015-01-02');
+insert into toma_fisica(id,fecha, estado_toma_fisica)values(1,'2014-01-01', 'TERMINADO');
+insert into toma_fisica(id,fecha, estado_toma_fisica)values(2,'2015-01-02', 'EN_PROCESO');

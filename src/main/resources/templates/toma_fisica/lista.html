@@ -26,22 +26,24 @@
                             <tr>
                                 <th th:text="#{toma_fisica.id}">ID</th>
                                 <th th:text="#{toma_fisica.fecha}">Fecha</th>
+                                <th th:text="#{toma_fisica.estado}">Estado</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="toma_fisica in toma_fisicas.content">
                                 <td>{{ toma_fisica.id}}</td>
                                 <td>{{ toma_fisica.fecha}}</td>
+                                <td>{{ toma_fisica.estado}}</td>
                                 <td>
                                     <div class="btn-group btn-group-ms pull-right" role="group">
-                                        <button class="btn btn-primary btn-sm" ui-sref="iniciar({ toma_fisicaId: toma_fisica.id })">
+                                        <button class="btn btn-primary btn-sm" ui-sref="iniciar({ tomaFisicaId: toma_fisica.id })">
                                             <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;<span th:text="#{boton.iniciar}">Iniciar</span>
                                         </button>
-                                        <button class="btn btn-primary btn-sm" ui-sref="ejecutar({ toma_fisicaId: toma_fisica.id })">
-                                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;<span th:text="#{boton.ejecutar}">Iniciar</span>
+                                        <button class="btn btn-primary btn-sm" ui-sref="ejecutar({ tomaFisicaId: toma_fisica.id })" ng-disabled="toma_fisica.estado == 'TERMINADO'">
+                                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;<span th:text="#{boton.ejecutar}">Ejecutar</span>
                                         </button>
                                         <button class="btn btn-danger btn-sm" ng-click="showModal(toma_fisica.id)">
-                                            <span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;<span th:text="#{boton.terminar}">Terminar</span>
+                                            <span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;<span th:text="#{boton.terminar}" ng-disabled="toma_fisica.estado == 'TERMINADO'">Terminar</span>
                                         </button>
                                     </div>
                                 </td>
@@ -52,6 +54,7 @@
                 <pagination class="hidden-xs" total-items="toma_fisicas.totalElements" ng-model="pagina" ng-change="pageChanged()" th:attr="previous-text=#{boton.anterior},next-text=#{boton.siguiente},first-text=#{boton.primera},last-text=#{boton.ultima}"/>
                 <pager class="visible-xs-block" total-items="toma_fisicas.totalElements" ng-model="pagina" ng-change="pageChanged()" th:attr="previous-text=#{boton.anterior},next-text=#{boton.siguiente}"/>
             </div>
+                <pre>{{toma_fisicas| json}}</pre>
         </div>
     </body>
 </html>

@@ -16,6 +16,7 @@
 package com.hbv.ciea.service;
 
 import com.hbv.ciea.dto.ActivoDTO;
+import com.hbv.ciea.dto.ActivoTomaFisicaDTO;
 import com.hbv.ciea.model.Activo;
 import com.hbv.ciea.model.Articulo;
 import com.hbv.ciea.model.Sitio;
@@ -51,6 +52,10 @@ public class ActivoService {
 
     public List<ActivoDTO> findAll() {
         return util.copiarLista(activoRepository.findAll(), ActivoDTO.class);
+    }
+
+    public List<ActivoTomaFisicaDTO> findAllActivoTomaFisicaDTO() {
+        return util.copiarLista(activoRepository.findAll(), ActivoTomaFisicaDTO.class);
     }
 
     public Page<ActivoDTO> findAll(Pageable pageable) {

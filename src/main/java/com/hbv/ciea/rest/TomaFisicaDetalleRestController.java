@@ -15,24 +15,19 @@
  */
 package com.hbv.ciea.rest;
 
-import com.hbv.ciea.dto.ActivoDTO;
-import com.hbv.ciea.dto.ActivoTomaFisicaDTO;
 import com.hbv.ciea.dto.ErrorRestDTO;
-import com.hbv.ciea.model.Activo;
+import com.hbv.ciea.dto.TomaFisicaDetalleDTO;
+import com.hbv.ciea.model.TomaFisicaDetalle;
 import com.hbv.ciea.repository.ActivoRepository;
-import static com.hbv.ciea.rest.ApiConstantes.API_ACTIVO;
-import static com.hbv.ciea.rest.ApiConstantes.ID;
-import static com.hbv.ciea.rest.ApiConstantes.ID_URL;
-import static com.hbv.ciea.rest.ApiConstantes.PAGE_URL;
-import com.hbv.ciea.service.ActivoService;
+import static com.hbv.ciea.rest.ApiConstantes.*;
+import com.hbv.ciea.service.TomaFisicaDetalleService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,52 +39,47 @@ import org.springframework.web.bind.annotation.RestController;
  * @author salazaei
  */
 @RestController
-@RequestMapping(API_ACTIVO)
-public class ActivoRestController {
+@RequestMapping(API_TOMA_FISICA_DETALLE)
+public class TomaFisicaDetalleRestController {
 
     @Autowired
-    private ActivoService activoService;
+    private TomaFisicaDetalleService tomaFisicaDetalleService;
+
 
     @RequestMapping(method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    private List<ActivoDTO> listar() {
-        return activoService.findAll();
-    }
-    
-    
-    @RequestMapping(value = {"listar_activo"}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    private List<ActivoTomaFisicaDTO> listarActivo() {
-        return activoService.findAllActivoTomaFisicaDTO();
+    private List<TomaFisicaDetalle> listar() {
+//        return tomaFisicaDetalleRepository.findAll();
+        return new ArrayList<TomaFisicaDetalle>();
     }
 
     @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    private Page<ActivoDTO> listar(Pageable pageable) {
-        return activoService.findAll(pageable);
+    private Page<TomaFisicaDetalleDTO> listar(Pageable pageable) {
+        return tomaFisicaDetalleService.findAll(pageable);
     }
 
     @RequestMapping(value = {ID_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    private Activo buscar(@PathVariable(ID) long id) {
-        Activo activo = activoService.findOne(id);
-        if (activo != null) {
-            return activo;
+    private TomaFisicaDetalle buscar(@PathVariable(ID) long id) {
+        TomaFisicaDetalle tomaFisicaDetalle = tomaFisicaDetalleService.findOne(id);
+        if (tomaFisicaDetalle != null) {
+            return tomaFisicaDetalle;
         } else {
             throw new ErrorRestDTO("error.not_found");
         }
     }
 
     @RequestMapping(method = {RequestMethod.POST}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    private Activo nuevo(@RequestBody @Valid Activo activo) {
-        return activoService.save(activo);
+    private TomaFisicaDetalle nuevo(@RequestBody @Valid TomaFisicaDetalleDTO tomaFisica) {
+        return tomaFisicaDetalleService.save(tomaFisica);
     }
 
-    @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    private Activo editar(@PathVariable(ID) long id, @RequestBody @Valid Activo activo) {
-        return activoService.save(activo);
-    }
-
-    @RequestMapping(value = {ID_URL}, method = {RequestMethod.DELETE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    private ResponseEntity<Boolean> borrar(@PathVariable(ID) long id) {
-        activoService.delete(id);
-        return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
+//    @RequestMapping(value = {ID_URL}, method = {RequestMethod.PUT}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+//    private TomaFisicaDetalle editar(@PathVariable(ID) long id, @RequestBody @Valid TomaFisicaDetalleDTO tomaFisicaDetalle) {
+//        return tomaFisicaDetalleService.save(tomaFisicaDetalle);
+//    }
+//
+    @RequestMapping(method = {RequestMethod.PUT}, produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    private TomaFisicaDetalle guardar(@RequestBody @Valid TomaFisicaDetalleDTO tomaFisicaDetalleDTO) {;
+        return tomaFisicaDetalleService.save(tomaFisicaDetalleDTO);
     }
 
 }

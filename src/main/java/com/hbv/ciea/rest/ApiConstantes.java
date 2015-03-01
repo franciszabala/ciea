@@ -36,4 +36,5 @@ public class ApiConstantes {
     public static final String API_Perfil = "/api/perfil";
     public static final String API_ORDEN_COMPRA = "/api/orden_compra";
     public static final String API_TOMA_FISICA = "/api/toma_fisica";
+    public static final String API_TOMA_FISICA_DETALLE= "/api/toma_fisica_detalle";
 }

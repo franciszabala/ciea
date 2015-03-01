@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-var app = angular.module("tomaFisicaApp", ["ui.router", "ngResource", "ui.bootstrap", "alerta.controller", "modal.directiva", "articulo.service", "sitio.service", "activo.service","toma_fisica.service", "toma_fisica.controller"]);
+var app = angular.module("tomaFisicaApp", ["ui.router", "ngResource", "ui.bootstrap", "alerta.controller", "modal.directiva","activo.service", "sitio.service","toma_fisica.service", "toma_fisica.controller"]);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("lista");
@@ -24,11 +24,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 url: '/lista',
                 templateUrl: "/toma_fisica/lista",
                 controller: 'TomaFisicaListaCtrl'
-            })
-            .state('iniciar', {
-                url: '/editar/:tomaFisicaId',
-                templateUrl: "/toma_fisica/editar",
-                controller: 'TomaFisicaEditarCtrl'
             })
             .state('ejecutar', {
                 url: '/editar/:tomaFisicaId',

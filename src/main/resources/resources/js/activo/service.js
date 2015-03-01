@@ -23,6 +23,11 @@ srvc.factory("Activo", function ($resource) {
         page: {
             method: 'GET',
             params: {ruta: 'page'}
+        },
+        listar_activo: {
+            method: 'GET',
+            isArray: true,
+            params: {ruta: 'listar_activo'}
         }
     });
 });

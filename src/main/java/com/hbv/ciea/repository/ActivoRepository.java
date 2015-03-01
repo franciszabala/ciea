@@ -53,4 +53,9 @@ public interface ActivoRepository extends JpaRepository<Activo, Long> {
     @Transactional
     @Query("UPDATE Activo a SET a.habilitado = false WHERE a.id = ?1")
     void deleteLogico(Long id);
+    @Transactional
+    @Modifying
+    @Query("UPDATE Activo a set a.estadoTomaFisica = :estado")
+    int changeStatusStockTaking(@Param("estado") String estado);
 }
+

@@ -23,8 +23,29 @@ srvc.factory("TomaFisica", function ($resource) {
         page: {
             method: 'GET',
             params: {ruta: 'page'}
+        },
+        iniciar: {
+            method: 'PUT',
+            params: {ruta: 'iniciar'}
         }
+
     });
 });
 
-srvc.value("tomaFisicaEstado", ["EN_PROCESO", "TERMINADO"]);
+
+srvc.factory("TomaFisicaDetalle", function ($resource) {
+    return $resource("/api/toma_fisica_detalle/:id:ruta", {id: "@id"}, {
+        update: {
+            method: 'PUT'
+        },
+        page: {
+            method: 'GET',
+            params: {ruta: 'page'}
+        }
+
+    });
+});
+
+srvc.value("EstadoTomaFisica", ["EN_PROCESO", "TERMINADO"]);
+srvc.value("ActivoEstado", ["EXCELENTE", "MUY_BUENO", "BUENO", "REGULAR", "MALO"]);
+

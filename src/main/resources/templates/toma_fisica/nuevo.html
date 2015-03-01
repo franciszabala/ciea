@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/plantilla">
+    <head>
+        <title th:text="#{toma_fisica.titulo}">Sitio</title>
+    </head>
+    <body>
+        <div class="container">
+            <div th:fragment="content">
+                <div class="row">
+                    <h1 th:text="#{toma_fisica.nuevo}">Nueva Toma Fisica</h1>
+                    <form role="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="fecha" class="col-sm-2 control-label" th:text="#{toma_fisica.fecha}">Fecha:</label>
+                            <div class="col-sm-10 col-xs-12">                              
+                                <p class="input-group">
+                                    <input type="text" class="form-control" id="toma_fisica_fecha" placeholder="Fecha" datepicker-popup="dd-MM-yyyy" ng-model="toma_fisica.fecha" is-open="opened" ng-required="true" close-text="Close" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+
+                            </div>
+                        </div>
+                        <div class="btn-group btn-group-ms pull-right" role="group">
+                            <button class="btn btn-primary" ng-click="createTomaFisica()">
+                                <span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;&nbsp;<span th:text="#{boton.aceptar}">Aceptar</span>
+                            </button>
+                            <button class="btn btn-default" ng-click="cancelar()">
+                                <span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp;<span th:text="#{boton.cancelar}">Cancelar</span>
+                            </button>
+                        </div>
+                    </form>
+                    <br/>
+                     <pre>{{toma_fisica| json}}</pre>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

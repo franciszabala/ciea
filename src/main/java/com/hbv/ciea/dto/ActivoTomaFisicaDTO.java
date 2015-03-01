@@ -16,37 +16,41 @@
 package com.hbv.ciea.dto;
 
 import com.hbv.ciea.model.Activo;
+import com.hbv.ciea.model.Sitio;
 import java.io.Serializable;
 
 /**
  *
  * @author salazaei
  */
-public class ActivoDTO implements Serializable {
+public class ActivoTomaFisicaDTO implements Serializable {
 
     private final long id;
     private final String placa;
     private final String descripcion;
     private final String articulo;
     private final String estado;
-    private final String sitio;
+    private final String estadoTomaFisica;
+    private final Sitio sitio;
 
-    public ActivoDTO(Activo activo) {
+    public ActivoTomaFisicaDTO(Activo activo) {
         this.id = activo.getId();
         this.placa = activo.getPlaca();
         this.descripcion = activo.getDescripcion();
         this.articulo = activo.getArticulo().getDescripcion();
         this.estado = activo.getEstado().name();
-        this.sitio = activo.getSitio().getNombre();
+        this.sitio = activo.getSitio();
+        this.estadoTomaFisica = activo.getEstadoTomaFisica().name();
     }
 
-    public ActivoDTO() {
+    public ActivoTomaFisicaDTO() {
         this.id = 0;
         this.placa = "";
         this.descripcion = "";
         this.articulo = "";
         this.estado = "";
-        this.sitio = "";
+        this.estadoTomaFisica = "";
+        this.sitio = new Sitio();
     }
 
     public long getId() {
@@ -69,8 +73,12 @@ public class ActivoDTO implements Serializable {
         return estado;
     }
 
-    public String getSitio() {
+    public Sitio getSitio() {
         return sitio;
     }
 
+    public String getEstadoTomaFisica() {
+        return estadoTomaFisica;
+    }
+ 
 }

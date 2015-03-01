@@ -23,6 +23,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -51,9 +53,9 @@ public class TomaFisica implements Serializable {
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "id_toma_fisica")
-    private List<TomaFisicaDetalle> detalles;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado_toma_fisica")
+    private EstadoTomaFisica estado;
 
     public TomaFisica() {
     }
@@ -74,14 +76,15 @@ public class TomaFisica implements Serializable {
         this.fecha = fecha;
     }
 
-    public List<TomaFisicaDetalle> getDetalles() {
-        return detalles;
+    public EstadoTomaFisica getEstado() {
+        return estado;
     }
 
-    public void setDetalles(List<TomaFisicaDetalle> detalles) {
-        this.detalles = detalles;
+    public void setEstado(EstadoTomaFisica estado) {
+        this.estado = estado;
     }
 
+   
     @Override
     public int hashCode() {
         int hash = 5;
