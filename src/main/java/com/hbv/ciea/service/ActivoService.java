@@ -84,6 +84,7 @@ public class ActivoService {
             Articulo articulo = articuloRepository.findOne(activo.getArticulo().getId());
             activo.setArticulo(articulo);
         }
+        activo.setHabilitado(true);
         return activoRepository.save(activo);
     }
 
@@ -99,7 +100,7 @@ public class ActivoService {
     }
 
     public void delete(long id) {
-        activoRepository.delete(id);
+        activoRepository.deleteLogico(id);
     }
 
     /**

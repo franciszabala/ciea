@@ -33,19 +33,26 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Herman Barrantes
  * @since 26-nov-2014
  */
+@Transactional(readOnly = true)
 public interface ActivoRepository extends JpaRepository<Activo, Long> {
 
     @Override
-    @Query(value = "SELECT a FROM Activo a JOIN FETCH a.sitio JOIN FETCH a.articulo", countQuery = "select count(a.id) from Activo a")
+    @Transactional(readOnly = true)
+    @Query(value = "SELECT a FROM Activo a JOIN FETCH a.sitio JOIN FETCH a.articulo WHERE a.habilitado = true", countQuery = "SELECT COUNT(a.id) FROM Activo a WHERE a.habilitado = true")
     Page findAll(Pageable pageable);
 
     @Override
-    @Query("SELECT a FROM Activo a JOIN FETCH a.sitio JOIN FETCH a.articulo")
+    @Transactional(readOnly = true)
+    @Query("SELECT a FROM Activo a JOIN FETCH a.sitio JOIN FETCH a.articulo WHERE a.habilitado = true")
     List<Activo> findAll();
 
     @Query("SELECT a FROM Activo a JOIN FETCH a.sitio JOIN FETCH a.articulo where a.placa = :placa")
     List<Activo> findActivos(@Param("placa") String placa);
 
+    @Modifying
+    @Transactional
+    @Query("UPDATE Activo a SET a.habilitado = false WHERE a.id = ?1")
+    void deleteLogico(Long id);
     @Transactional
     @Modifying
     @Query("UPDATE Activo a set a.estadoTomaFisica = :estado")
