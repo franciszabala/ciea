@@ -34,6 +34,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.CreatedBy;
@@ -64,16 +65,18 @@ public class TomaFisicaDetalle implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date fechaModificacion;
-    @JoinColumn(name = "id_usuario_creacion", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    @JoinColumn(name = "id_usuario_creacion", referencedColumnName = "id")
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @CreatedBy
-    private Usuario usuarioCreacion;
-    @JoinColumn(name = "id_usuario_modificacion", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @Column(name = "usuario_creacion")
+    private String usuarioCreacion;
+//    @JoinColumn(name = "id_usuario_modificacion", referencedColumnName = "id")
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @LastModifiedBy
-    private Usuario usuarioModificacion;
+    @Column(name = "usuario_modificacion")
+    private String usuarioModificacion;
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
     @JoinColumn(name = "id_toma_fisica", referencedColumnName = "id")
@@ -95,6 +98,8 @@ public class TomaFisicaDetalle implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Sitio sitio;
+    @Version
+    private Long version;
 
     public TomaFisicaDetalle() {
     }
@@ -123,19 +128,19 @@ public class TomaFisicaDetalle implements Serializable {
         this.fechaModificacion = fechaModificacion;
     }
 
-    public Usuario getUsuarioCreacion() {
+    public String getUsuarioCreacion() {
         return usuarioCreacion;
     }
 
-    public void setUsuarioCreacion(Usuario usuarioCreacion) {
+    public void setUsuarioCreacion(String usuarioCreacion) {
         this.usuarioCreacion = usuarioCreacion;
     }
 
-    public Usuario getUsuarioModificacion() {
+    public String getUsuarioModificacion() {
         return usuarioModificacion;
     }
 
-    public void setUsuarioModificacion(Usuario usuarioModificacion) {
+    public void setUsuarioModificacion(String usuarioModificacion) {
         this.usuarioModificacion = usuarioModificacion;
     }
 
@@ -169,6 +174,14 @@ public class TomaFisicaDetalle implements Serializable {
 
     public void setSitio(Sitio sitio) {
         this.sitio = sitio;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     @Override

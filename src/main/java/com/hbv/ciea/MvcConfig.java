@@ -50,7 +50,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/template/modal/modal.html").setViewName("directivas/modal/modal");
         registry.addViewController("/template/pagination/pager.html").setViewName("directivas/pagination/pager");
         registry.addViewController("/template/pagination/pagination.html").setViewName("directivas/pagination/pagination"); 
-        
         registry.addViewController("/template/datepicker/datepicker.html").setViewName("directivas/datepicker/datepicker");
         registry.addViewController("/template/datepicker/day.html").setViewName("directivas/datepicker/day");
         registry.addViewController("/template/datepicker/month.html").setViewName("directivas/datepicker/month");
@@ -100,13 +99,14 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
         //Perfil
         registry.addViewController("/perfil").setViewName("perfil/inicio");
+        
         //Ordenes de Compra
         registry.addViewController("/ordenes_compra").setViewName("ordenes_compra/inicio");
         registry.addViewController("/ordenes_compra/nuevo").setViewName("ordenes_compra/nuevo :: content");
         registry.addViewController("/ordenes_compra/editar").setViewName("ordenes_compra/editar :: content");
         registry.addViewController("/ordenes_compra/lista").setViewName("ordenes_compra/lista :: content");
         
-                //Ordenes de Compra
+        //Toma fisica
         registry.addViewController("/toma_fisica").setViewName("toma_fisica/inicio");
         registry.addViewController("/toma_fisica/nuevo").setViewName("toma_fisica/nuevo :: content");
         registry.addViewController("/toma_fisica/editar").setViewName("toma_fisica/editar :: content");
