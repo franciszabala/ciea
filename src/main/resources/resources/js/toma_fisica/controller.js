@@ -111,8 +111,12 @@ ctrl.controller("TomaFisicaEditarCtrl", function ($scope, TomaFisica, EstadoToma
         $scope.toma_fisica = TomaFisica.get({id: $stateParams.tomaFisicaId});
         $scope.estados = EstadoTomaFisica;
         $scope.activo_estados = ActivoEstado;
-        $scope.activos = Activo.listar_activo();
+        $scope.activos = [];
         $scope.sitios = Sitio.query();
+    };
+
+    $scope.buscar = function () {
+        $scope.activos = Activo.listar_activo({placa: $scope.placa, idSitio: $scope.idSitio});
     };
 
     $scope.guardarTomaFisica = function (activo) {
@@ -120,7 +124,7 @@ ctrl.controller("TomaFisicaEditarCtrl", function ($scope, TomaFisica, EstadoToma
         toma_fisica_detalle.activo = activo;
         toma_fisica_detalle.tomaFisica = $scope.toma_fisica;
         toma_fisica_detalle.$update({}, function () {
-            $scope.activos = Activo.listar_activo();
+            $scope.activos = Activo.listar_activo({placa: $scope.placa, idSitio: $scope.idSitio});
         }, function (error) {
             $scope.alertaError(error);
         });

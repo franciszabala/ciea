@@ -73,12 +73,14 @@ public class ActivoService {
 
     public List<ActivoTomaFisicaDTO> findActivos(String placa, Long idSitio) {
         List<Activo> activos = new ArrayList<Activo>();
-        if (placa != null && !placa.isEmpty() && idSitio != null && idSitio != 0) {
-            activos = activoRepository.findAll(where(hasPlaca("%" + placa + "%")).and(inSitio(idSitio)));
-        } else if (placa != null && !placa.isEmpty()) {
-            activos = activoRepository.findAll(hasPlaca("%" + placa + "%"));
+        if (placa != null && !placa.trim().isEmpty() && idSitio != null && idSitio != 0) {
+            activos = activoRepository.findAll(where(hasPlaca("%" + placa.trim() + "%")).and(inSitio(idSitio)));
+        } else if (placa != null && !placa.trim().isEmpty()) {
+            activos = activoRepository.findAll(hasPlaca("%" + placa.trim() + "%"));
         } else if (idSitio != null && idSitio != 0) {
             activos = activoRepository.findAll(inSitio(idSitio));
+        } else {
+            activos = activoRepository.findAll();
         }
         return util.copiarLista(activos, ActivoTomaFisicaDTO.class);
     }

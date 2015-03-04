@@ -27,7 +27,21 @@
 
                         <fieldset>
                             <legend th:text="#{activo.lista}">Activos </legend>
-                            <button class="btn btn-success btn-sm" ng-click="guardarTomaFisica(activo)">
+                            <div class="form-group">
+                                <label for="placa" class="col-sm-2 control-label" th:text="#{activo.placa}">Placa</label>
+                                <div class="col-sm-10 col-xs-12">
+                                    <input type="text" class="form-control" id="placa" placeholder="Placa" ng-model="placa"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="idSitio" class="col-sm-2 control-label" th:text="#{activo.sitio}">Sitio</label>
+                                <div class="col-sm-10 col-xs-12">
+                                    <select class="form-control" id="idSitio" ng-model="idSitio" ng-options="sitio.id as sitio.nombre for sitio in sitios">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn btn-success btn-sm" ng-click="buscar()">
                                 <span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;<span th:text="#{boton.buscar}">Buscar</span>
                             </button>
                             <div class="table-responsive">
@@ -68,6 +82,8 @@
                         </div>
                     </form>
                     <br/>
+                    <pre>{{placa| json}}</pre>
+                    <pre>{{idSitio| json}}</pre>
                     <pre>{{toma_fisica| json}}</pre>
                     <pre>{{activos| json}}</pre>
                 </div>
