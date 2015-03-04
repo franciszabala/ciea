@@ -26,25 +26,32 @@ import org.springframework.data.jpa.domain.Specification;
  *
  * @author Herman
  * @since 03/03/2015
+ * @see http://spring.io/blog/2011/04/26/advanced-spring-data-jpa-specifications-and-querydsl/
+ * @see https://blog.42.nl/articles/spring-data-jpa-with-querydsl-repositories-made-easy/
+ * @see http://www.altuure.com/2010/09/23/jpa-criteria-api-by-samples-part-i/
+ * @see http://stackoverflow.com/questions/7790794/some-basic-questions-on-criteria-from-jpa-2-0
+ * @see http://docs.oracle.com/javaee/6/tutorial/doc/gjivm.html
+ * @see http://en.wikibooks.org/wiki/Java_Persistence/Criteria
+ * 
  */
 public class ActivoSpecifications {
-
+    
     public static Specification<Activo> hasPlaca(final String placa) {
         return new Specification<Activo>() {
-
+            
             @Override
             public Predicate toPredicate(Root<Activo> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return cb.like(root.<String>get("placa"), placa);
+                return cb.like(cb.lower(root.get("placa").as(String.class)), placa.toLowerCase());
             }
         };
     }
     
-    public static Specification<Activo> hasSitio(final String placa) {
+    public static Specification<Activo> inSitio(final Long sitio) {
         return new Specification<Activo>() {
-
+            
             @Override
             public Predicate toPredicate(Root<Activo> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                return cb.like(root.<String>get("placa"), placa);
+                return cb.equal(root.join("sitio").get("id"), sitio);
             }
         };
     }

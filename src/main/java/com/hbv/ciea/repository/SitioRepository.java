@@ -28,6 +28,8 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Herman Barrantes
  * @since 24-nov-2014
+ * @see http://docs.spring.io/spring-data/jpa/docs/1.4.2.RELEASE/reference/html/jpa.repositories.html
+ * @see http://docs.spring.io/spring-data/data-commons/docs/1.6.1.RELEASE/reference/html/repositories.html
  */
 @Transactional(readOnly = true)
 public interface SitioRepository extends JpaRepository<Sitio, Long> {

@@ -15,6 +15,7 @@
  */
 package com.hbv.ciea.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hbv.ciea.model.Activo;
 import com.hbv.ciea.model.Sitio;
 import java.io.Serializable;
@@ -31,6 +32,7 @@ public class ActivoTomaFisicaDTO implements Serializable {
     private final String articulo;
     private final String estado;
     private final String estadoTomaFisica;
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private final Sitio sitio;
 
     public ActivoTomaFisicaDTO(Activo activo) {

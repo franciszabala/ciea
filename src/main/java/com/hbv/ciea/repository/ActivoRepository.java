@@ -47,9 +47,6 @@ public interface ActivoRepository extends JpaRepository<Activo, Long>, JpaSpecif
     @Query("SELECT a FROM Activo a JOIN FETCH a.sitio JOIN FETCH a.articulo WHERE a.habilitado = true")
     List<Activo> findAll();
 
-    @Query("SELECT a FROM Activo a JOIN FETCH a.sitio JOIN FETCH a.articulo where a.placa like :placa and a.sitio.id = :idSitio")
-    List<Activo> findActivos(@Param("placa") String placa, @Param("idSitio") Long idSitio);
-
     @Modifying
     @Transactional
     @Query("UPDATE Activo a SET a.habilitado = false WHERE a.id = ?1")

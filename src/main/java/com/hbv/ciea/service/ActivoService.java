@@ -23,12 +23,15 @@ import com.hbv.ciea.model.Sitio;
 import com.hbv.ciea.repository.ActivoRepository;
 import com.hbv.ciea.repository.ArticuloRepository;
 import com.hbv.ciea.repository.SitioRepository;
+import static com.hbv.ciea.repository.specification.ActivoSpecifications.*;
 import com.hbv.ciea.util.CopyConstructorUtil;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import static org.springframework.data.jpa.domain.Specifications.where;
 import org.springframework.stereotype.Service;
 
 /**
@@ -69,7 +72,15 @@ public class ActivoService {
     }
 
     public List<ActivoTomaFisicaDTO> findActivos(String placa, Long idSitio) {
-        return util.copiarLista( activoRepository.findActivos("%"+placa+"%", idSitio), ActivoTomaFisicaDTO.class);
+        List<Activo> activos = new ArrayList<Activo>();
+        if (placa != null && !placa.isEmpty() && idSitio != null && idSitio != 0) {
+            activos = activoRepository.findAll(where(hasPlaca("%" + placa + "%")).and(inSitio(idSitio)));
+        } else if (placa != null && !placa.isEmpty()) {
+            activos = activoRepository.findAll(hasPlaca("%" + placa + "%"));
+        } else if (idSitio != null && idSitio != 0) {
+            activos = activoRepository.findAll(inSitio(idSitio));
+        }
+        return util.copiarLista(activos, ActivoTomaFisicaDTO.class);
     }
 
     public Activo save(Activo activo) {
