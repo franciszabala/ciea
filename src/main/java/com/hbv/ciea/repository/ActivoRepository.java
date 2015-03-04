@@ -22,6 +22,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -34,7 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 26-nov-2014
  */
 @Transactional(readOnly = true)
-public interface ActivoRepository extends JpaRepository<Activo, Long> {
+public interface ActivoRepository extends JpaRepository<Activo, Long>, JpaSpecificationExecutor<Activo> {
 
     @Override
     @Transactional(readOnly = true)
@@ -53,9 +54,9 @@ public interface ActivoRepository extends JpaRepository<Activo, Long> {
     @Transactional
     @Query("UPDATE Activo a SET a.habilitado = false WHERE a.id = ?1")
     void deleteLogico(Long id);
+
     @Transactional
     @Modifying
-    @Query("UPDATE Activo a set a.estadoTomaFisica = :estado")
+    @Query("UPDATE Activo a SET a.estadoTomaFisica = :estado")
     int changeStatusStockTaking(@Param("estado") String estado);
 }
-
