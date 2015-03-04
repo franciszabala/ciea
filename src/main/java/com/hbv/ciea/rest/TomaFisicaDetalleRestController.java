@@ -18,7 +18,6 @@ package com.hbv.ciea.rest;
 import com.hbv.ciea.dto.ErrorRestDTO;
 import com.hbv.ciea.dto.TomaFisicaDetalleDTO;
 import com.hbv.ciea.model.TomaFisicaDetalle;
-import com.hbv.ciea.repository.ActivoRepository;
 import static com.hbv.ciea.rest.ApiConstantes.*;
 import com.hbv.ciea.service.TomaFisicaDetalleService;
 import java.util.ArrayList;

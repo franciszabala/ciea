@@ -68,6 +68,10 @@ public class ActivoService {
         return activoRepository.findOne(id);
     }
 
+    public List<ActivoTomaFisicaDTO> findActivos(String placa, Long idSitio) {
+        return util.copiarLista( activoRepository.findActivos("%"+placa+"%", idSitio), ActivoTomaFisicaDTO.class);
+    }
+
     public Activo save(Activo activo) {
         if (activo.getDetalle() != null
                 && isNullOrEmpty(activo.getDetalle().getSerie())

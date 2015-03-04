@@ -57,8 +57,10 @@ public class ActivoRestController {
     }
     
     @RequestMapping(value = {"listar_activo"}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    private List<ActivoTomaFisicaDTO> listarActivo() {
-        return activoService.findAllActivoTomaFisicaDTO();
+    private List<ActivoTomaFisicaDTO> listarActivo(
+            @RequestParam(value = "placa", required = false, defaultValue = "") String placa,
+            @RequestParam(value = "idSitio", required = false, defaultValue = "0") Long idSitio) {
+        return activoService.findActivos(placa, idSitio);
     }
     
     @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
