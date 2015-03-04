@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -57,8 +58,10 @@ public class ActivoRestController {
     
     
     @RequestMapping(value = {"listar_activo"}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    private List<ActivoTomaFisicaDTO> listarActivo() {
-        return activoService.findAllActivoTomaFisicaDTO();
+    private List<ActivoTomaFisicaDTO> listarActivo(
+            @RequestParam(value = "placa", required = false, defaultValue = "") String placa,
+            @RequestParam(value = "idSitio", required = false, defaultValue = "0") Long idSitio) {
+        return activoService.findActivos(placa, idSitio);
     }
 
     @RequestMapping(value = {PAGE_URL}, method = {RequestMethod.GET}, produces = {MediaType.APPLICATION_JSON_VALUE})

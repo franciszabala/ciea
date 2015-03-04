@@ -22,11 +22,14 @@
                                 <select id="estado" class="form-control" th:placeholder="#{toma_fisica.estado}"  ng-model="toma_fisica.estado" ng-options="estado for estado in estados"></select>
                             </div>
                         </div>
-                        
-                        
+
+
 
                         <fieldset>
                             <legend th:text="#{activo.lista}">Activos </legend>
+                            <button class="btn btn-success btn-sm" ng-click="guardarTomaFisica(activo)">
+                                <span class="glyphicon glyphicon-file"></span>&nbsp;&nbsp;<span th:text="#{boton.buscar}">Buscar</span>
+                            </button>
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover">
                                     <thead>
